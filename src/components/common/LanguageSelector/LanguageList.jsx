@@ -2,7 +2,10 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setLanguage } from "@modules/language";
-import { STORAGE_KEYS } from "@constants/constant";
+import { STORAGE_KEYS, LANGUAGES } from "@constants/constant";
+
+import koData from "@data/languages/ko.json";
+import jaData from "@data/languages/ja.json";
 
 const LanguageListWrap = styled.ul`
   position: absolute;
@@ -33,7 +36,7 @@ const LanguageBox = styled.li`
   }
 `;
 
-const LanguageList = ({ language, languages, isOpen, setOpen }) => {
+const LanguageList = ({ language, isOpen, setOpen }) => {
   const dispatch = useDispatch();
   const listEl = useRef();
 
@@ -48,20 +51,27 @@ const LanguageList = ({ language, languages, isOpen, setOpen }) => {
     };
   }, []);
 
+  const langDatas = {};
+  langDatas[LANGUAGES.KO] = koData;
+  langDatas[LANGUAGES.JA] = jaData;
+
   let languageList = [];
 
-  for (let [key, value] of Object.entries(languages)) {
+  for (let key in langDatas) {
     const className = key === language ? "current" : "";
+
     const handleClick = () => {
       localStorage.setItem(STORAGE_KEYS.LANGUAGE, key);
-      dispatch(setLanguage(key));
+      dispatch(setLanguage(key, langDatas[key]));
       setOpen(false);
     };
+
     const item = (
       <LanguageBox key={key} className={className} onClick={handleClick}>
-        {value}
+        {langDatas[key]["T0000"]}
       </LanguageBox>
     );
+
     languageList.push(item);
   }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { LANGUAGES } from "@constants/constant";
 
 import logoLargeKo from "@assets/images/logos/logo-large-ko.png";
 import logoLargeJa from "@assets/images/logos/logo-large-ja.png";
@@ -32,24 +33,20 @@ const Text = styled.a`
 `;
 
 const Title = () => {
-  const { language } = useSelector(({ language }) => language);
-  const logos = {
-    ko: logoLargeKo,
-    ja: logoLargeJa,
-  };
-  const texts = {
-    ko: "혹시 로그인이 안된다면 메일주세요!",
-    ja: "ログインできない場合はメールをください！",
-  };
+  const { langData } = useSelector(({ language }) => language);
 
-  const mainTitle = logos[language];
-  const text = texts[language];
+  const logos = {};
+  logos[LANGUAGES.KO] = logoLargeKo;
+  logos[LANGUAGES.JA] = logoLargeJa;
+
+  const mainTitle = logos[langData["L0000"]];
+  const text = langData["L0002"];
 
   return (
     <TitleWrap>
       <Envelope />
       <div>
-        <img src={mainTitle} alt="칭찬합시다 타이틀 이미지" />
+        <img src={mainTitle} alt="title img" />
       </div>
       <GoogleLoginButton />
       <Text href="mailto:stlee@rsupport.com">{text}</Text>

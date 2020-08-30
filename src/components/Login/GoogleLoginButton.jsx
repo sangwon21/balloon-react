@@ -10,21 +10,16 @@ const GoogleLoginButtonWrap = styled.div`
 
 const GoogleLoginButton = () => {
   const history = useHistory();
-  const { language } = useSelector(({ language }) => language);
+  const { langData } = useSelector(({ language }) => language);
 
   const responseGoogle = (response) => {
     const { email } = response.profileObj;
 
-    if (!email.endsWith("@rsupport.com")) return alert("등록된 회사 이메일로만 로그인 가능합니다.");
+    if (!email.endsWith("@rsupport.com")) return alert(langData["L0005"]);
     return history.push("/users");
   };
 
-  const texts = {
-    ko: "Google 이메일로 로그인하기",
-    ja: "Gメールでログインする",
-  };
-
-  const buttonText = texts[language];
+  const buttonText = langData["L0004"];
 
   return (
     <GoogleLoginButtonWrap>

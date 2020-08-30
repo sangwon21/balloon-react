@@ -39,15 +39,10 @@ const SelectButton = styled.button`
 `;
 
 const LanguageSelectBox = () => {
-  const { language } = useSelector(({ language }) => language);
+  const { language, langData } = useSelector(({ language }) => language);
   const [isOpen, setOpen] = useState(false);
 
-  const languages = {
-    ko: "Korea (한국어)",
-    ja: "Japan (日本語)",
-  };
-
-  const currentLanguage = languages[language];
+  const currentLanguage = langData["T0000"];
 
   const handleClick = () => setOpen(!isOpen);
 
@@ -59,7 +54,7 @@ const LanguageSelectBox = () => {
           <RiArrowUpSLine />
         </SelectButton>
       </BoxInner>
-      {isOpen && <LanguageList {...{ language, languages, isOpen, setOpen }} />}
+      {isOpen && <LanguageList {...{ language, langData, isOpen, setOpen }} />}
     </LanguageSelectBoxWrap>
   );
 };
