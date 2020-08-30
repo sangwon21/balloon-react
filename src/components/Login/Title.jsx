@@ -37,8 +37,13 @@ const Title = () => {
     ko: logoLargeKo,
     ja: logoLargeJa,
   };
+  const texts = {
+    ko: "혹시 로그인이 안된다면 메일주세요!",
+    ja: "ログインできない場合はメールをください！",
+  };
 
   const mainTitle = logos[language];
+  const text = texts[language];
 
   return (
     <TitleWrap>
@@ -47,7 +52,7 @@ const Title = () => {
         <img src={mainTitle} alt="칭찬합시다 타이틀 이미지" />
       </div>
       <GoogleLoginButton />
-      <Text href="mailto:stlee@rsupport.com">혹시 로그인이 안된다면 메일주세요!</Text>
+      <Text href="mailto:stlee@rsupport.com">{text}</Text>
     </TitleWrap>
   );
 };

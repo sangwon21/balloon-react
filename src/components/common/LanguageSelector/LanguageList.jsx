@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setLanguage } from "@modules/language";
+import { STORAGE_KEYS } from "@constants/constant";
 
 const LanguageListWrap = styled.ul`
   position: absolute;
@@ -52,6 +53,7 @@ const LanguageList = ({ language, languages, isOpen, setOpen }) => {
   for (let [key, value] of Object.entries(languages)) {
     const className = key === language ? "current" : "";
     const handleClick = () => {
+      localStorage.setItem(STORAGE_KEYS.LANGUAGE, key);
       dispatch(setLanguage(key));
       setOpen(false);
     };
