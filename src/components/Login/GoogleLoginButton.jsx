@@ -23,12 +23,7 @@ const GoogleLoginButton = () => {
 
   return (
     <GoogleLoginButtonWrap>
-      <GoogleLogin
-        clientId="281154283163-bsa8jkvn8jh1vnf5kklv153cmtko7bc8.apps.googleusercontent.com"
-        buttonText={buttonText}
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-      />
+      <GoogleLogin clientId={process.env.REACT_APP_OAUTH_CLIENT_ID} buttonText={buttonText} onSuccess={responseGoogle} onFailure={responseGoogle} />
     </GoogleLoginButtonWrap>
   );
 };
