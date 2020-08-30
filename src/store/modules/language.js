@@ -1,11 +1,12 @@
 import koData from "@data/languages/ko.json";
+import { LANGUAGES } from "@constants/constant";
 
 const SET_LANGUAGE = "language/SET_LANGUAGE";
 
 export const setLanguage = (language, data) => ({ type: SET_LANGUAGE, payload: { language, data } });
 
 const initialState = {
-  language: "ko",
+  language: LANGUAGES.KO,
   langData: koData,
 };
 
