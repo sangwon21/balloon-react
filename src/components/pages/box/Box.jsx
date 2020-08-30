@@ -7,7 +7,7 @@ const Box = () => {
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
-  }, []);
+  }, [dispatch]);
 
   return <div></div>;
 };

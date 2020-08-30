@@ -12,7 +12,7 @@ const Users = () => {
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
-  }, []);
+  }, [dispatch]);
 
   return <UsersWrap></UsersWrap>;
 };

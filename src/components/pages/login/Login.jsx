@@ -18,7 +18,7 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
-  }, []);
+  }, [dispatch]);
 
   return (
     <LoginWrap>

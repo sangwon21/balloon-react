@@ -28,7 +28,7 @@ const App = () => {
   useEffect(() => {
     const settingLanguage = localStorage.getItem(STORAGE_KEYS.LANGUAGE);
     if (settingLanguage) dispatch(setLanguage(settingLanguage, langDatas[settingLanguage]));
-  }, []);
+  }, [dispatch, langDatas]);
 
   return (
     <Router>

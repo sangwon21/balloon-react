@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setLanguage } from "@modules/language";
@@ -40,16 +40,19 @@ const LanguageList = ({ language, isOpen, setOpen }) => {
   const dispatch = useDispatch();
   const listEl = useRef();
 
-  const handleClickOutside = ({ target }) => {
-    if (isOpen && !listEl.current.contains(target)) setOpen(false);
-  };
+  const handleClickOutside = useCallback(
+    ({ target }) => {
+      if (isOpen && !listEl.current.contains(target)) setOpen(false);
+    },
+    [isOpen, setOpen],
+  );
 
   useEffect(() => {
     window.addEventListener("click", handleClickOutside);
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   const langDatas = {};
   langDatas[LANGUAGES.KO] = koData;

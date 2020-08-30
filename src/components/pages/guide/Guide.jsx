@@ -7,7 +7,7 @@ const Guide = () => {
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
-  }, []);
+  }, [dispatch]);
 
   return <div></div>;
 };
