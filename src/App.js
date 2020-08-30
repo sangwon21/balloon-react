@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import GlobalStyles from "@styles/GlobalStyles";
-import Login from "@components/Login/Login";
+import Login from "@components/login/Login";
+import Users from "@components/users/Users";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
+          <Route path="/users" component={Users} />
         </Switch>
       </Router>
     </>
