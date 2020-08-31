@@ -1,8 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { LANGUAGES } from "@constants/constant";
+import { LANGUAGES, STORAGE_KEYS } from "@constants/constant";
+import { userLogin } from "@modules/login";
 
 import logoSmallKo from "@assets/images/logos/logo-small-ko.png";
 import logoSmallJa from "@assets/images/logos/logo-small-ja.png";
@@ -41,8 +42,12 @@ const Title = styled.div`
 `;
 
 const Header = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const { langData } = useSelector(({ language }) => language);
+  const {
+    language: { langData },
+    login: { isLogin },
+  } = useSelector((index) => index);
 
   const logos = {};
   logos[LANGUAGES.KO] = logoSmallKo;
@@ -51,6 +56,13 @@ const Header = () => {
   const mainTitle = logos[langData["L0000"]];
 
   const handleClick = () => history.push("/users");
+
+  useEffect(() => {
+    const loginSessionData = sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION);
+    if (!isLogin && !loginSessionData) history.replace("/");
+
+    dispatch(userLogin(JSON.parse(loginSessionData)));
+  }, [isLogin, history, dispatch]);
 
   return (
     <HeaderWrap>

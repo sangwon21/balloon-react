@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import balloonRed from "@assets/images/balloon-red.png";
@@ -14,12 +15,12 @@ const UserInfoWrap = styled.div`
 const Balloon = styled.img`
   width: 20px;
   height: 23px;
-  margin-right: 5px;
+  margin-right: 4px;
   &.used {
     opacity: 0.25;
   }
   :last-child {
-    margin-right: 20px;
+    margin-right: 15px;
   }
 `;
 
@@ -32,6 +33,8 @@ const UserImg = styled.img`
 `;
 
 const UserInfo = () => {
+  const { name, email, imageUrl } = useSelector(({ login }) => login);
+
   const BALLOON_COUNT = 7;
   const TEST_COUNT = 5;
 
@@ -45,7 +48,7 @@ const UserInfo = () => {
   return (
     <UserInfoWrap>
       <div>{balloons}</div>
-      <UserImg src={noPicture} alt="user img" />
+      <UserImg src={imageUrl || noPicture} alt="user img" />
     </UserInfoWrap>
   );
 };
