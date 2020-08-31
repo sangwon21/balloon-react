@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { GoogleLogout } from "react-google-login";
 import { STORAGE_KEYS } from "@constants/constant";
 
-const GoogleLogoutButton = () => {
+const GoogleLogoutButton = ({ text }) => {
   const history = useHistory();
 
   const logout = () => {
@@ -11,7 +11,15 @@ const GoogleLogoutButton = () => {
     history.push("/");
   };
 
-  return <GoogleLogout lientId={process.env.REACT_APP_OAUTH_CLIENT_ID} buttonText="Logout" onLogoutSuccess={logout} />;
+  return (
+    <GoogleLogout
+      icon={false}
+      render={({ onClick }) => <span onClick={onClick}>{text}</span>}
+      clientId={process.env.REACT_APP_OAUTH_CLIENT_ID}
+      onLogoutSuccess={logout}
+      onLogoutFailure={logout}
+    />
+  );
 };
 
 export default GoogleLogoutButton;

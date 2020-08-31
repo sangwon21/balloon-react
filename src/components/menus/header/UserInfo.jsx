@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import balloonRed from "@assets/images/balloon-red.png";
 import noPicture from "@assets/images/no-picture.png";
+
+import UserInfoModal from "./UserInfoModal";
 
 const UserInfoWrap = styled.div`
   position: absolute;
@@ -33,6 +35,7 @@ const UserImg = styled.img`
 `;
 
 const UserInfo = () => {
+  const [isOpen, setOpen] = useState(false);
   const { name, email, imageUrl } = useSelector(({ login }) => login);
 
   const BALLOON_COUNT = 7;
@@ -45,10 +48,13 @@ const UserInfo = () => {
     balloons.push(<Balloon key={i} className={className} src={balloonRed} alt="balloon img" />);
   }
 
+  const handleClick = () => setOpen(!isOpen);
+
   return (
     <UserInfoWrap>
       <div>{balloons}</div>
-      <UserImg src={imageUrl || noPicture} alt="user img" />
+      <UserImg onClick={handleClick} src={imageUrl || noPicture} alt="user img" />
+      {isOpen && <UserInfoModal {...{ isOpen, setOpen, name, email, imageUrl }} />}
     </UserInfoWrap>
   );
 };
