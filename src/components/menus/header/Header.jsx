@@ -9,6 +9,7 @@ import logoSmallJa from "@assets/images/logos/logo-small-ja.png";
 
 import Nav from "./Nav";
 import SearchBar from "./SearchBar";
+import UserInfo from "./UserInfo";
 
 const HeaderWrap = styled.div`
   position: fixed;
@@ -17,6 +18,7 @@ const HeaderWrap = styled.div`
   height: 60px;
   background-color: #00a6de;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-sizing: border-box;
 `;
 
 const HeaderInner = styled.div`
@@ -24,6 +26,7 @@ const HeaderInner = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
+  position: relative;
 `;
 
 const Title = styled.div`
@@ -57,6 +60,7 @@ const Header = () => {
         </Title>
         <Nav />
         <SearchBar />
+        <UserInfo />
       </HeaderInner>
     </HeaderWrap>
   );

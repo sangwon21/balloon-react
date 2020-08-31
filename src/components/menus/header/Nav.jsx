@@ -11,9 +11,9 @@ const NavWrap = styled.ul`
   align-items: center;
   li {
     line-height: 60px;
-    padding: 0 15px;
     cursor: pointer;
     a {
+      padding: 0 15px;
       display: inline-block;
       color: #fff;
       font-size: 14px;
