@@ -59,7 +59,7 @@ const Header = () => {
 
   useEffect(() => {
     const loginSessionData = sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION);
-    if (!isLogin && !loginSessionData) history.replace("/");
+    if (!isLogin && !loginSessionData) return history.replace("/");
 
     dispatch(userLogin(JSON.parse(loginSessionData)));
   }, [isLogin, history, dispatch]);

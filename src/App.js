@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLanguage } from "@modules/language";
 import { STORAGE_KEYS, LANGUAGES } from "@constants/constant";
@@ -46,6 +46,7 @@ const App = () => {
         <Route path="/box" component={box} />
         <Route path="/stats" component={Stats} />
         <Route path="/guide" component={Guide} />
+        <Redirect to="/" />
       </Switch>
     </Router>
   );
