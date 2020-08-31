@@ -8,6 +8,7 @@ import logoSmallKo from "@assets/images/logos/logo-small-ko.png";
 import logoSmallJa from "@assets/images/logos/logo-small-ja.png";
 
 import Nav from "./Nav";
+import SearchBar from "./SearchBar";
 
 const HeaderWrap = styled.div`
   position: fixed;
@@ -55,6 +56,7 @@ const Header = () => {
           <img src={mainTitle} alt="title img" />
         </Title>
         <Nav />
+        <SearchBar />
       </HeaderInner>
     </HeaderWrap>
   );

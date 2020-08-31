@@ -25,3 +25,15 @@ export const navMenus = [
     path: "/guide",
   },
 ];
+
+export const searchMenus = {
+  "/users": {
+    placeholder: "L0041",
+  },
+  "/congrats": {
+    placeholder: "L0042",
+  },
+  "/box": {
+    placeholder: "L0043",
+  },
+};
