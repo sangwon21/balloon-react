@@ -4,7 +4,7 @@ import { BalloonListWrap } from "@styles/CommonStyles";
 
 const SentBalloonList = () => {
   const { langData } = useSelector(({ language }) => language);
-  const TEST_COUNT = 3;
+  const TEST_COUNT = 0;
 
   return (
     <BalloonListWrap>
