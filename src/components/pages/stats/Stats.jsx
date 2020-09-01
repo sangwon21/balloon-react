@@ -109,10 +109,7 @@ const Stats = () => {
       <BalloonSection>
         <Balloon>
           <img src={balloonLetterRed} alt="balloon img" />
-          <span className="total-count">
-            {TEST_COUNT}
-            {langData["L0061"]}
-          </span>
+          <span className="total-count">{langData["L0061"].replace("%s", TEST_COUNT)}</span>
         </Balloon>
         <DescriptionBox>
           <p dangerouslySetInnerHTML={createMarkup()} />

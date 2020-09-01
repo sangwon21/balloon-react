@@ -4,6 +4,8 @@ import { setCurrentPage } from "@modules/page";
 import styled from "styled-components";
 
 import ContentWrapper from "@components/common/wrapper/ContentWrap";
+import ReceiveBalloonList from "./ReceiveBalloonList";
+import SentBalloonList from "./SentBalloonList";
 
 const UserInfoBox = styled.div`
   width: 100%;
@@ -26,9 +28,9 @@ const UserInfoBox = styled.div`
     color: #aaa;
     margin-bottom: 10px;
   }
-  ::after {
+  ::before {
     position: absolute;
-    bottom: 0;
+    top: 250px;
     display: inline-block;
     content: "";
     width: 100%;
@@ -38,12 +40,15 @@ const UserInfoBox = styled.div`
   }
 `;
 
+const BalloonListBox = styled.div`
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Box = () => {
   const dispatch = useDispatch();
-  const {
-    language: { langData },
-    login: { name, email, imageUrl },
-  } = useSelector((index) => index);
+  const { name, email, imageUrl } = useSelector(({ login }) => login);
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
@@ -56,6 +61,10 @@ const Box = () => {
         <p className="name">{name}</p>
         <p className="email">{email}</p>
       </UserInfoBox>
+      <BalloonListBox>
+        <ReceiveBalloonList />
+        <SentBalloonList />
+      </BalloonListBox>
     </ContentWrapper>
   );
 };

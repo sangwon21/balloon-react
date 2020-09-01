@@ -10,7 +10,7 @@ import GoogleLogoutButton from "./GoogleLogoutButton";
 const UserInfoModalWrap = styled.div`
   position: absolute;
   top: calc(100% + 13px);
-  right: 0;
+  right: -10px;
   width: 240px;
   background-color: #fff;
   border-bottom-left-radius: 4px;

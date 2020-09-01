@@ -9,7 +9,7 @@ import UserInfoModal from "./UserInfoModal";
 
 const UserInfoWrap = styled.div`
   position: absolute;
-  right: 0;
+  right: 10px;
   display: flex;
   align-items: center;
 `;

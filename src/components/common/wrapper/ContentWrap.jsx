@@ -7,9 +7,10 @@ const ContentWrapOuter = styled.div`
 `;
 
 const ContentWrapInner = styled.div`
-  width: 1365px;
+  width: 1400px;
   margin: 0 auto;
   position: relative;
+  overflow: hidden;
   .title {
     color: #252525;
     font-size: 30px;
