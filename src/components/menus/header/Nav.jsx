@@ -10,15 +10,17 @@ const NavWrap = styled.ul`
   display: flex;
   align-items: center;
   li {
-    line-height: 60px;
-    cursor: pointer;
+    height: 60px;
     a {
       padding: 0 15px;
       display: inline-block;
+      height: 100%;
       color: #fff;
       font-size: 14px;
-      height: 100%;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
     }
     &.active {
       background-color: rgba(255, 255, 255, 0.3);
@@ -37,7 +39,9 @@ const Nav = () => {
 
     return (
       <li key={menu.id} className={className}>
-        <Link to={menu.path}>{langData[menu.id]}</Link>
+        <Link to={menu.path}>
+          <span>{langData[menu.id]}</span>
+        </Link>
       </li>
     );
   });
