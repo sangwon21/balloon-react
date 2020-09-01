@@ -70,7 +70,7 @@ const Guide = () => {
         <VideoSection>
           <h3>{langData["L0065"]}</h3>
           <Devider />
-          <iframe src="https://www.youtube.com/embed/TTSbmLuTU98" frameBorder="0" allowFullScreen title="introduce video"></iframe>
+          <iframe src="https://www.youtube.com/embed/TTSbmLuTU98" frameBorder="0" allowFullScreen title="introduce video" />
           <p>{langData["L0066"]}</p>
         </VideoSection>
         <Section>

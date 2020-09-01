@@ -9,12 +9,14 @@ const ContentWrapOuter = styled.div`
 const ContentWrapInner = styled.div`
   width: 1365px;
   margin: 0 auto;
+  position: relative;
   .title {
     color: #252525;
     font-size: 30px;
-    padding: 40px 0;
+    padding-top: 40px;
   }
   .content {
+    margin-top: 40px;
     padding: 25px 24px;
     border: 1px solid #e6e6e6;
     background-color: #fff;
