@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import LanguageSelectBox from "@/components/common/LanguageSelector/LanguageSelectBox";
+import LanguageSelectBox from "@/components/common/languageSelector/LanguageSelectBox";
 
 const FooterWrap = styled.div`
   position: fixed;

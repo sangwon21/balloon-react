@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import { reset } from 'styled-reset';
+import { createGlobalStyle } from "styled-components";
+import { reset } from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: 'Noto Sans KR', sans-serif;
     position: relative;
+    background: rgba(241,241,241);
   }
 
   button, input {
@@ -18,4 +19,4 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export default GlobalStyles
+export default GlobalStyles;

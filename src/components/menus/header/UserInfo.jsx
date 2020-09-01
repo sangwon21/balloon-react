@@ -48,7 +48,10 @@ const UserInfo = () => {
     balloons.push(<Balloon key={i} className={className} src={balloonRed} alt="balloon img" />);
   }
 
-  const handleClick = () => setOpen(!isOpen);
+  const handleClick = () => {
+    if (isOpen) return;
+    setOpen(true);
+  };
 
   return (
     <UserInfoWrap>
