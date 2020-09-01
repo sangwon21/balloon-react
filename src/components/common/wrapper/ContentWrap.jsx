@@ -7,7 +7,7 @@ const ContentWrapOuter = styled.div`
 `;
 
 const ContentWrapInner = styled.div`
-  width: 1400px;
+  width: 1365px;
   margin: 0 auto;
   .title {
     color: #252525;

@@ -5,6 +5,7 @@ import LanguageSelectBox from "@/components/common/languageSelector/LanguageSele
 
 const FooterWrap = styled.div`
   position: fixed;
+  z-index: 10;
   bottom: 0;
   width: 100%;
   height: 40px;
