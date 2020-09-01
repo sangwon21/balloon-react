@@ -10,13 +10,14 @@ const ContentWrapInner = styled.div`
   width: 1400px;
   margin: 0 auto;
   .title {
+    color: #252525;
     font-size: 30px;
-    font-weight: 600;
-    padding: 30px 0;
+    padding: 40px 0;
   }
   .content {
+    padding: 25px 24px;
     border: 1px solid #e6e6e6;
-    background-color: #f9f9f9;
+    background-color: #fff;
     border-radius: 2px;
   }
 `;
