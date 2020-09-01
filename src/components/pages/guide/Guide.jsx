@@ -33,15 +33,6 @@ const GuideWrap = styled.div`
     list-style: disc;
     list-style-position: inside;
   }
-  .m-t-20 {
-    margin-top: 20px;
-  }
-  .m-t-30 {
-    margin-top: 30px;
-  }
-  .m-b-20 {
-    margin-bottom: 20px;
-  }
 `;
 
 const Devider = styled.div`
