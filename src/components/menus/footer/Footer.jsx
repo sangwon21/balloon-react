@@ -14,6 +14,14 @@ const FooterWrap = styled.div`
   align-items: center;
 `;
 
+const FooterInner = styled.div`
+  position: relative;
+  width: 1400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Text = styled.p`
   color: #939597;
   font-size: 13px;
@@ -23,20 +31,22 @@ const Text = styled.p`
   }
 `;
 
-const Test = styled.div`
+const LanguageSelectBoxWrap = styled.div`
   position: absolute;
-  right: 10px;
+  right: 0;
 `;
 
 const Footer = () => {
   return (
     <FooterWrap>
-      <Text>
-        © Created by <a href="mailto:stlee@rsupport.com">Lee Seung Taek</a>
-      </Text>
-      <Test>
-        <LanguageSelectBox />
-      </Test>
+      <FooterInner>
+        <Text>
+          © Created by <a href="mailto:stlee@rsupport.com">Lee Seung Taek</a>
+        </Text>
+        <LanguageSelectBoxWrap>
+          <LanguageSelectBox />
+        </LanguageSelectBoxWrap>
+      </FooterInner>
     </FooterWrap>
   );
 };
