@@ -12,11 +12,24 @@ const UserInfoModalWrap = styled.div`
   top: calc(100% + 12px);
   right: 0;
   width: 240px;
-  height: 160px;
   background-color: #fff;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+  animation-name: userInfoModalAnim;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  overflow: hidden;
+  @keyframes userInfoModalAnim {
+    0% {
+      height: 0;
+    }
+    100% {
+      height: 160px;
+    }
+  }
 `;
 
 const UserInfoBox = styled.div`
