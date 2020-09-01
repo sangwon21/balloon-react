@@ -28,6 +28,9 @@ const Text = styled.p`
   a {
     color: #939597;
     text-decoration: none;
+    :hover {
+      text-decoration: underline;
+    }
   }
 `;
 

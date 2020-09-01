@@ -21,6 +21,9 @@ const Text = styled.p`
   a {
     color: #ffffff80;
     text-decoration: none;
+    :hover {
+      text-decoration: underline;
+    }
   }
 `;
 
