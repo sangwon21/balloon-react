@@ -4,6 +4,9 @@ import { setCurrentPage } from "@modules/page";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 
+import ContentWrapper from "@components/common/wrapper/ContentWrap";
+import PartList from "./PartList";
+
 const UsersWrap = styled.div`
   position: relative;
 `;
@@ -17,11 +20,14 @@ const Users = () => {
   }, [dispatch]);
 
   return (
-    <UsersWrap>
+    <ContentWrapper>
       <Helmet>
         <title>{`${langData["L0001"]} - ${langData["L0033"]}`}</title>
       </Helmet>
-    </UsersWrap>
+      <UsersWrap>
+        <PartList />
+      </UsersWrap>
+    </ContentWrapper>
   );
 };
 
