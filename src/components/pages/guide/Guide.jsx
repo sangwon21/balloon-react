@@ -10,6 +10,7 @@ import contSpecialHoliday from "@assets/images/cont-special-holiday.png";
 import ContentWrapper from "@components/common/wrapper/ContentWrap";
 
 const GuideWrap = styled.div`
+  padding: 25px 24px;
   h3 {
     font-size: 24px;
     color: #444;

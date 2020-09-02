@@ -8,6 +8,10 @@ import congratulation from "@assets/images/congratulation.jpg";
 
 import ContentWrapper from "@components/common/wrapper/ContentWrap";
 
+const CongratsWrap = styled.div`
+  padding: 25px 24px;
+`;
+
 const CongratsTopImgBox = styled.div`
   width: 100%;
   height: 250px;
@@ -53,10 +57,12 @@ const Congrats = () => {
       <Helmet>
         <title>{`${langData["L0001"]} - ${langData["L0034"]}`}</title>
       </Helmet>
-      <CongratsTopImgBox>
-        <CongratsTopImg />
-      </CongratsTopImgBox>
-      <DummyBox />
+      <CongratsWrap>
+        <CongratsTopImgBox>
+          <CongratsTopImg />
+        </CongratsTopImgBox>
+        <DummyBox />
+      </CongratsWrap>
     </ContentWrapper>
   );
 };

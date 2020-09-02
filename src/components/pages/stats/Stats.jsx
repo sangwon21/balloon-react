@@ -9,6 +9,10 @@ import balloonLetterRed from "@assets/images/balloon-letter-red.png";
 
 import ContentWrapper from "@components/common/wrapper/ContentWrap";
 
+const StatsWrap = styled.div`
+  padding: 25px 24px;
+`;
+
 const BalloonSection = styled.div`
   display: flex;
   justify-content: center;
@@ -110,19 +114,21 @@ const Stats = () => {
       <Helmet>
         <title>{`${langData["L0001"]} - ${langData["L0037"]}`}</title>
       </Helmet>
-      <BalloonSection>
-        <Balloon>
-          <img src={balloonLetterRed} alt="balloon img" />
-          <span className="total-count">{langData["L0061"].replace("%s", TEST_COUNT)}</span>
-        </Balloon>
-        <DescriptionBox>
-          <p dangerouslySetInnerHTML={createMarkup()} />
-          <button type="button">
-            <ImBubbles className="icon" />
-            <span>{langData["L0060"]}</span>
-          </button>
-        </DescriptionBox>
-      </BalloonSection>
+      <StatsWrap>
+        <BalloonSection>
+          <Balloon>
+            <img src={balloonLetterRed} alt="balloon img" />
+            <span className="total-count">{langData["L0061"].replace("%s", TEST_COUNT)}</span>
+          </Balloon>
+          <DescriptionBox>
+            <p dangerouslySetInnerHTML={createMarkup()} />
+            <button type="button">
+              <ImBubbles className="icon" />
+              <span>{langData["L0060"]}</span>
+            </button>
+          </DescriptionBox>
+        </BalloonSection>
+      </StatsWrap>
     </ContentWrapper>
   );
 };

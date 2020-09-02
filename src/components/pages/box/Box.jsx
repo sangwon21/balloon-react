@@ -8,6 +8,10 @@ import ContentWrapper from "@components/common/wrapper/ContentWrap";
 import ReceiveBalloonList from "./ReceiveBalloonList";
 import SentBalloonList from "./SentBalloonList";
 
+const BoxWrap = styled.div`
+  padding: 25px 24px;
+`;
+
 const UserInfoBox = styled.div`
   width: 100%;
   display: flex;
@@ -63,15 +67,17 @@ const Box = () => {
       <Helmet>
         <title>{`${langData["L0001"]} - ${langData["L0035"]}`}</title>
       </Helmet>
-      <UserInfoBox>
-        <img src={imageUrl} alt="user img" />
-        <p className="name">{name}</p>
-        <p className="email">{email}</p>
-      </UserInfoBox>
-      <BalloonListBox>
-        <ReceiveBalloonList />
-        <SentBalloonList />
-      </BalloonListBox>
+      <BoxWrap>
+        <UserInfoBox>
+          <img src={imageUrl} alt="user img" />
+          <p className="name">{name}</p>
+          <p className="email">{email}</p>
+        </UserInfoBox>
+        <BalloonListBox>
+          <ReceiveBalloonList />
+          <SentBalloonList />
+        </BalloonListBox>
+      </BoxWrap>
     </ContentWrapper>
   );
 };

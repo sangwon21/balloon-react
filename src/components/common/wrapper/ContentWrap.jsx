@@ -18,7 +18,6 @@ const ContentWrapInner = styled.div`
   .content {
     position: relative;
     margin-top: 40px;
-    padding: 25px 24px;
     border: 1px solid #e6e6e6;
     background-color: #f9f9f9;
     border-radius: 2px;
