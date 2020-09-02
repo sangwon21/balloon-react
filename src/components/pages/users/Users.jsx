@@ -38,11 +38,15 @@ const TabButton = styled.li`
   cursor: pointer;
   box-sizing: border-box;
   border-bottom: 2px solid ${({ selected }) => (selected ? "#1f8ecd" : "transparent")};
+  color: ${({ selected }) => (selected ? "#1f8ecd" : "#555")};
+  transition: color 0.3s;
   span {
     line-height: 94px;
-    color: ${({ selected }) => (selected ? "#1f8ecd" : "#555")};
     font-size: 16px;
     font-weight: ${({ selected }) => (selected ? "600" : "500")};
+  }
+  :hover {
+    color: #1f8ecd;
   }
 `;
 
