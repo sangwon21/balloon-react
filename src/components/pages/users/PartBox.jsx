@@ -28,20 +28,19 @@ const PartBoxWrap = styled.div`
   }
 `;
 
-const PartBox = () => {
+const PartBox = ({ language, part, teams }) => {
+  const teamsList = teams.map((team) => (
+    <li key={team[language]}>
+      <a href={`#${team[language]}`}>{team[language]}</a>
+    </li>
+  ));
+
   return (
     <PartBoxWrap>
       <h3>
-        <a href="#">해외법인</a>
+        <a href={`#${part[language]}`}>{part[language]}</a>
       </h3>
-      <ul>
-        <li>
-          <a href="#">중국법인</a> (2명)
-        </li>
-        <li>
-          <a href="#">일본법인</a> (24명)
-        </li>
-      </ul>
+      <ul>{teamsList}</ul>
     </PartBoxWrap>
   );
 };

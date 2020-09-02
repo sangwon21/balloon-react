@@ -4,6 +4,9 @@ import styled from "styled-components";
 
 import PartBox from "./PartBox";
 
+// DEMO DATA
+import { parts } from "@data/demoData/part";
+
 const PartListWrap = styled.div`
   position: relative;
   width: 240px;
@@ -23,12 +26,14 @@ const PartListTitle = styled.h2`
 `;
 
 const PartList = () => {
-  const { langData } = useSelector(({ language }) => language);
+  const { language, langData } = useSelector(({ language }) => language);
+
+  const partList = parts.map(({ part, teams }) => <PartBox key={part[language]} {...{ language, part, teams }} />);
 
   return (
     <PartListWrap>
       <PartListTitle>{langData["L0015"]}</PartListTitle>
-      <PartBox />
+      {partList}
     </PartListWrap>
   );
 };
