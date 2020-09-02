@@ -30,7 +30,7 @@ const UserInfoBox = styled.div`
   }
   ::before {
     position: absolute;
-    top: 250px;
+    top: 210px;
     display: inline-block;
     content: "";
     width: 100%;

@@ -17,7 +17,7 @@ const GoogleLoginButton = () => {
 
   const responseGoogle = ({ profileObj, tokenObj }) => {
     const { email } = profileObj;
-    if (!email.endsWith("@rsupport.com")) return alert(langData["L0005"]);
+    if (!email.endsWith(process.env.REACT_APP_VAILD_MAIL_DOMAIN)) return alert(langData["L0005"]);
 
     const loginData = { profileObj, tokenObj };
     dispatch(userLogin(loginData));

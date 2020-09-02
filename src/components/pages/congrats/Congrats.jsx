@@ -1,6 +1,43 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentPage } from "@modules/page";
+import styled from "styled-components";
+
+import congratulation from "@assets/images/congratulation.jpg";
+
+import ContentWrapper from "@components/common/wrapper/ContentWrap";
+
+const CongratsTopImgBox = styled.div`
+  width: 100%;
+  height: 250px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+`;
+
+const CongratsTopImg = styled.div`
+  width: 100%;
+  height: 100%;
+  background: url(${congratulation}) 100% 550px;
+  background-size: cover;
+  ::before {
+    position: absolute;
+    top: 240px;
+    display: inline-block;
+    content: "";
+    width: 100%;
+    height: 10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+`;
+
+const DummyBox = styled.div`
+  width: 100%;
+  height: 290px;
+`;
 
 const Congrats = () => {
   const dispatch = useDispatch();
@@ -9,7 +46,14 @@ const Congrats = () => {
     dispatch(setCurrentPage(window.location.pathname));
   }, [dispatch]);
 
-  return <div></div>;
+  return (
+    <ContentWrapper>
+      <CongratsTopImgBox>
+        <CongratsTopImg />
+      </CongratsTopImgBox>
+      <DummyBox />
+    </ContentWrapper>
+  );
 };
 
 export default Congrats;

@@ -9,7 +9,6 @@ const ContentWrapOuter = styled.div`
 const ContentWrapInner = styled.div`
   width: 1400px;
   margin: 0 auto;
-  position: relative;
   overflow: hidden;
   .title {
     color: #252525;
@@ -17,6 +16,7 @@ const ContentWrapInner = styled.div`
     padding-top: 40px;
   }
   .content {
+    position: relative;
     margin-top: 40px;
     padding: 25px 24px;
     border: 1px solid #e6e6e6;
