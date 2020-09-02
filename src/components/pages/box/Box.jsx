@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 
 import ContentWrapper from "@components/common/wrapper/ContentWrap";
 import ReceiveBalloonList from "./ReceiveBalloonList";
@@ -48,7 +49,10 @@ const BalloonListBox = styled.div`
 
 const Box = () => {
   const dispatch = useDispatch();
-  const { name, email, imageUrl } = useSelector(({ login }) => login);
+  const {
+    login: { name, email, imageUrl },
+    language: { langData },
+  } = useSelector((index) => index);
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
@@ -56,6 +60,9 @@ const Box = () => {
 
   return (
     <ContentWrapper>
+      <Helmet>
+        <title>{`${langData["L0001"]} - ${langData["L0035"]}`}</title>
+      </Helmet>
       <UserInfoBox>
         <img src={imageUrl} alt="user img" />
         <p className="name">{name}</p>

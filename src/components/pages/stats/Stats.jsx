@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
 import styled from "styled-components";
 import { ImBubbles } from "react-icons/im";
+import { Helmet } from "react-helmet";
 
 import balloonLetterRed from "@assets/images/balloon-letter-red.png";
 
@@ -106,6 +107,9 @@ const Stats = () => {
 
   return (
     <ContentWrapper title={langData["L0009"]}>
+      <Helmet>
+        <title>{`${langData["L0001"]} - ${langData["L0037"]}`}</title>
+      </Helmet>
       <BalloonSection>
         <Balloon>
           <img src={balloonLetterRed} alt="balloon img" />

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
 import styled from "styled-components";
 import { LANGUAGES } from "@constants/constant";
+import { Helmet } from "react-helmet";
 
 import contSpecialHoliday from "@assets/images/cont-special-holiday.png";
 
@@ -66,6 +67,9 @@ const Guide = () => {
 
   return (
     <ContentWrapper title={langData["L0010"]}>
+      <Helmet>
+        <title>{`${langData["L0001"]} - ${langData["L0036"]}`}</title>
+      </Helmet>
       <GuideWrap>
         <VideoSection>
           <h3>{langData["L0065"]}</h3>

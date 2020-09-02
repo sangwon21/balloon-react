@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 
 import congratulation from "@assets/images/congratulation.jpg";
 
@@ -41,6 +42,7 @@ const DummyBox = styled.div`
 
 const Congrats = () => {
   const dispatch = useDispatch();
+  const { langData } = useSelector(({ language }) => language);
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
@@ -48,6 +50,9 @@ const Congrats = () => {
 
   return (
     <ContentWrapper>
+      <Helmet>
+        <title>{`${langData["L0001"]} - ${langData["L0034"]}`}</title>
+      </Helmet>
       <CongratsTopImgBox>
         <CongratsTopImg />
       </CongratsTopImgBox>

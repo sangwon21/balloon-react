@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 
 import Title from "./Title";
 import Footer from "./Footer";
@@ -15,6 +16,7 @@ const LoginWrap = styled.div`
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { langData } = useSelector(({ language }) => language);
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
@@ -22,6 +24,9 @@ const Login = () => {
 
   return (
     <LoginWrap>
+      <Helmet>
+        <title>{langData["L0001"]}</title>
+      </Helmet>
       <Title />
       <Footer />
     </LoginWrap>
