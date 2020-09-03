@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
+import { getUsersData } from "@modules/users";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 
@@ -52,11 +53,15 @@ const TabButton = styled.li`
 
 const Users = () => {
   const dispatch = useDispatch();
-  const { langData } = useSelector(({ language }) => language);
+  const {
+    language: { langData },
+    users: { usersData },
+  } = useSelector((index) => index);
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
-  }, [dispatch]);
+    if (!usersData.length) dispatch(getUsersData());
+  }, [dispatch, usersData.length]);
 
   return (
     <ContentWrapper>
