@@ -1,11 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { parts } from "@data/menus/part";
 
 import PartBox from "./PartBox";
-
-// DEMO DATA
-import { parts } from "@data/demoData/part";
 
 const PartListWrap = styled.div`
   position: relative;
