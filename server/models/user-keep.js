@@ -5,4 +5,4 @@ var userKeepSchema = new mongoose.Schema({
   picture: String,
 });
 
-module.exports = mongoose.model("UserKeep", userKeepSchema);
+module.exports = mongoose.model("userKeep", userKeepSchema);
