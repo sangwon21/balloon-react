@@ -19,18 +19,11 @@ export const getUsersData = () => async (dispatch) => {
       partsMap.get(user.part)[user.team].push(user);
     }
   });
-
-  const partsData = [];
-  for (let [part, teams] of Array.from(partsMap)) {
-    const data = {};
-    data[part] = teams;
-    partsData.push(data);
-  }
-
-  dispatch({ type: SET_PARTS_DATA, payload: partsData });
+  dispatch({ type: SET_PARTS_DATA, payload: Array.from(partsMap) });
 };
 
 const initialState = {
+  isLoading: true,
   usersData: [],
   partsData: [],
   error: null,
@@ -42,6 +35,7 @@ const users = (state = initialState, action) => {
       return {
         ...state,
         usersData: action.payload,
+        isLoading: false,
         error: null,
       };
     case GET_DATA_ERROR:

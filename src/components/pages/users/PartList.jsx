@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { parts } from "@data/menus/part";
 
 import PartBox from "./PartBox";
 
@@ -23,15 +22,19 @@ const PartListTitle = styled.h2`
   color: #252525;
 `;
 
-const PartList = () => {
+const PartList = ({ isLoading, partsData }) => {
   const { language, langData } = useSelector(({ language }) => language);
 
-  const partList = parts.map(({ part, teams }) => <PartBox key={part[language]} {...{ language, part, teams }} />);
+  const partList = partsData.map((partData, idx) => <PartBox key={idx} {...{ language, partData }} />);
 
   return (
     <PartListWrap>
-      <PartListTitle>{langData["L0015"]}</PartListTitle>
-      {partList}
+      {!isLoading && (
+        <>
+          <PartListTitle>{langData["L0015"]}</PartListTitle>
+          {partList}
+        </>
+      )}
     </PartListWrap>
   );
 };

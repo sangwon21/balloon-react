@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { partName, teamName } from "@data/languages/part-team-name";
 
 const PartBoxWrap = styled.div`
   padding-top: 20px;
@@ -28,17 +29,23 @@ const PartBoxWrap = styled.div`
   }
 `;
 
-const PartBox = ({ language, part, teams }) => {
-  const teamsList = teams.map((team) => (
-    <li key={team[language]}>
-      <a href={`#${team[language]}`}>{team[language]}</a>
-    </li>
-  ));
+const PartBox = ({ language, partData }) => {
+  const teamsList = [];
+  for (let name in partData[1]) {
+    const team = teamName[name] ? teamName[name][language] : name;
+    teamsList.push(
+      <li key={name}>
+        <a href={`#${team}`}>{team}</a>
+      </li>,
+    );
+  }
+
+  const part = partName[partData[0]] ? partName[partData[0]][language] : partData[0];
 
   return (
     <PartBoxWrap>
       <h3>
-        <a href={`#${part[language]}`}>{part[language]}</a>
+        <a href={`#${part}`}>{part}</a>
       </h3>
       <ul>{teamsList}</ul>
     </PartBoxWrap>

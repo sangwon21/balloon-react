@@ -55,7 +55,7 @@ const Users = () => {
   const dispatch = useDispatch();
   const {
     language: { langData },
-    users: { usersData },
+    users: { isLoading, usersData, partsData },
   } = useSelector((index) => index);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const Users = () => {
         <title>{`${langData["L0001"]} - ${langData["L0033"]}`}</title>
       </Helmet>
       <UsersWrap>
-        <PartList />
+        <PartList {...{ isLoading, partsData }} />
         <TabsMenuWrap>
           <Tabs {...{ TabButtonWrap, TabButton }}>
             <UserList title={langData["L0017"]} />
