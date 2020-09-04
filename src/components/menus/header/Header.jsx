@@ -23,6 +23,11 @@ const HeaderWrap = styled.div`
   box-sizing: border-box;
 `;
 
+const HeaderWrapDummy = styled.div`
+  width: 100%;
+  height: 60px;
+`;
+
 const HeaderInner = styled.div`
   width: 1400px;
   margin: 0 auto;
@@ -67,16 +72,19 @@ const Header = () => {
   }, [isLogin, history, dispatch]);
 
   return (
-    <HeaderWrap>
-      <HeaderInner>
-        <Title onClick={handleClick}>
-          <img src={mainTitle} alt="title img" />
-        </Title>
-        <Nav />
-        <SearchBar />
-        <UserInfo />
-      </HeaderInner>
-    </HeaderWrap>
+    <>
+      <HeaderWrap>
+        <HeaderInner>
+          <Title onClick={handleClick}>
+            <img src={mainTitle} alt="title img" />
+          </Title>
+          <Nav />
+          <SearchBar />
+          <UserInfo />
+        </HeaderInner>
+      </HeaderWrap>
+      <HeaderWrapDummy />
+    </>
   );
 };
 

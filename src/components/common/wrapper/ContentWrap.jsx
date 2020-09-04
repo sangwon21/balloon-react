@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const ContentWrapOuter = styled.div`
   width: 100%;
-  padding: 60px 0;
 `;
 
 const ContentWrapInner = styled.div`
