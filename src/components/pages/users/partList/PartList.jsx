@@ -29,10 +29,17 @@ const PartListTreeWrap = styled.div`
   &.fixed {
     position: fixed;
     top: 60px;
-    height: calc(100vh - 120px);
+    width: 240px;
+    margin-left: -21px;
+    height: calc(100vh - 100px);
     overflow-y: auto;
-    &::-webkit-scrollbar {
-      display: none;
+    background-color: #f9f9f9;
+    border-left: 1px solid #e6e6e6;
+    h3 {
+      margin-left: 20px;
+    }
+    ul {
+      margin-left: 35px;
     }
   }
 `;
