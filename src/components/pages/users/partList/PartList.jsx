@@ -7,7 +7,7 @@ import PartBox from "./PartBox";
 const PartListWrap = styled.div`
   position: relative;
   width: 240px;
-  padding: 20px;
+  padding: 20px 0 20px 20px;
   border-right: 1px solid #e6e6e6;
   box-sizing: border-box;
 `;
@@ -25,6 +25,8 @@ const PartListTitle = styled.h2`
   color: #252525;
 `;
 
+const PartListTreeWrap = styled.div``;
+
 const PartList = ({ partsData }) => {
   const { language, langData } = useSelector(({ language }) => language);
 
@@ -36,7 +38,7 @@ const PartList = ({ partsData }) => {
   return (
     <PartListWrap>
       <PartListTitle>{langData["L0015"]}</PartListTitle>
-      {partList}
+      <PartListTreeWrap>{partList}</PartListTreeWrap>
     </PartListWrap>
   );
 };
