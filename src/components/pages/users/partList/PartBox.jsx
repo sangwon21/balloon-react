@@ -18,6 +18,8 @@ const PartBoxWrap = styled.div`
     margin: 6px 0;
   }
   a {
+    display: inline-block;
+    width: 80%;
     color: #333;
     text-decoration: none;
     :hover {
