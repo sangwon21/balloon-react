@@ -36,15 +36,16 @@ const UserImg = styled.img`
 
 const UserInfo = () => {
   const [isOpen, setOpen] = useState(false);
-  const { name, email, imageUrl } = useSelector(({ login }) => login);
+  const { name, email, imageUrl, userData } = useSelector(({ login }) => login);
+
+  if (!userData) return null;
 
   const BALLOON_COUNT = 7;
-  const TEST_COUNT = 5;
+  const USER_BALLOON_SIZE = userData.balloonSize;
 
   let balloons = [];
-
   for (let i = 0; i < BALLOON_COUNT; i++) {
-    const className = i < BALLOON_COUNT - TEST_COUNT ? "used" : "";
+    const className = i < BALLOON_COUNT - USER_BALLOON_SIZE ? "used" : "";
     balloons.push(<Balloon key={i} className={className} src={balloonRed} alt="balloon img" />);
   }
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { LANGUAGES, STORAGE_KEYS } from "@constants/constant";
-import { userLogin } from "@modules/login";
+import { userLogin, getUserData } from "@modules/login";
 
 import logoSmallKo from "@assets/images/logos/logo-small-ko.png";
 import logoSmallJa from "@assets/images/logos/logo-small-ja.png";
@@ -63,6 +63,7 @@ const Header = () => {
     if (!isLogin && !loginSessionData) return history.replace("/");
 
     dispatch(userLogin(JSON.parse(loginSessionData)));
+    dispatch(getUserData(JSON.parse(loginSessionData).profileObj.email));
   }, [isLogin, history, dispatch]);
 
   return (

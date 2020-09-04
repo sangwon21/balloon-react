@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { GoogleLogin } from "react-google-login";
-import { userLogin } from "@modules/login";
+import { userLogin, getUserData } from "@modules/login";
 import { STORAGE_KEYS } from "@constants/constant";
 
 const GoogleLoginButtonWrap = styled.div`
@@ -22,6 +22,8 @@ const GoogleLoginButton = () => {
     const loginData = { profileObj, tokenObj };
     dispatch(userLogin(loginData));
     sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(loginData));
+
+    dispatch(getUserData(email));
 
     return history.push("/users");
   };
