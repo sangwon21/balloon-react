@@ -23,7 +23,6 @@ export const getUsersData = () => async (dispatch) => {
 };
 
 const initialState = {
-  isLoading: true,
   usersData: [],
   partsData: [],
   error: null,
@@ -35,7 +34,6 @@ const users = (state = initialState, action) => {
       return {
         ...state,
         usersData: action.payload,
-        isLoading: false,
         error: null,
       };
     case GET_DATA_ERROR:

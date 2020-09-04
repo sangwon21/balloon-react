@@ -7,9 +7,9 @@ import { Helmet } from "react-helmet";
 
 import ContentWrapper from "@components/common/wrapper/ContentWrap";
 import Tabs from "@components/common/wrapper/Tabs";
-import PartList from "./PartList";
-import UserList from "./UserList";
-import PraiseList from "./PraiseList";
+import PartList from "./partList/PartList";
+import UserList from "./userList/UserList";
+import PraiseList from "./praiseList/PraiseList";
 
 const UsersWrap = styled.div`
   position: relative;
@@ -55,7 +55,7 @@ const Users = () => {
   const dispatch = useDispatch();
   const {
     language: { langData },
-    users: { isLoading, usersData, partsData },
+    users: { usersData, partsData },
   } = useSelector((index) => index);
 
   useEffect(() => {
@@ -69,11 +69,11 @@ const Users = () => {
         <title>{`${langData["L0001"]} - ${langData["L0033"]}`}</title>
       </Helmet>
       <UsersWrap>
-        <PartList {...{ isLoading, partsData }} />
+        <PartList {...{ partsData }} />
         <TabsMenuWrap>
           <Tabs {...{ TabButtonWrap, TabButton }}>
-            <UserList title={langData["L0017"]} />
-            <PraiseList title={langData["L0018"]} />
+            <UserList title={langData["L0017"]} {...{ partsData }} />
+            <PraiseList title={langData["L0018"]} {...{ partsData }} />
           </Tabs>
         </TabsMenuWrap>
       </UsersWrap>

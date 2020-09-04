@@ -5,7 +5,7 @@ const PraiseListWrap = styled.div`
   padding: 20px;
 `;
 
-const PraiseList = () => {
+const PraiseList = ({ partsData }) => {
   return <PraiseListWrap>이번 달 칭찬한 사람</PraiseListWrap>;
 };
 

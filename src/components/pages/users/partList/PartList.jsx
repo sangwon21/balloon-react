@@ -22,14 +22,14 @@ const PartListTitle = styled.h2`
   color: #252525;
 `;
 
-const PartList = ({ isLoading, partsData }) => {
+const PartList = ({ partsData }) => {
   const { language, langData } = useSelector(({ language }) => language);
 
   const partList = partsData.map((partData, idx) => <PartBox key={idx} {...{ language, partData }} />);
 
   return (
     <PartListWrap>
-      {!isLoading && (
+      {partsData.length > 0 && (
         <>
           <PartListTitle>{langData["L0015"]}</PartListTitle>
           {partList}

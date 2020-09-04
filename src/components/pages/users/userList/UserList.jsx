@@ -5,7 +5,7 @@ const UserListWrap = styled.div`
   padding: 20px;
 `;
 
-const UserList = () => {
+const UserList = ({ partsData }) => {
   return <UserListWrap>전체보기</UserListWrap>;
 };
 
