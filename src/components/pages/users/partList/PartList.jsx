@@ -18,7 +18,10 @@ const PartListTitle = styled.h2`
   padding: 0 20px 15px;
   font-size: 30px;
   height: 60px;
-  line-height: 60px;
+  line-height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-content: center;
   color: #252525;
 `;
 

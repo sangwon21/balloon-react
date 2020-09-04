@@ -23,7 +23,7 @@ const TabsMenuWrap = styled.div`
 
 const TabButtonWrap = styled.ul`
   width: 100%;
-  height: 96px;
+  height: 80px;
   display: flex;
   justify-content: center;
   border-top-right-radius: 2px;
@@ -73,7 +73,7 @@ const Users = () => {
         <TabsMenuWrap>
           <Tabs {...{ TabButtonWrap, TabButton }}>
             <UserList title={langData["L0017"]} {...{ partsData }} />
-            <PraiseList title={langData["L0018"]} {...{ partsData }} />
+            <PraiseList title={langData["L0018"]} />
           </Tabs>
         </TabsMenuWrap>
       </UsersWrap>
