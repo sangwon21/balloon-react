@@ -29,9 +29,7 @@ const PartBoxWrap = styled.div`
   }
 `;
 
-const PartBox = ({ language, partData }) => {
-  const [partName, teamsData] = partData;
-
+const PartBox = ({ language, partName, teamsData }) => {
   const teamsList = [];
   for (let name in teamsData) {
     const team = teamNameLangData[name] ? teamNameLangData[name][language] : name;

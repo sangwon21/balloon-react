@@ -25,16 +25,15 @@ const PartListTitle = styled.h2`
 const PartList = ({ partsData }) => {
   const { language, langData } = useSelector(({ language }) => language);
 
-  const partList = partsData.map((partData, idx) => <PartBox key={idx} {...{ language, partData }} />);
+  const partList = partsData.map((partData) => {
+    const [partName, teamsData] = partData;
+    return <PartBox key={partName} {...{ language, partName, teamsData }} />;
+  });
 
   return (
     <PartListWrap>
-      {partsData.length > 0 && (
-        <>
-          <PartListTitle>{langData["L0015"]}</PartListTitle>
-          {partList}
-        </>
-      )}
+      <PartListTitle>{langData["L0015"]}</PartListTitle>
+      {partList}
     </PartListWrap>
   );
 };
