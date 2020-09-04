@@ -26,21 +26,29 @@ const PartListTitle = styled.h2`
 `;
 
 const PartListTreeWrap = styled.div`
+  overflow-y: auto;
   &.fixed {
     position: fixed;
     top: 60px;
-    width: 240px;
-    margin-left: -21px;
+    width: 219px;
     height: calc(100vh - 100px);
     overflow-y: auto;
-    background-color: #f9f9f9;
-    border-left: 1px solid #e6e6e6;
-    h3 {
-      margin-left: 20px;
+    &.small {
+      height: calc(100vh - 121px);
     }
-    ul {
-      margin-left: 35px;
-    }
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #999;
   }
 `;
 
@@ -65,7 +73,7 @@ const PartList = ({ partsData }) => {
     return <PartBox key={partName} {...{ language, partName, teamsData }} />;
   });
 
-  const className = pageY >= 120 ? "fixed" : "";
+  const className = pageY < 120 ? "" : document.body.scrollHeight - window.visualViewport.height - 20 >= pageY ? "fixed" : "fixed small";
 
   return (
     <PartListWrap>

@@ -6,6 +6,7 @@ import Part from "./Part";
 
 const UserListWrap = styled.ul`
   padding: 0px 20px;
+  min-height: 100vh;
 `;
 
 const UserList = ({ partsData }) => {

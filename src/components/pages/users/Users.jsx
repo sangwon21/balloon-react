@@ -27,8 +27,8 @@ const TabButtonWrap = styled.ul`
   display: flex;
   justify-content: center;
   border-top-right-radius: 2px;
-  border-bottom: 1px solid #e6e6e6;
   box-sizing: border-box;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
 `;
 
 const TabButton = styled.li`

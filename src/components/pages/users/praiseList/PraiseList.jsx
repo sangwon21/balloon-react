@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const PraiseListWrap = styled.div`
   padding: 20px;
+  min-height: 100vh;
 `;
 
 const PraiseList = ({ partsData }) => {
