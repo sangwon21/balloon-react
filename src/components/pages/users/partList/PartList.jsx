@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -25,20 +25,45 @@ const PartListTitle = styled.h2`
   color: #252525;
 `;
 
-const PartListTreeWrap = styled.div``;
+const PartListTreeWrap = styled.div`
+  &.fixed {
+    position: fixed;
+    top: 60px;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+`;
 
 const PartList = ({ partsData }) => {
+  const documentRef = useRef(document);
+  const [pageY, setPageY] = useState(0);
   const { language, langData } = useSelector(({ language }) => language);
+
+  const handleScroll = () => {
+    const { pageYOffset } = window;
+    setPageY(pageYOffset);
+  };
+
+  useEffect(() => {
+    documentRef.current.addEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => documentRef.current.removeEventListener("scroll", handleScroll);
+  }, [pageY]);
 
   const partList = partsData.map((partData) => {
     const [partName, teamsData] = partData;
     return <PartBox key={partName} {...{ language, partName, teamsData }} />;
   });
 
+  const className = pageY >= 120 ? "fixed" : "";
+
   return (
     <PartListWrap>
       <PartListTitle>{langData["L0015"]}</PartListTitle>
-      <PartListTreeWrap>{partList}</PartListTreeWrap>
+      <PartListTreeWrap className={className}>{partList}</PartListTreeWrap>
     </PartListWrap>
   );
 };
