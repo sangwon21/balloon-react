@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { partName, teamName } from "@data/languages/part-team-name";
+import { partNameLangData, teamNameLangData } from "@data/languages/part-team-name";
 
 const PartBoxWrap = styled.div`
   padding-top: 20px;
@@ -30,9 +30,11 @@ const PartBoxWrap = styled.div`
 `;
 
 const PartBox = ({ language, partData }) => {
+  const [partName, teamsData] = partData;
+
   const teamsList = [];
-  for (let name in partData[1]) {
-    const team = teamName[name] ? teamName[name][language] : name;
+  for (let name in teamsData) {
+    const team = teamNameLangData[name] ? teamNameLangData[name][language] : name;
     teamsList.push(
       <li key={name}>
         <a href={`#${team}`}>{team}</a>
@@ -40,7 +42,7 @@ const PartBox = ({ language, partData }) => {
     );
   }
 
-  const part = partName[partData[0]] ? partName[partData[0]][language] : partData[0];
+  const part = partNameLangData[partName] ? partNameLangData[partName][language] : partName;
 
   return (
     <PartBoxWrap>

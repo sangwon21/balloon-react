@@ -1,4 +1,4 @@
-export const partName = {
+export const partNameLangData = {
   해외법인: {
     ko: "해외법인",
     ja: "海外法人",
@@ -53,7 +53,7 @@ export const partName = {
   },
 };
 
-export const teamName = {
+export const teamNameLangData = {
   미국법인: {
     ko: "미국법인",
     ja: "米国法人",
