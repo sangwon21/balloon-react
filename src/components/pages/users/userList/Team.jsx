@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { teamNameLangData } from "@data/languages/part-team-name";
 
 const TeamWrap = styled.div`
   h4 {
@@ -9,11 +10,13 @@ const TeamWrap = styled.div`
   }
 `;
 
-const Team = ({ teamName, members }) => {
+const Team = ({ language, langData, teamName, members }) => {
+  const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
+
   return (
     <TeamWrap>
-      <h4 id={teamName}>
-        {teamName} <span>({members.length}명)</span>
+      <h4 id={team}>
+        {team} <span>({langData["L0016"].replace("%s", members.length)})</span>
       </h4>
     </TeamWrap>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import Part from "./Part";
@@ -8,9 +9,11 @@ const UserListWrap = styled.ul`
 `;
 
 const UserList = ({ partsData }) => {
+  const { language, langData } = useSelector(({ language }) => language);
+
   const userList = partsData.map((partData) => {
     const [partName, teamsData] = partData;
-    return <Part key={partName} {...{ partName, teamsData }} />;
+    return <Part key={partName} {...{ language, langData, partName, teamsData }} />;
   });
 
   return <UserListWrap>{userList}</UserListWrap>;
