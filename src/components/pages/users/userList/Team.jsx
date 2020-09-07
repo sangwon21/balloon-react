@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { teamNameLangData } from "@data/languages/part-team-name";
 
 import Member from "./Member";
+import FilterList from "./FilterList";
 
 const TeamWrap = styled.div`
   h4 {
@@ -22,28 +23,28 @@ const TeamWrap = styled.div`
 const Team = ({ language, langData, teamName, members, setShow }) => {
   const { value } = useSelector(({ searchBar }) => searchBar);
 
-  const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
+  const checkFilter = (member) => {
+    if (member.name.toLowerCase().includes(value.toLowerCase())) return true;
+    if (member.englishName && member.englishName.toLowerCase().includes(value.toLowerCase())) return true;
+    return false;
+  };
 
-  const filterList = members
-    .filter((member) => member.name.includes(value) || (member.englishName && member.englishName.toLowerCase().includes(value.toLowerCase())))
-    .map((member) => <Member key={member._id} {...{ member }} />);
+  const filterList = members.filter((member) => checkFilter(member)).map((member) => <Member key={member._id} {...{ member }} />);
 
   useEffect(() => {
-    if (!filterList.length) {
-      setShow(false);
-    } else {
-      setShow(true);
-    }
+    if (!filterList.length) setShow(false);
   }, [filterList.length, setShow]);
 
   if (!filterList.length) return null;
+
+  const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
 
   return (
     <TeamWrap>
       <h4 id={team}>
         {team} <span>({langData["L0016"].replace("%s", filterList.length)})</span>
       </h4>
-      <ul>{filterList}</ul>
+      <FilterList {...{ filterList, setShow, value }} />
     </TeamWrap>
   );
 };
