@@ -1,5 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { LANGUAGES } from "@constants/constant";
 
 import noPicture from "@assets/images/no-picture.png";
 
@@ -42,13 +44,17 @@ const NamePanel = styled.div`
 `;
 
 const Member = ({ member }) => {
+  const { language } = useSelector(({ language }) => language);
+
+  const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
+
   return (
     <MemberWrap>
       <ImgPanel>
         <img src={member.picture ? member.picture : noPicture} alt="user img" />
       </ImgPanel>
       <NamePanel>
-        <span>{member.name}</span>
+        <span>{name}</span>
       </NamePanel>
     </MemberWrap>
   );
