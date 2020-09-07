@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { teamNameLangData } from "@data/languages/part-team-name";
 
 import Member from "./Member";
-import FilterList from "./FilterList";
+import Filter from "./Filter";
 
 const TeamWrap = styled.div`
   h4 {
@@ -23,13 +23,13 @@ const TeamWrap = styled.div`
 const Team = ({ language, langData, teamName, members, setShow }) => {
   const { value } = useSelector(({ searchBar }) => searchBar);
 
-  const checkFilter = (member) => {
+  const checkFilterCondition = (member) => {
     if (member.name.toLowerCase().includes(value.toLowerCase())) return true;
     if (member.englishName && member.englishName.toLowerCase().includes(value.toLowerCase())) return true;
     return false;
   };
 
-  const filterList = members.filter((member) => checkFilter(member)).map((member) => <Member key={member._id} {...{ member }} />);
+  const filterList = members.filter((member) => checkFilterCondition(member)).map((member) => <Member key={member._id} {...{ member }} />);
 
   useEffect(() => {
     if (!filterList.length) setShow(false);
@@ -44,7 +44,7 @@ const Team = ({ language, langData, teamName, members, setShow }) => {
       <h4 id={team}>
         {team} <span>({langData["L0016"].replace("%s", filterList.length)})</span>
       </h4>
-      <FilterList {...{ filterList, setShow, value }} />
+      <Filter {...{ filterList, setShow, value }} />
     </TeamWrap>
   );
 };

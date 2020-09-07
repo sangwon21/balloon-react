@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const FilterList = ({ filterList, setShow, value }) => {
+const Filter = ({ filterList, setShow, value }) => {
   useEffect(() => {
     if (filterList.length) setShow(true);
   }, [filterList.length, setShow, value]);
@@ -8,4 +8,4 @@ const FilterList = ({ filterList, setShow, value }) => {
   return <ul>{filterList}</ul>;
 };
 
-export default FilterList;
+export default Filter;
