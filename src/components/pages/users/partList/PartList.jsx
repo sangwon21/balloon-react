@@ -14,7 +14,7 @@ const PartListWrap = styled.div`
 
 const PartListTitle = styled.h2`
   border-bottom: 1px solid #e6e6e6;
-  margin: 0 -20px;
+  margin-left: -20px;
   padding: 0 20px 15px;
   font-size: 30px;
   height: 60px;

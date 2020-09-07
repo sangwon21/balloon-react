@@ -4,7 +4,7 @@ import { partNameLangData } from "@data/languages/part-team-name";
 
 import TeamList from "./TeamList";
 
-const PartWrap = styled.li`
+const PartListWrap = styled.li`
   border-bottom: 1px dashed #e6e6e6;
   margin-bottom: 40px;
   h3 {
@@ -16,15 +16,15 @@ const PartWrap = styled.li`
   }
 `;
 
-const Part = ({ language, langData, partName, teamsData }) => {
+const PartList = ({ language, langData, partName, teamsData }) => {
   const part = partNameLangData[partName] ? partNameLangData[partName][language] : partName;
 
   return (
-    <PartWrap>
+    <PartListWrap>
       <h3 id={part}>{part}</h3>
       <TeamList {...{ language, langData, teamsData }} />
-    </PartWrap>
+    </PartListWrap>
   );
 };
 
-export default Part;
+export default PartList;

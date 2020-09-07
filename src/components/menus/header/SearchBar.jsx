@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeValue } from "@modules/searchBar";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 
@@ -34,18 +35,19 @@ const SearchInput = styled.input`
 `;
 
 const SearchBar = () => {
-  const [value, setValue] = useState("");
+  const dispatch = useDispatch();
   const {
     language: { langData },
     page: { currentPage },
+    searchBar: { value },
   } = useSelector((index) => index);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setValue("");
+    // dispatch(changeValue(""));
   };
 
-  const handleChange = ({ target: { value } }) => setValue(value);
+  const handleChange = ({ target: { value } }) => dispatch(changeValue(value));
 
   const searchMenu = searchMenus[currentPage];
 
