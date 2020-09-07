@@ -1,9 +1,12 @@
 import { API } from "@constants/url";
 import { get } from "@utils/request";
 
+const CHANGE_SELECTED_TAB = "users/CHANGE_SELECTED_TAB";
 const GET_DATA_SUCCESS = "users/GET_DATA_SUCCESS";
 const GET_DATA_ERROR = "users/GET_DATA_ERROR";
 const SET_PARTS_DATA = "users/SET_PARTS_DATA";
+
+export const changeSelectedTab = (tabIndex) => ({ type: CHANGE_SELECTED_TAB, payload: tabIndex });
 
 export const getUsersData = () => async (dispatch) => {
   const data = await get(API.GET_USERS, dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
@@ -23,6 +26,7 @@ export const getUsersData = () => async (dispatch) => {
 };
 
 const initialState = {
+  selectedTab: 0,
   usersData: [],
   partsData: [],
   error: null,
@@ -30,6 +34,11 @@ const initialState = {
 
 const users = (state = initialState, action) => {
   switch (action.type) {
+    case CHANGE_SELECTED_TAB:
+      return {
+        ...state,
+        selectedTab: action.payload,
+      };
     case GET_DATA_SUCCESS:
       return {
         ...state,

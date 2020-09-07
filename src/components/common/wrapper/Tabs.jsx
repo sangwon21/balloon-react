@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Tabs = ({ children, TabButtonWrap, TabButton }) => {
-  const [selected, setSelected] = useState(0);
+const Tabs = ({ selectedTab, setSelectedTab, children, TabButtonWrap, TabButton }) => {
   const tabs = children.map((c, i) => {
-    const handleClick = () => setSelected(i);
-
+    const handleClick = () => setSelectedTab(i);
     return (
-      <TabButton key={i} selected={i === selected} onClick={handleClick}>
+      <TabButton key={i} selected={i === selectedTab} onClick={handleClick}>
         <span>{c.props.title}</span>
       </TabButton>
     );
@@ -15,7 +13,7 @@ const Tabs = ({ children, TabButtonWrap, TabButton }) => {
   return (
     <>
       <TabButtonWrap>{tabs}</TabButtonWrap>
-      {children[selected]}
+      {children[selectedTab]}
     </>
   );
 };

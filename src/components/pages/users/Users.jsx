@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
-import { getUsersData } from "@modules/users";
+import { changeSelectedTab, getUsersData } from "@modules/users";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 
@@ -55,13 +55,15 @@ const Users = () => {
   const dispatch = useDispatch();
   const {
     language: { langData },
-    users: { usersData, partsData },
+    users: { selectedTab, usersData, partsData },
   } = useSelector((index) => index);
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
     if (!usersData.length) dispatch(getUsersData());
   }, [dispatch, usersData.length]);
+
+  const setSelectedTab = (tabIndex) => dispatch(changeSelectedTab(tabIndex));
 
   return (
     <ContentWrapper>
@@ -71,7 +73,7 @@ const Users = () => {
       <UsersWrap>
         <PartList {...{ partsData }} />
         <TabsMenuWrap>
-          <Tabs {...{ TabButtonWrap, TabButton }}>
+          <Tabs {...{ TabButtonWrap, TabButton, selectedTab, setSelectedTab }}>
             <UserList title={langData["L0017"]} {...{ partsData }} />
             <PraiseList title={langData["L0018"]} />
           </Tabs>
