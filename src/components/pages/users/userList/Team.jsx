@@ -2,24 +2,25 @@ import React from "react";
 import styled from "styled-components";
 import { teamNameLangData } from "@data/languages/part-team-name";
 
+import Member from "./Member";
+
 const TeamWrap = styled.div`
   h4 {
     color: #aaa;
     font-size: 14px;
-    margin: 10px 0;
+    margin: 15px 0;
   }
   ul {
-    margin-bottom: 20px;
+    margin: 10px 0 40px 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
   }
 `;
 
-const MemberBox = styled.li``;
-
 const Team = ({ language, langData, teamName, members }) => {
   const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
-  const memberList = members.map((member) => {
-    return <MemberBox key={member._id}>{member.name}</MemberBox>;
-  });
+  const memberList = members.map((member) => <Member key={member._id} {...{ member }} />);
 
   return (
     <TeamWrap>
