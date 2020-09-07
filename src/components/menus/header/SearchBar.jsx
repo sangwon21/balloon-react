@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeValue } from "@modules/searchBar";
-import { changeSelectedTab } from "@modules/users";
+import { changeSelectedTab, filterUsersData } from "@modules/users";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 
@@ -41,6 +41,7 @@ const SearchBar = () => {
     language: { langData },
     page: { currentPage },
     searchBar: { value },
+    users: { usersData },
   } = useSelector((index) => index);
 
   const handleSubmit = (event) => {
@@ -48,7 +49,12 @@ const SearchBar = () => {
     // dispatch(changeValue());
   };
 
-  const handleChange = ({ target: { value } }) => dispatch(changeValue(value));
+  const handleChange = ({ target: { value } }) => {
+    if (currentPage === "/users") {
+      dispatch(changeValue(value));
+      return dispatch(filterUsersData(usersData, value));
+    }
+  };
 
   const handleFocus = () => {
     if (currentPage === "/users") return dispatch(changeSelectedTab());

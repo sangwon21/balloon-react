@@ -56,7 +56,7 @@ const Users = () => {
   const dispatch = useDispatch();
   const {
     language: { langData },
-    users: { selectedTab, usersData, partsData },
+    users: { selectedTab, usersData, partsData, filterPartsData },
   } = useSelector((index) => index);
 
   useEffect(() => {
@@ -76,8 +76,8 @@ const Users = () => {
         <PartList {...{ partsData }} />
         <TabsMenuWrap>
           <Tabs {...{ TabButtonWrap, TabButton, selectedTab, setSelectedTab }}>
-            <UserList title={langData["L0017"]} {...{ partsData }} />
-            <PraiseList title={langData["L0018"]} callback={() => dispatch(changeValue())} />
+            <UserList title={langData["L0017"]} {...{ partsData, filterPartsData }} />
+            <PraiseList title={langData["L0018"]} />
           </Tabs>
         </TabsMenuWrap>
       </UsersWrap>

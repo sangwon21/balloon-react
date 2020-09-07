@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import styled from "styled-components";
 import { teamNameLangData } from "@data/languages/part-team-name";
 
 import Member from "./Member";
-import Filter from "./Filter";
 
 const TeamWrap = styled.div`
   h4 {
@@ -20,22 +18,8 @@ const TeamWrap = styled.div`
   }
 `;
 
-const Team = ({ language, langData, teamName, members, setShow }) => {
-  const { value } = useSelector(({ searchBar }) => searchBar);
-
-  const checkFilterCondition = (member) => {
-    if (member.name.toLowerCase().includes(value.toLowerCase())) return true;
-    if (member.englishName && member.englishName.toLowerCase().includes(value.toLowerCase())) return true;
-    return false;
-  };
-
-  const filterList = members.filter((member) => checkFilterCondition(member)).map((member) => <Member key={member._id} {...{ member }} />);
-
-  useEffect(() => {
-    if (!filterList.length) setShow(false);
-  }, [filterList.length, setShow]);
-
-  if (!filterList.length) return null;
+const Team = ({ language, langData, teamName, members }) => {
+  const filterList = members.map((member) => <Member key={member._id} {...{ member }} />);
 
   const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
 
@@ -44,7 +28,7 @@ const Team = ({ language, langData, teamName, members, setShow }) => {
       <h4 id={team}>
         {team} <span>({langData["L0016"].replace("%s", filterList.length)})</span>
       </h4>
-      <Filter {...{ filterList, setShow, value }} />
+      <ul>{filterList}</ul>
     </TeamWrap>
   );
 };

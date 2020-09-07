@@ -9,10 +9,15 @@ const UserListWrap = styled.ul`
   min-height: 100vh;
 `;
 
-const UserList = ({ partsData }) => {
-  const { language, langData } = useSelector(({ language }) => language);
+const UserList = ({ partsData, filterPartsData }) => {
+  const {
+    language: { language, langData },
+    searchBar: { value },
+  } = useSelector((index) => index);
 
-  const userList = partsData.map((partData) => {
+  const data = value ? filterPartsData : partsData;
+
+  const userList = data.map((partData) => {
     const [partName, teamsData] = partData;
     return <Part key={partName} {...{ language, langData, partName, teamsData }} />;
   });
