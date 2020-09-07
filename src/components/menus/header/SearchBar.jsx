@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeValue } from "@modules/searchBar";
+import { changeSelectedTab } from "@modules/users";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 
@@ -44,10 +45,14 @@ const SearchBar = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // dispatch(changeValue(""));
+    // dispatch(changeValue());
   };
 
   const handleChange = ({ target: { value } }) => dispatch(changeValue(value));
+
+  const handleFocus = () => {
+    if (currentPage === "/users") return dispatch(changeSelectedTab());
+  };
 
   const searchMenu = searchMenus[currentPage];
 
@@ -55,7 +60,7 @@ const SearchBar = () => {
 
   return (
     <SearchBarForm onSubmit={handleSubmit}>
-      <SearchInput type="text" value={value} onChange={handleChange} placeholder={langData[searchMenu.placeholder]} />
+      <SearchInput type="text" value={value} onFocus={handleFocus} onChange={handleChange} placeholder={langData[searchMenu.placeholder]} />
       <BiSearch className="search-icon" />
     </SearchBarForm>
   );

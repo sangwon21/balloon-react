@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
 import { changeSelectedTab, getUsersData } from "@modules/users";
+import { changeValue } from "@modules/searchBar";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 
@@ -60,6 +61,7 @@ const Users = () => {
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
+    dispatch(changeValue());
     if (!usersData.length) dispatch(getUsersData());
   }, [dispatch, usersData.length]);
 
@@ -75,7 +77,7 @@ const Users = () => {
         <TabsMenuWrap>
           <Tabs {...{ TabButtonWrap, TabButton, selectedTab, setSelectedTab }}>
             <UserList title={langData["L0017"]} {...{ partsData }} />
-            <PraiseList title={langData["L0018"]} />
+            <PraiseList title={langData["L0018"]} callback={() => dispatch(changeValue())} />
           </Tabs>
         </TabsMenuWrap>
       </UsersWrap>

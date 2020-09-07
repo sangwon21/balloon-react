@@ -1,6 +1,6 @@
 const CHANGE_VALUE = "searchBar/CHANGE_VALUE";
 
-export const changeValue = (value) => ({ type: CHANGE_VALUE, payload: value });
+export const changeValue = (value = "") => ({ type: CHANGE_VALUE, payload: value });
 
 const initalState = {
   value: "",

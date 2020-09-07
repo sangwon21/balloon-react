@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
+import { changeValue } from "@modules/searchBar";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 
@@ -50,6 +51,7 @@ const Congrats = () => {
 
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
+    dispatch(changeValue());
   }, [dispatch]);
 
   return (

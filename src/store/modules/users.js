@@ -6,7 +6,7 @@ const GET_DATA_SUCCESS = "users/GET_DATA_SUCCESS";
 const GET_DATA_ERROR = "users/GET_DATA_ERROR";
 const SET_PARTS_DATA = "users/SET_PARTS_DATA";
 
-export const changeSelectedTab = (tabIndex) => ({ type: CHANGE_SELECTED_TAB, payload: tabIndex });
+export const changeSelectedTab = (tabIndex = 0) => ({ type: CHANGE_SELECTED_TAB, payload: tabIndex });
 
 export const getUsersData = () => async (dispatch) => {
   const data = await get(API.GET_USERS, dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
