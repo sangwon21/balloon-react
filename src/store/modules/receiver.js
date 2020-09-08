@@ -1,6 +1,9 @@
-const SET_PRAISE_MODAL = "message/SET_PRAISE_MODAL";
+const SET_RECEIVER_DATA = "message/SET_RECEIVER_DATA";
 
-export const setPraiseModal = ({ name, englishName, email, picture }) => ({ type: SET_PRAISE_MODAL, payload: { name, englishName, email, picture } });
+export const setReceiverData = ({ name, englishName, email, picture }) => ({
+  type: SET_RECEIVER_DATA,
+  payload: { name, englishName, email, picture },
+});
 
 const initialState = {
   name: "",
@@ -9,9 +12,9 @@ const initialState = {
   picture: "",
 };
 
-const message = (state = initialState, action) => {
+const receiver = (state = initialState, action) => {
   switch (action.type) {
-    case SET_PRAISE_MODAL:
+    case SET_RECEIVER_DATA:
       return {
         ...state,
         name: action.payload.name,
@@ -24,4 +27,4 @@ const message = (state = initialState, action) => {
   }
 };
 
-export default message;
+export default receiver;

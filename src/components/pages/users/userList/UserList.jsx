@@ -11,7 +11,7 @@ const UserListWrap = styled.ul`
 `;
 
 const UserList = ({ partsData, filterPartsData }) => {
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
   const {
     language: { language, langData },
     searchBar: { value },

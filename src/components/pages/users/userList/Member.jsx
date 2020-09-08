@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { setPraiseModal } from "@modules/message";
+import { setReceiverData } from "@modules/receiver";
 import { LANGUAGES } from "@constants/constant";
 
 import noPicture from "@assets/images/no-picture.png";
@@ -22,6 +22,9 @@ const ImgPanel = styled.div`
   padding: 20px;
   box-sizing: border-box;
   cursor: pointer;
+  &.myImg {
+    cursor: default;
+  }
   img {
     width: 100px;
     height: 100px;
@@ -77,6 +80,8 @@ const Member = ({ member, setOpen }) => {
     login: { userData },
   } = useSelector((index) => index);
 
+  if (!userData) return null;
+
   const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
 
   const handleMouseEnter = () => {
@@ -85,25 +90,26 @@ const Member = ({ member, setOpen }) => {
   };
   const handleMouseLeave = () => setHover(false);
   const handleClick = () => {
-    dispatch(setPraiseModal(memberEl.current.dataset));
+    if (userData.email === member.email) return;
+    dispatch(setReceiverData(memberEl.current.dataset));
     setOpen(true);
   };
 
   const hoverPanelClassName = isHover ? "active" : "";
   const hoverPanelText = "L0020";
+  const imgPanelClassName = userData.email === member.email ? "myImg" : "";
 
   return (
     <MemberWrap
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
       data-email={member.email}
       data-name={member.name}
       data-english-name={member.englishName}
       data-picture={member.picture}
       ref={memberEl}
     >
-      <ImgPanel>
+      <ImgPanel className={imgPanelClassName} onClick={handleClick}>
         <img src={member.picture ? member.picture : noPicture} alt="user img" />
         <HoverPanel className={hoverPanelClassName}>
           <span>{langData[hoverPanelText]}</span>

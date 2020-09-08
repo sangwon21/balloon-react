@@ -5,7 +5,7 @@ import page from "./page";
 import login from "./login";
 import users from "./users";
 import searchBar from "./searchBar";
-import message from "./message";
+import receiver from "./receiver";
 
 const rootReducer = combineReducers({
   language,
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   login,
   users,
   searchBar,
-  message,
+  receiver,
 });
 
 export default rootReducer;

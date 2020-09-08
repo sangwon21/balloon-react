@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  button, input {
+  button, input, textarea {
     font-family: 'Noto Sans KR', sans-serif;
   }
 `;

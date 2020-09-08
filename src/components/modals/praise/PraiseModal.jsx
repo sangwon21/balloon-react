@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { ImCross } from "react-icons/im";
+import { LANGUAGES } from "@constants/constant";
 
 const PraiseModalBackground = styled.div`
   position: fixed;
@@ -16,13 +18,12 @@ const PraiseModalBackground = styled.div`
   align-items: center;
 `;
 
-const PraiseModalWrap = styled.div`
+const PraiseModalForm = styled.form`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 490px;
-  min-height: 300px;
   background-color: #fff;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.33);
   font-size: 18px;
@@ -52,8 +53,46 @@ const Header = styled.div`
   }
 `;
 
+const Body = styled.div`
+  padding: 9px;
+  display: flex;
+  flex-direction: column;
+  .receiver-name {
+    font-size: 14px;
+  }
+  .message-area {
+    resize: vertical;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0 15px 0;
+    color: #252525;
+  }
+  .secret-checkbox {
+    align-self: baseline;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: #eee;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    input {
+      margin: 0 6px 0 0;
+    }
+  }
+  .caution-text {
+    color: #f00;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+  }
+`;
+
 const Footer = styled.div`
-  position: absolute;
   width: 100%;
   padding: 10px;
   bottom: 0;
@@ -64,31 +103,82 @@ const Footer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  button {
+    padding: 5px 20px;
+    color: #fff;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .send-btn {
+    background-color: #00a6de;
+    margin-right: 10px;
+    :hover {
+      background-color: #0090c0;
+    }
+  }
+  .close-btn {
+    background-color: #ccc;
+  }
 `;
 
 const PraiseModal = ({ setOpen }) => {
+  const [message, setMessage] = useState("");
+  const { register, handleSubmit } = useForm();
   const {
-    language: { langData },
-    message: { name, englishName, email, picture },
+    language: { langData, language },
+    receiver: { name, englishName },
+    login: { userData },
   } = useSelector((index) => index);
 
-  const handleModalClose = () => setOpen(false);
+  if (!userData) return null;
+
+  const handleModalClose = () => {
+    if (message === "") return setOpen(false);
+    if (window.confirm("작성된 내용이 있습니다. 닫겠습니까?")) return setOpen(false);
+  };
+  const handleChange = ({ target: { value } }) => setMessage(value);
+
+  const onSubmit = (data) => console.log(data);
+
+  const receiverName = language === LANGUAGES.KO ? name : englishName ? englishName : name;
 
   return (
     <>
       <PraiseModalBackground onClick={handleModalClose} />
-      <PraiseModalWrap>
+      <PraiseModalForm onSubmit={handleSubmit(onSubmit)}>
         <Header>
           <h3>{langData["L0022"]}</h3>
           <ImCross className="close-icon" onClick={handleModalClose} />
         </Header>
+        <Body>
+          <span className="receiver-name">To. {receiverName}</span>
+          <textarea
+            ref={register}
+            name="message"
+            className="message-area"
+            rows="6"
+            placeholder={langData["L0024"]}
+            maxLength={500}
+            onChange={handleChange}
+          />
+          <label className="secret-checkbox">
+            <input type="checkbox" name="isSecret" ref={register} />
+            <p>{langData["L0025"]}</p>
+          </label>
+          <p className="caution-text">※ {langData["L0026"]}</p>
+        </Body>
         <Footer>
-          <button type="submit">{langData["L0027"]}</button>
-          <button type="button" onClick={handleModalClose}>
+          <button type="submit" className="send-btn">
+            {langData["L0027"]}
+          </button>
+          <button type="button" className="close-btn" onClick={handleModalClose}>
             {langData["L0028"]}
           </button>
         </Footer>
-      </PraiseModalWrap>
+      </PraiseModalForm>
     </>
   );
 };
