@@ -75,7 +75,7 @@ const Body = styled.div`
     background: #eee;
     font-size: 14px;
     font-weight: 600;
-    line-height: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     cursor: pointer;
