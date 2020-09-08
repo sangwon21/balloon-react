@@ -134,7 +134,7 @@ const PraiseModal = ({ setOpen }) => {
 
   const handleModalClose = () => {
     if (message === "") return setOpen(false);
-    if (window.confirm("작성된 내용이 있습니다. 닫겠습니까?")) return setOpen(false);
+    if (window.confirm(langData["T0001"])) return setOpen(false);
   };
   const handleChange = ({ target: { value } }) => setMessage(value);
 
