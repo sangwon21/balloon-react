@@ -16,12 +16,12 @@ const PartWrap = styled.li`
   }
 `;
 
-const Part = ({ language, langData, partName, teamsData }) => {
+const Part = ({ language, langData, partName, teamsData, setOpen }) => {
   const part = partNameLangData[partName] ? partNameLangData[partName][language] : partName;
 
   const teamList = [];
   for (let [teamName, members] of Object.entries(teamsData)) {
-    teamList.push(<Team key={teamName} {...{ language, langData, teamName, members }} />);
+    teamList.push(<Team key={teamName} {...{ language, langData, teamName, members, setOpen }} />);
   }
 
   return (

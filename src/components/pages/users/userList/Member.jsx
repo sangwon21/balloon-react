@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { setPraiseModal } from "@modules/message";
 import { LANGUAGES } from "@constants/constant";
 
 import noPicture from "@assets/images/no-picture.png";
@@ -67,7 +68,9 @@ const HoverPanel = styled.div`
   }
 `;
 
-const Member = ({ member }) => {
+const Member = ({ member, setOpen }) => {
+  const dispatch = useDispatch();
+  const memberEl = useRef();
   const [isHover, setHover] = useState(false);
   const {
     language: { language, langData },
@@ -81,6 +84,10 @@ const Member = ({ member }) => {
     setHover(true);
   };
   const handleMouseLeave = () => setHover(false);
+  const handleClick = () => {
+    dispatch(setPraiseModal(memberEl.current.dataset));
+    setOpen(true);
+  };
 
   const hoverPanelClassName = isHover ? "active" : "";
   const hoverPanelText = "L0020";
@@ -89,9 +96,12 @@ const Member = ({ member }) => {
     <MemberWrap
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       data-email={member.email}
       data-name={member.name}
       data-english-name={member.englishName}
+      data-picture={member.picture}
+      ref={memberEl}
     >
       <ImgPanel>
         <img src={member.picture ? member.picture : noPicture} alt="user img" />

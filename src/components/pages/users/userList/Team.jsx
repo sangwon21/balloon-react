@@ -18,8 +18,8 @@ const TeamWrap = styled.div`
   }
 `;
 
-const Team = ({ language, langData, teamName, members }) => {
-  const filterList = members.map((member) => <Member key={member._id} {...{ member }} />);
+const Team = ({ language, langData, teamName, members, setOpen }) => {
+  const filterList = members.map((member) => <Member key={member._id} {...{ member, setOpen }} />);
 
   const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
 

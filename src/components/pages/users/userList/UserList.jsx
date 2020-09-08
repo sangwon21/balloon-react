@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
+import PraiseModal from "@components/modals/praise/PraiseModal";
 import Part from "./Part";
 
 const UserListWrap = styled.ul`
@@ -10,6 +11,7 @@ const UserListWrap = styled.ul`
 `;
 
 const UserList = ({ partsData, filterPartsData }) => {
+  const [isOpen, setOpen] = useState(true);
   const {
     language: { language, langData },
     searchBar: { value },
@@ -19,10 +21,15 @@ const UserList = ({ partsData, filterPartsData }) => {
 
   const userList = data.map((partData) => {
     const [partName, teamsData] = partData;
-    return <Part key={partName} {...{ language, langData, partName, teamsData }} />;
+    return <Part key={partName} {...{ language, langData, partName, teamsData, setOpen }} />;
   });
 
-  return <UserListWrap>{userList}</UserListWrap>;
+  return (
+    <>
+      <UserListWrap>{userList}</UserListWrap>
+      {isOpen && <PraiseModal {...{ setOpen }} />}
+    </>
+  );
 };
 
 export default UserList;
