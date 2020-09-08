@@ -70,7 +70,7 @@ const HoverPanel = styled.div`
 const Member = ({ member }) => {
   const [isHover, setHover] = useState(false);
   const {
-    language: { language },
+    language: { language, langData },
     login: { userData },
   } = useSelector((index) => index);
 
@@ -83,6 +83,7 @@ const Member = ({ member }) => {
   const handleMouseLeave = () => setHover(false);
 
   const hoverPanelClassName = isHover ? "active" : "";
+  const hoverPanelText = "L0020";
 
   return (
     <MemberWrap
@@ -95,7 +96,7 @@ const Member = ({ member }) => {
       <ImgPanel>
         <img src={member.picture ? member.picture : noPicture} alt="user img" />
         <HoverPanel className={hoverPanelClassName}>
-          <span>칭찬하기</span>
+          <span>{langData[hoverPanelText]}</span>
         </HoverPanel>
       </ImgPanel>
       <NamePanel>
