@@ -47,16 +47,8 @@ const Header = () => {
   const history = useHistory();
   const {
     language: { langData },
-    login: { isLogin },
+    login: { isLogin, userData },
   } = useSelector((index) => index);
-
-  const logos = {};
-  logos[LANGUAGES.KO] = logoSmallKo;
-  logos[LANGUAGES.JA] = logoSmallJa;
-
-  const mainTitle = logos[langData["L0000"]];
-
-  const handleClick = () => history.push("/users");
 
   useEffect(() => {
     const loginSessionData = sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION);
@@ -65,6 +57,16 @@ const Header = () => {
     dispatch(userLogin(JSON.parse(loginSessionData)));
     dispatch(getUserData(JSON.parse(loginSessionData).profileObj.email));
   }, [isLogin, history, dispatch]);
+
+  if (!userData) return null;
+
+  const logos = {};
+  logos[LANGUAGES.KO] = logoSmallKo;
+  logos[LANGUAGES.JA] = logoSmallJa;
+
+  const mainTitle = logos[langData["L0000"]];
+
+  const handleClick = () => history.push("/users");
 
   return (
     <>

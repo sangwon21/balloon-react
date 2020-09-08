@@ -15,7 +15,10 @@ const UserList = ({ partsData, filterPartsData }) => {
   const {
     language: { language, langData },
     searchBar: { value },
+    login: { userData },
   } = useSelector((index) => index);
+
+  if (!userData) return null;
 
   const data = value ? filterPartsData : partsData;
 

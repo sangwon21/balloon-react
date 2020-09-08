@@ -130,10 +130,7 @@ const PraiseModal = ({ setOpen }) => {
   const {
     language: { langData, language },
     receiver: { name, englishName },
-    login: { userData },
   } = useSelector((index) => index);
-
-  if (!userData) return null;
 
   const handleModalClose = () => {
     if (message === "") return setOpen(false);

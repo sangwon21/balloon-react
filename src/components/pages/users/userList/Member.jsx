@@ -80,8 +80,6 @@ const Member = ({ member, setOpen }) => {
     login: { userData },
   } = useSelector((index) => index);
 
-  if (!userData) return null;
-
   const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
 
   const handleMouseEnter = () => {
