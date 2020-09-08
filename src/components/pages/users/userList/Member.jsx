@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { LANGUAGES } from "@constants/constant";
@@ -43,15 +43,60 @@ const NamePanel = styled.div`
   box-sizing: border-box;
 `;
 
+const HoverPanel = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 166, 222, 0.3);
+  color: #333;
+  opacity: 0;
+  transition: opacity 0.3s;
+  span {
+    text-shadow: 0 0 2px rgba(255, 255, 255, 1);
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  &.active {
+    opacity: 1;
+  }
+`;
+
 const Member = ({ member }) => {
-  const { language } = useSelector(({ language }) => language);
+  const [isHover, setHover] = useState(false);
+  const {
+    language: { language },
+    login: { userData },
+  } = useSelector((index) => index);
 
   const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
 
+  const handleMouseEnter = () => {
+    if (userData.email === member.email) return;
+    setHover(true);
+  };
+  const handleMouseLeave = () => setHover(false);
+
+  const hoverPanelClassName = isHover ? "active" : "";
+
   return (
-    <MemberWrap>
+    <MemberWrap
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      data-email={member.email}
+      data-name={member.name}
+      data-english-name={member.englishName}
+    >
       <ImgPanel>
         <img src={member.picture ? member.picture : noPicture} alt="user img" />
+        <HoverPanel className={hoverPanelClassName}>
+          <span>칭찬하기</span>
+        </HoverPanel>
       </ImgPanel>
       <NamePanel>
         <span>{name}</span>
