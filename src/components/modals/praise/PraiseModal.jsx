@@ -16,11 +16,23 @@ const PraiseModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  &.show {
+    animation-name: show-modal-background;
+    animation-duration: 0.25s;
+    animation-fill-mode: both;
+  }
+  @keyframes show-modal-background {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const PraiseModalForm = styled.form`
   position: fixed;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 490px;
@@ -31,6 +43,21 @@ const PraiseModalForm = styled.form`
   border-radius: 6px;
   color: #474747;
   z-index: 25;
+  &.show {
+    animation-name: show-praise-modal;
+    animation-duration: 0.25s;
+    animation-fill-mode: both;
+  }
+  @keyframes show-praise-modal {
+    0% {
+      opacity: 0;
+      top: 40%;
+    }
+    100% {
+      opacity: 1;
+      top: 50%;
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -124,7 +151,7 @@ const Footer = styled.div`
   }
 `;
 
-const PraiseModal = ({ setOpen }) => {
+const PraiseModal = ({ isOpen, setOpen }) => {
   const [message, setMessage] = useState("");
   const { register, handleSubmit } = useForm();
   const {
@@ -142,10 +169,12 @@ const PraiseModal = ({ setOpen }) => {
 
   const receiverName = language === LANGUAGES.KO ? name : englishName ? englishName : name;
 
+  const className = isOpen ? "show" : "";
+
   return (
     <>
-      <PraiseModalBackground onClick={handleModalClose} />
-      <PraiseModalForm onSubmit={handleSubmit(onSubmit)}>
+      <PraiseModalBackground onClick={handleModalClose} className={className} />
+      <PraiseModalForm onSubmit={handleSubmit(onSubmit)} className={className}>
         <Header>
           <h3>{langData["L0022"]}</h3>
           <ImCross className="close-icon" onClick={handleModalClose} />

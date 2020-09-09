@@ -30,7 +30,7 @@ const UserList = ({ partsData, filterPartsData }) => {
   return (
     <>
       <UserListWrap>{userList}</UserListWrap>
-      {isOpen && <PraiseModal {...{ setOpen }} />}
+      {isOpen && <PraiseModal {...{ isOpen, setOpen }} />}
     </>
   );
 };
