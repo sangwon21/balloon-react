@@ -5,7 +5,7 @@ import styled from "styled-components";
 import balloonRed from "@assets/images/balloon-red.png";
 import noPicture from "@assets/images/no-picture.png";
 
-import UserInfoModal from "./UserInfoModal";
+import UserInfoSlideMenu from "./UserInfoSlideMenu";
 
 const UserInfoWrap = styled.div`
   position: absolute;
@@ -53,7 +53,7 @@ const UserInfo = () => {
     <UserInfoWrap>
       <div>{balloons}</div>
       <UserImg onClick={handleClick} src={imageUrl || noPicture} alt="user img" />
-      {isOpen && <UserInfoModal {...{ isOpen, setOpen, name, email, imageUrl }} />}
+      {isOpen && <UserInfoSlideMenu {...{ isOpen, setOpen, name, email, imageUrl }} />}
     </UserInfoWrap>
   );
 };

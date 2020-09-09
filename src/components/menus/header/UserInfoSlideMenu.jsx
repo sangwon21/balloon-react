@@ -18,7 +18,7 @@ const UserInfoModalWrap = styled.div`
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 
   animation-name: userInfoModalAnim;
-  animation-duration: 0.25s;
+  animation-duration: 0.2s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: both;
   overflow: hidden;
@@ -102,7 +102,7 @@ const TextMenuInner = styled.div`
   }
 `;
 
-const UserInfoModal = ({ isOpen, setOpen, name, email, imageUrl }) => {
+const UserInfoSlideMenu = ({ isOpen, setOpen, name, email, imageUrl }) => {
   const history = useHistory();
   const modalRef = useRef();
 
@@ -154,4 +154,4 @@ const UserInfoModal = ({ isOpen, setOpen, name, email, imageUrl }) => {
   );
 };
 
-export default UserInfoModal;
+export default UserInfoSlideMenu;
