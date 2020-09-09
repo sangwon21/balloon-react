@@ -28,7 +28,6 @@ const initialState = {
   selectedTab: 0,
   usersData: [],
   partsData: [],
-  filterUsersData: [],
   filterPartsData: [],
   error: null,
 };
