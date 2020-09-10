@@ -82,11 +82,11 @@ const Member = ({ member, setOpen }) => {
 
   const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
 
-  const handleMouseEnter = () => {
+  const handleMouseOver = () => {
     if (userData.email === member.email) return;
     setHover(true);
   };
-  const handleMouseLeave = () => setHover(false);
+  const handleMouseOut = () => setHover(false);
   const handleClick = () => {
     if (userData.email === member.email) return;
     dispatch(setReceiverData(memberEl.current.dataset));
@@ -99,8 +99,8 @@ const Member = ({ member, setOpen }) => {
 
   return (
     <MemberWrap
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
       data-email={member.email}
       data-name={member.name}
       data-english-name={member.englishName}
