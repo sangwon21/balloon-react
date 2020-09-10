@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import PraiseModal from "@components/modals/praise/PraiseModal";
 import Part from "./Part";
+import PraiseModal from "@components/modals/praise/PraiseModal";
 
 const UserListWrap = styled.ul`
   padding: 0px 20px;
