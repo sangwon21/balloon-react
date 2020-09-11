@@ -8,8 +8,8 @@ const GET_DATA_ERROR = "login/GET_DATA_ERROR";
 
 export const userLogin = ({ profileObj, tokenObj }) => ({ type: USER_LOGIN, payload: { profileObj, tokenObj } });
 export const userLogout = () => ({ type: USER_LOGOUT });
-export const getUserData = (email) => (dispatch) => {
-  get(API.GET_USER(email), dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
+export const getUserData = (email) => async (dispatch) => {
+  return await get(API.GET_USER(email), dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
 };
 
 const initialState = {
@@ -27,7 +27,6 @@ const login = (state = initialState, action) => {
     case USER_LOGIN:
       return {
         ...state,
-        isLogin: true,
         name: action.payload.profileObj.name,
         email: action.payload.profileObj.email,
         imageUrl: action.payload.profileObj.imageUrl,
@@ -40,6 +39,7 @@ const login = (state = initialState, action) => {
     case GET_DATA_SUCCESS:
       return {
         ...state,
+        isLogin: true,
         userData: action.payload,
         error: null,
       };

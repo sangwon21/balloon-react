@@ -13,19 +13,23 @@ const GoogleLoginButtonWrap = styled.div`
 const GoogleLoginButton = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { langData } = useSelector(({ language }) => language);
+  const {
+    language: { langData },
+  } = useSelector((index) => index);
 
-  const responseGoogle = ({ profileObj, tokenObj }) => {
+  const responseGoogle = async ({ profileObj, tokenObj }) => {
     const { email } = profileObj;
-    if (!email.endsWith(process.env.REACT_APP_VAILD_MAIL_DOMAIN)) return alert(langData["L0005"]);
+
+    if (!email.includes(process.env.REACT_APP_VAILD_MAIL_DOMAIN) && !(email === process.env.REACT_APP_TEST_ACCOUNT)) return alert(langData["L0005"]);
 
     const loginData = { profileObj, tokenObj };
     dispatch(userLogin(loginData));
     sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(loginData));
 
-    dispatch(getUserData(email));
+    const data = await dispatch(getUserData(email, history));
 
-    return history.push("/users");
+    if (data.message !== "404" && data.message !== "500") return history.push("/users");
+    return alert(langData["T0002"]);
   };
 
   const buttonText = langData["L0004"];
