@@ -1,3 +1,5 @@
+const moment = require("moment-timezone");
+
 module.exports = function ({ app, Feedback, Message, OpenComment, User, UserKeep }) {
   // [GET] 모든 유저 정보 조회
   app.get("/api/users", function (req, res) {
@@ -28,6 +30,29 @@ module.exports = function ({ app, Feedback, Message, OpenComment, User, UserKeep
         if (err) res.status(500).json({ error: "failed to update" });
         res.json({ message: "user updated" });
       });
+    });
+  });
+
+  // [POST] 칭찬 메세지 보내기
+  app.post("/api/message", function (req, res) {
+    var message = new Message();
+
+    message.date = moment().tz("Asia/Seoul").toDate().toISOString();
+    message.isSecret = req.body.isSecret;
+    message.message = req.body.message;
+    message.receiverEmail = req.body.receiverEmail;
+    message.receiverName = req.body.receiverName;
+    message.receiverPicture = req.body.receiverPicture || null;
+    message.senderEmail = req.body.senderEmail;
+    message.senderName = req.body.senderName;
+    message.senderPicture = req.body.senderPicture || null;
+
+    message.save(function (err) {
+      if (err) {
+        res.json({ status: 404 });
+        return;
+      }
+      res.json({ status: 200 });
     });
   });
 };

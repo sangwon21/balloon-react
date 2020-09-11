@@ -1,3 +1,6 @@
+import { API } from "@constants/url";
+import { put, post } from "@utils/request";
+
 export const checkResponseData = (response) => response.ok && response.status >= 200 && response.status <= 207;
 
 export const checkFilterCondition = (userData, value) => {
@@ -19,4 +22,14 @@ export const makePartsMap = (data) => {
     }
   });
   return partsMap;
+};
+
+export const updateUserPicture = async (email, imageUrl) => {
+  const data = JSON.stringify({ picture: imageUrl });
+  return await put(API.UPDATE_USER_PICTURE(email), data);
+};
+
+export const sendMessage = async (messageData) => {
+  const data = JSON.stringify(messageData);
+  return await post(API.SEND_MESSAGE, data);
 };

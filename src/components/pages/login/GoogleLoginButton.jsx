@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { GoogleLogin } from "react-google-login";
-import { userLogin, getUserData, updateUserPicture } from "@modules/login";
+import { userLogin, getUserData } from "@modules/login";
+import { updateUserPicture } from "@utils/util";
 import { STORAGE_KEYS } from "@constants/constant";
 
 const GoogleLoginButtonWrap = styled.div`
@@ -27,7 +28,7 @@ const GoogleLoginButton = () => {
     sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(loginData));
 
     const { message, picture } = await dispatch(getUserData(email));
-    if (imageUrl !== picture) await dispatch(updateUserPicture(email, imageUrl));
+    if (imageUrl !== picture) await updateUserPicture(email, imageUrl);
 
     if (message !== "404" && message !== "500") return history.push("/users");
     return alert(langData["T0002"]);

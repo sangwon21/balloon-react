@@ -22,3 +22,13 @@ export const put = async (url, data) => {
     body: data,
   });
 };
+
+export const post = async (url, data) => {
+  return await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  });
+};

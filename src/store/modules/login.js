@@ -1,5 +1,5 @@
 import { API } from "@constants/url";
-import { get, put } from "@utils/request";
+import { get } from "@utils/request";
 
 const USER_LOGIN = "login/USER_LOGIN";
 const USER_LOGOUT = "login/USER_LOGOUT";
@@ -11,11 +11,6 @@ export const userLogout = () => ({ type: USER_LOGOUT });
 
 export const getUserData = (email) => async (dispatch) => {
   return await get(API.GET_USER(email), dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
-};
-
-export const updateUserPicture = (email, imageUrl) => async () => {
-  const data = JSON.stringify({ picture: imageUrl });
-  return await put(API.UPDATE_USER_PICTURE(email), data);
 };
 
 const initialState = {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { LANGUAGES } from "@constants/constant";
+import { sendMessage } from "@utils/util";
 
 import ModalContainer from "@components/modals/ModalContainer";
 import PraiseModalBody from "./PraiseModalBody";
@@ -11,11 +12,12 @@ const PraiseModal = ({ isOpen, setOpen }) => {
   const [message, setMessage] = useState("");
   const {
     language: { langData, language },
-    receiver: { name, englishName },
+    receiver,
+    login,
   } = useSelector((index) => index);
 
   const handleChange = ({ target: { value } }) => setMessage(value);
-  const receiverName = language === LANGUAGES.KO ? name : englishName ? englishName : name;
+  const receiverName = language === LANGUAGES.KO ? receiver.name : receiver.englishName ? receiver.englishName : receiver.name;
 
   // Essential Modal Props
   const { register, handleSubmit } = useForm();
@@ -24,7 +26,20 @@ const PraiseModal = ({ isOpen, setOpen }) => {
     if (window.confirm(langData["T0001"])) return setOpen(false);
   };
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async ({ isSecret, message }) => {
+    const messageData = {
+      isSecret: isSecret,
+      message: message,
+      receiverEmail: receiver.email,
+      receiverName: receiver.name,
+      receiverPicture: receiver.picture,
+      senderEmail: login.email,
+      senderName: login.name,
+      senderPicture: login.imageUrl,
+    };
+
+    await sendMessage(messageData);
+  };
 
   const modalTitleText = langData["L0022"];
   const submitBtnText = langData["L0027"];
