@@ -25,7 +25,6 @@ export const updateUserPicture = (email, imageUrl) => async () => {
 };
 
 const initialState = {
-  isLogin: false,
   name: "",
   email: "",
   imageUrl: "",
@@ -51,7 +50,6 @@ const login = (state = initialState, action) => {
     case GET_DATA_SUCCESS:
       return {
         ...state,
-        isLogin: true,
         userData: action.payload,
         error: null,
       };
