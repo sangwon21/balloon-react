@@ -8,8 +8,20 @@ const GET_DATA_ERROR = "login/GET_DATA_ERROR";
 
 export const userLogin = ({ profileObj, tokenObj }) => ({ type: USER_LOGIN, payload: { profileObj, tokenObj } });
 export const userLogout = () => ({ type: USER_LOGOUT });
+
 export const getUserData = (email) => async (dispatch) => {
   return await get(API.GET_USER(email), dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
+};
+
+export const updateUserPicture = (email, imageUrl) => async () => {
+  const data = JSON.stringify({ picture: imageUrl });
+  return await fetch(API.UPDATE_USER_PICTURE(email), {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  });
 };
 
 const initialState = {

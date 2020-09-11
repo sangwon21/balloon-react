@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { GoogleLogin } from "react-google-login";
-import { userLogin, getUserData } from "@modules/login";
+import { userLogin, getUserData, updateUserPicture } from "@modules/login";
 import { STORAGE_KEYS } from "@constants/constant";
 
 const GoogleLoginButtonWrap = styled.div`
@@ -18,7 +18,7 @@ const GoogleLoginButton = () => {
   } = useSelector((index) => index);
 
   const responseGoogle = async ({ profileObj, tokenObj }) => {
-    const { email } = profileObj;
+    const { email, imageUrl } = profileObj;
 
     if (!email.includes(process.env.REACT_APP_VAILD_MAIL_DOMAIN) && !(email === process.env.REACT_APP_TEST_ACCOUNT)) return alert(langData["L0005"]);
 
@@ -26,9 +26,10 @@ const GoogleLoginButton = () => {
     dispatch(userLogin(loginData));
     sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(loginData));
 
-    const data = await dispatch(getUserData(email, history));
+    const { message, picture } = await dispatch(getUserData(email));
+    if (imageUrl !== picture) await dispatch(updateUserPicture(email, imageUrl));
 
-    if (data.message !== "404" && data.message !== "500") return history.push("/users");
+    if (message !== "404" && message !== "500") return history.push("/users");
     return alert(langData["T0002"]);
   };
 

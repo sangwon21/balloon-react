@@ -13,6 +13,7 @@ const GoogleLogoutButton = ({ text }) => {
     sessionStorage.removeItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION);
     dispatch(userLogout());
     history.push("/");
+    window.location.reload();
   };
 
   return (
