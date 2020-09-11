@@ -55,7 +55,7 @@ const BalloonListBox = styled.div`
 const Box = () => {
   const dispatch = useDispatch();
   const {
-    login: { name, email, imageUrl },
+    login: { name, email, picture },
     language: { langData },
   } = useSelector((index) => index);
 
@@ -71,7 +71,7 @@ const Box = () => {
       </Helmet>
       <BoxWrap>
         <UserInfoBox>
-          <img src={imageUrl} alt="user img" />
+          <img src={picture} alt="user img" />
           <p className="name">{name}</p>
           <p className="email">{email}</p>
         </UserInfoBox>

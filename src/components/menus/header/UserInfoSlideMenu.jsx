@@ -112,7 +112,7 @@ const TextMenuInner = styled.div`
   }
 `;
 
-const UserInfoSlideMenu = ({ isOpen, setOpen, name, email, imageUrl }) => {
+const UserInfoSlideMenu = ({ isOpen, setOpen, name, email, picture }) => {
   const history = useHistory();
   const modalRef = useRef();
 
@@ -141,7 +141,7 @@ const UserInfoSlideMenu = ({ isOpen, setOpen, name, email, imageUrl }) => {
     <UserInfoModalWrap ref={modalRef}>
       <UserInfoBox>
         <UserInfoInner onClick={handleClick}>
-          <img src={imageUrl} alt="user img" />
+          <img src={picture} alt="user img" />
           <div className="info-text">
             <p className="name">{name}</p>
             <p className="email">{email}</p>

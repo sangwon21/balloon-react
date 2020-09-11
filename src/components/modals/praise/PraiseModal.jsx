@@ -35,7 +35,7 @@ const PraiseModal = ({ isOpen, setOpen }) => {
       receiverPicture: receiver.picture,
       senderEmail: login.email,
       senderName: login.name,
-      senderPicture: login.imageUrl,
+      senderPicture: login.picture,
     };
 
     await sendMessage(messageData);

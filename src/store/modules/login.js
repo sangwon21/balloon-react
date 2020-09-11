@@ -16,7 +16,7 @@ export const getUserData = (email) => async (dispatch) => {
 const initialState = {
   name: "",
   email: "",
-  imageUrl: "",
+  picture: "",
   tokenData: null,
   userData: null,
   error: null,
@@ -29,7 +29,7 @@ const login = (state = initialState, action) => {
         ...state,
         name: action.payload.profileObj.name,
         email: action.payload.profileObj.email,
-        imageUrl: action.payload.profileObj.imageUrl,
+        picture: action.payload.profileObj.imageUrl,
         tokenData: action.payload.tokenObj,
       };
     case USER_LOGOUT:
