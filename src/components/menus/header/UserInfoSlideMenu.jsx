@@ -56,14 +56,24 @@ const UserInfoInner = styled.div`
     border: 1px solid #e2e2e2;
   }
   .info-text {
-    height: 32px;
+    height: 38px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    p {
+      max-width: 120px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
     .name {
+      line-height: 20px;
       color: #000;
       font-size: 14px;
       font-weight: 600;
+    }
+    .email {
+      line-height: 16px;
     }
   }
   :hover {
