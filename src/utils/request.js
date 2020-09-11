@@ -12,3 +12,13 @@ export const get = async (url, dispatch, successActionType, errorActionType) => 
     return error;
   }
 };
+
+export const put = async (url, data) => {
+  return await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  });
+};

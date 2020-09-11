@@ -1,5 +1,5 @@
 import { API } from "@constants/url";
-import { get } from "@utils/request";
+import { get, put } from "@utils/request";
 
 const USER_LOGIN = "login/USER_LOGIN";
 const USER_LOGOUT = "login/USER_LOGOUT";
@@ -15,13 +15,7 @@ export const getUserData = (email) => async (dispatch) => {
 
 export const updateUserPicture = (email, imageUrl) => async () => {
   const data = JSON.stringify({ picture: imageUrl });
-  return await fetch(API.UPDATE_USER_PICTURE(email), {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: data,
-  });
+  return await put(API.UPDATE_USER_PICTURE(email), data);
 };
 
 const initialState = {
