@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { LANGUAGES } from "@constants/constant";
 import { sendMessage } from "@utils/util";
 
+import Toast from "@components/common/toast/Toast";
 import ModalContainer from "@components/modals/ModalContainer";
 import PraiseModalBody from "./PraiseModalBody";
 
@@ -27,6 +28,10 @@ const PraiseModal = ({ isOpen, setOpen }) => {
   };
 
   const onSubmit = async ({ isSecret, message }) => {
+    const MIN_TEXT_LENGTH = 10;
+    if (message.length < MIN_TEXT_LENGTH) return alert(langData["L0029"]);
+    if (!window.confirm(langData["T0003"].replace("{{name}}", receiver.name))) return;
+
     const messageData = {
       isSecret: isSecret,
       message: message,
@@ -38,7 +43,13 @@ const PraiseModal = ({ isOpen, setOpen }) => {
       senderPicture: login.picture,
     };
 
-    await sendMessage(messageData);
+    const { status } = await sendMessage(messageData);
+    if (status === 200) {
+      // 메세지 발송 성공 애니메이션, 메세지
+    } else {
+      // 메세지 발송 실패 메세지
+    }
+    setOpen(false);
   };
 
   const modalTitleText = langData["L0022"];
