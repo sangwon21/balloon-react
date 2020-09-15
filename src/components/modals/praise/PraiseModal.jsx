@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { LANGUAGES } from "@constants/constant";
 import { sendMessage } from "@utils/util";
 
-import Toast from "@components/common/toast/Toast";
 import ModalContainer from "@components/modals/ModalContainer";
 import PraiseModalBody from "./PraiseModalBody";
 
