@@ -3,18 +3,18 @@ const moment = require("moment-timezone");
 module.exports = function ({ app, Feedback, Message, OpenComment, User, UserKeep }) {
   // [GET] 모든 유저 정보 조회
   app.get("/api/users", function (req, res) {
-    User.find((err, users) => {
+    User.find(function (err, users) {
       if (err) return res.status(500).send({ error: "database failure" });
-      res.json(users);
+      return res.json(users);
     });
   });
 
   // [GET] 로그인한 사용자 정보 조회
   app.get("/api/user/:email", function (req, res) {
     User.findOne({ email: req.params.email }, function (err, user) {
-      if (err) return res.status(500).json({ error: err });
+      if (err) return res.status(500).json({ error: "database failure" });
       if (!user) return res.status(404).json({ error: "user not found" });
-      res.json(user);
+      return res.json(user);
     });
   });
 
@@ -28,7 +28,7 @@ module.exports = function ({ app, Feedback, Message, OpenComment, User, UserKeep
 
       user.save(function (err) {
         if (err) res.status(500).json({ error: "failed to update" });
-        res.json({ message: "user updated" });
+        res.status(200).json({ status: 200 });
       });
     });
   });
@@ -48,11 +48,8 @@ module.exports = function ({ app, Feedback, Message, OpenComment, User, UserKeep
     message.senderPicture = req.body.senderPicture || null;
 
     message.save(function (err) {
-      if (err) {
-        res.json({ status: 404 });
-        return;
-      }
-      res.json({ status: 200 });
+      if (err) res.status(500).json({ error: "failed to send message" });
+      res.status(200).json({ status: 200 });
     });
   });
 };

@@ -13,22 +13,21 @@ export const get = async (url, dispatch, successActionType, errorActionType) => 
   }
 };
 
-export const put = async (url, data) => {
-  return await fetch(url, {
-    method: "PUT",
+export const dataPush = async (url, method, data) => {
+  const fetchOption = {
+    method: method,
     headers: {
       "Content-Type": "application/json",
     },
     body: data,
-  });
-};
+  };
 
-export const post = async (url, data) => {
-  return await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: data,
-  });
+  try {
+    const response = await fetch(url, fetchOption);
+    if (!checkResponseData(response)) throw new Error(response.status);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
 };

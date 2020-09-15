@@ -1,5 +1,5 @@
 import { API } from "@constants/url";
-import { put, post } from "@utils/request";
+import { dataPush } from "@utils/request";
 
 export const checkResponseData = (response) => response.ok && response.status >= 200 && response.status <= 207;
 
@@ -26,10 +26,10 @@ export const makePartsMap = (data) => {
 
 export const updateUserPicture = async (email, imageUrl) => {
   const data = JSON.stringify({ picture: imageUrl });
-  return await put(API.UPDATE_USER_PICTURE(email), data);
+  return await dataPush(API.UPDATE_USER_PICTURE(email), "PUT", data);
 };
 
 export const sendMessage = async (messageData) => {
   const data = JSON.stringify(messageData);
-  return await post(API.SEND_MESSAGE, data);
+  return await dataPush(API.SEND_MESSAGE, "POST", data);
 };
