@@ -20,9 +20,6 @@ import Guide from "@components/pages/guide/Guide";
 
 const App = () => {
   const dispatch = useDispatch();
-  // const { currentPage } = useSelector(({ page }) => page);
-  // const { isShow } = useSelector(({ toast }) => toast);
-
   const {
     page: { currentPage },
     toast: { isShow },
