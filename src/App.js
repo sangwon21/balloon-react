@@ -10,6 +10,7 @@ import jaData from "@data/languages/ja.json";
 import GlobalStyles from "@styles/GlobalStyles";
 import Header from "@components/menus/header/Header";
 import Footer from "@components/menus/footer/Footer";
+import Toast from "@components/common/toast/Toast";
 import Login from "@components/pages/login/Login";
 import Users from "@components/pages/users/Users";
 import Congrats from "@components/pages/congrats/Congrats";
@@ -19,7 +20,13 @@ import Guide from "@components/pages/guide/Guide";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { currentPage } = useSelector(({ page }) => page);
+  // const { currentPage } = useSelector(({ page }) => page);
+  // const { isShow } = useSelector(({ toast }) => toast);
+
+  const {
+    page: { currentPage },
+    toast: { isShow },
+  } = useSelector((index) => index);
 
   const langDatas = {};
   langDatas[LANGUAGES.KO] = koData;
@@ -28,7 +35,7 @@ const App = () => {
   useEffect(() => {
     const settingLanguage = localStorage.getItem(STORAGE_KEYS.LANGUAGE);
     if (settingLanguage) dispatch(setLanguage(settingLanguage, langDatas[settingLanguage]));
-  }, [dispatch, langDatas]);
+  }, []);
 
   return (
     <Router>
@@ -39,6 +46,7 @@ const App = () => {
           <Footer />
         </>
       )}
+      {isShow && <Toast />}
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/users" component={Users} />

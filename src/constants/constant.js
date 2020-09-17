@@ -7,3 +7,8 @@ export const LANGUAGES = {
   KO: "ko",
   JA: "ja",
 };
+
+export const TOAST_TYPE = {
+  NOMAL: "normal",
+  ERROR: "error",
+};

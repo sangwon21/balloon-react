@@ -6,6 +6,7 @@ import login from "./login";
 import users from "./users";
 import searchBar from "./searchBar";
 import receiver from "./receiver";
+import toast from "./toast";
 
 const rootReducer = combineReducers({
   language,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   users,
   searchBar,
   receiver,
+  toast,
 });
 
 export default rootReducer;

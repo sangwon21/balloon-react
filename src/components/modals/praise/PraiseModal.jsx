@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LANGUAGES } from "@constants/constant";
 import { sendMessage } from "@utils/util";
+import { showToastMessage, updateToastMessage, updateToastType } from "@modules/toast";
+import { TOAST_TYPE } from "@constants/constant";
 
 import ModalContainer from "@components/modals/ModalContainer";
 import PraiseModalBody from "./PraiseModalBody";
 
 const PraiseModal = ({ isOpen, setOpen }) => {
+  const dispatch = useDispatch();
+
   // Modal Body Props
   const [message, setMessage] = useState("");
   const {
@@ -45,9 +49,14 @@ const PraiseModal = ({ isOpen, setOpen }) => {
     const { status } = await sendMessage(messageData);
     if (status === 200) {
       // 메세지 발송 성공 애니메이션, 메세지
+      dispatch(updateToastType(TOAST_TYPE.NOMAL));
+      dispatch(updateToastMessage(langData["L0030"]));
     } else {
       // 메세지 발송 실패 메세지
+      dispatch(updateToastType(TOAST_TYPE.ERROR));
+      dispatch(updateToastMessage(langData["T0004"]));
     }
+    dispatch(showToastMessage(true));
     setOpen(false);
   };
 
