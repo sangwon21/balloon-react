@@ -11,6 +11,7 @@ export const updateToastType = (type) => ({ type: UPDATE_TOAST_TYPE, payload: ty
 export const resetToast = () => ({ type: RESET_TOAST });
 
 const initialState = {
+  number: 0,
   isShow: false,
   message: "",
   type: TOAST_TYPE.NOMAL,
@@ -27,6 +28,7 @@ const toast = (state = initialState, action) => {
       return {
         ...state,
         message: action.payload,
+        number: ++state.number,
       };
     case UPDATE_TOAST_TYPE:
       return {
