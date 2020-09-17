@@ -52,7 +52,7 @@ const Congrats = () => {
   useEffect(() => {
     dispatch(setCurrentPage(window.location.pathname));
     dispatch(changeValue());
-  }, [dispatch]);
+  }, []);
 
   return (
     <ContentWrapper>

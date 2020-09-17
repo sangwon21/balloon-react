@@ -63,7 +63,7 @@ const Users = () => {
     dispatch(setCurrentPage(window.location.pathname));
     dispatch(changeValue());
     if (!usersData.length) dispatch(getUsersData());
-  }, [dispatch, usersData.length]);
+  }, []);
 
   const setSelectedTab = (tabIndex) => dispatch(changeSelectedTab(tabIndex));
 
