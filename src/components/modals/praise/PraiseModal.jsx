@@ -9,7 +9,7 @@ import { TOAST_TYPE } from "@constants/constant";
 import ModalContainer from "@components/modals/ModalContainer";
 import PraiseModalBody from "./PraiseModalBody";
 
-const PraiseModal = ({ isOpen, setOpen }) => {
+const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
   const dispatch = useDispatch();
 
   // Modal Body Props
@@ -57,6 +57,7 @@ const PraiseModal = ({ isOpen, setOpen }) => {
       dispatch(updateToastMessage(langData["T0004"]));
     }
     dispatch(showToastMessage(true));
+    setShowSendEffect(true);
     setOpen(false);
   };
 

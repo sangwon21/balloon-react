@@ -26,7 +26,6 @@ const Balloon = styled.div`
   padding-top: 64px;
   width: 500px;
   height: 600px;
-  animation-duration: 4.5s;
   animation: balloon 4.5s ease-in-out infinite;
   transform-origin: bottom center;
   @keyframes balloon {

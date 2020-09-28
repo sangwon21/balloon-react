@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Part from "./Part";
 import PraiseModal from "@components/modals/praise/PraiseModal";
+import BalloonLetter from "@components/common/effect/BalloonLetter";
 
 const UserListWrap = styled.ul`
   padding: 0px 20px;
@@ -12,6 +13,7 @@ const UserListWrap = styled.ul`
 
 const UserList = ({ partsData, filterPartsData }) => {
   const [isOpen, setOpen] = useState(false);
+  const [showSendEffect, setShowSendEffect] = useState(false);
   const {
     language: { language, langData },
     searchBar: { value },
@@ -30,7 +32,8 @@ const UserList = ({ partsData, filterPartsData }) => {
   return (
     <>
       <UserListWrap>{userList}</UserListWrap>
-      {isOpen && <PraiseModal {...{ isOpen, setOpen }} />}
+      {isOpen && <PraiseModal {...{ isOpen, setOpen, setShowSendEffect }} />}
+      {showSendEffect && <BalloonLetter {...{ setShowSendEffect }} />}
     </>
   );
 };
