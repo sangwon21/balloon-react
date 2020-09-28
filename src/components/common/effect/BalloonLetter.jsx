@@ -15,17 +15,17 @@ const BalloonLetterWrap = styled.div`
       transform: translate(-50%, -65%) rotate(-5deg);
     }
     25% {
-      transform: translate(-50%, -85%) rotate(16deg);
+      transform: translate(-50%, -85%) rotate(18deg);
     }
     50% {
-      transform: translate(-50%, -105%) rotate(-14deg);
+      transform: translate(-50%, -105%) rotate(-16deg);
     }
     75% {
-      transform: translate(-50%, -125%) rotate(13deg);
+      transform: translate(-50%, -125%) rotate(15deg);
       opacity: 1;
     }
     100% {
-      transform: translate(-50%, -145%) rotate(-15deg);
+      transform: translate(-50%, -145%) rotate(-17deg);
       opacity: 0;
     }
   }
