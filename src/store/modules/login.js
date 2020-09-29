@@ -1,12 +1,17 @@
 import { API } from "@constants/url";
-import { get } from "@utils/request";
+import { get, dataPush } from "@utils/request";
 
 const USER_LOGIN = "login/USER_LOGIN";
 const USER_LOGOUT = "login/USER_LOGOUT";
 const GET_DATA_SUCCESS = "login/GET_DATA_SUCCESS";
 const GET_DATA_ERROR = "login/GET_DATA_ERROR";
 
-export const userLogin = ({ profileObj, tokenObj }) => ({ type: USER_LOGIN, payload: { profileObj, tokenObj } });
+export const userLogin = ({ profileObj }) => async (dispatch) => {
+  const { token } = await dataPush({ url: API.LOGIN, method: "POST", data: JSON.stringify({ email: profileObj.email }) });
+  profileObj.token = token;
+  dispatch({ type: USER_LOGIN, payload: { profileObj } });
+  return { profileObj };
+};
 export const userLogout = () => ({ type: USER_LOGOUT });
 
 export const getUserData = (email) => async (dispatch) => {
@@ -17,7 +22,6 @@ const initialState = {
   name: "",
   email: "",
   picture: "",
-  tokenData: null,
   userData: null,
   error: null,
 };
@@ -30,7 +34,6 @@ const login = (state = initialState, action) => {
         name: action.payload.profileObj.name,
         email: action.payload.profileObj.email,
         picture: action.payload.profileObj.imageUrl,
-        tokenData: action.payload.tokenObj,
       };
     case USER_LOGOUT:
       return {

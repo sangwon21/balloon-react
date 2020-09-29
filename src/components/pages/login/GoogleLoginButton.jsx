@@ -18,14 +18,14 @@ const GoogleLoginButton = () => {
     language: { langData },
   } = useSelector((index) => index);
 
-  const responseGoogle = async ({ profileObj, tokenObj }) => {
+  const responseGoogle = async ({ profileObj }) => {
     const { email, imageUrl } = profileObj;
 
     if (!email.includes(process.env.REACT_APP_VAILD_MAIL_DOMAIN) && !(email === process.env.REACT_APP_TEST_ACCOUNT)) return alert(langData["L0005"]);
 
-    const loginData = { profileObj, tokenObj };
-    dispatch(userLogin(loginData));
-    sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(loginData));
+    const loginData = { profileObj };
+    const sessionData = await dispatch(userLogin(loginData));
+    sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(sessionData));
 
     const { message, picture } = await dispatch(getUserData(email));
     if (imageUrl !== picture) await updateUserPicture(email, imageUrl);

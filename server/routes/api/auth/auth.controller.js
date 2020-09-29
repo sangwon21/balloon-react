@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../../../models/user");
 
-// [GET] 로그인시 jwt 발행
+// [POST] 로그인시 jwt 발행
 exports.login = (req, res) => {
-  const email = "stlee@rsupport.com";
+  const { email } = req.body;
   const secret = req.app.get("jwt-secret");
 
   const check = (user) => {

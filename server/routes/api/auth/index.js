@@ -3,7 +3,7 @@ const controller = require("./auth.controller");
 const authMiddleware = require("../../../middlewares/auth");
 
 // [GET] 로그인시 jwt 발행
-router.get("/login", controller.login);
+router.post("/login", controller.login);
 
 // [GET] jwt 토큰 검증
 router.use("/check", authMiddleware);

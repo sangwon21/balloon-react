@@ -13,10 +13,11 @@ export const get = async (url, dispatch, successActionType, errorActionType) => 
   }
 };
 
-export const dataPush = async (url, method, data) => {
+export const dataPush = async ({ url, method, data, token }) => {
   const fetchOption = {
     method: method,
     headers: {
+      "x-access-token": token,
       "Content-Type": "application/json",
     },
     body: data,

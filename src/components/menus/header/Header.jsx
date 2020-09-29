@@ -51,12 +51,16 @@ const Header = () => {
   } = useSelector((index) => index);
 
   useEffect(() => {
-    const loginSessionData = sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION);
-    if (!loginSessionData) return history.replace("/");
+    const prevSessionData = JSON.parse(sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION));
+    if (!prevSessionData) return history.replace("/");
+    if (!userData) dispatch(getUserData(prevSessionData.profileObj.email));
 
-    dispatch(userLogin(JSON.parse(loginSessionData)));
-    if (!userData) dispatch(getUserData(JSON.parse(loginSessionData).profileObj.email));
-  }, [userData, history, dispatch]);
+    const sessionUpdate = async () => {
+      const sessionData = await dispatch(userLogin(prevSessionData));
+      sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(sessionData));
+    };
+    sessionUpdate();
+  }, []);
 
   if (!userData) return null;
 
