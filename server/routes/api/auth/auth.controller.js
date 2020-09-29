@@ -20,7 +20,7 @@ exports.login = (req, res) => {
           },
           secret,
           {
-            expiresIn: "7d",
+            expiresIn: "3d",
           },
           (err, token) => {
             if (err) reject(err);

@@ -1,9 +1,11 @@
 import { TOAST_TYPE } from "@constants/constant";
 
 const SHOW_TOAST_MESSAGE = "toast/SHOW_TOAST_MESSAGE";
+const UPDATE_TOAST_MESSAGE = "toast/UPDATE_TOAST_MESSAGE";
 const RESET_TOAST = "toast/RESET_TOAST";
 
-export const showToastMessage = ({ isShow, type, message }) => ({ type: SHOW_TOAST_MESSAGE, payload: { type, message } });
+export const showToastMessage = () => ({ type: SHOW_TOAST_MESSAGE });
+export const updateToastMessage = ({ type, message }) => ({ type: UPDATE_TOAST_MESSAGE, payload: { type, message } });
 export const resetToast = () => ({ type: RESET_TOAST });
 
 const initialState = {
@@ -19,9 +21,13 @@ const toast = (state = initialState, action) => {
       return {
         ...state,
         isShow: true,
+      };
+    case UPDATE_TOAST_MESSAGE:
+      return {
+        ...state,
+        number: state.number + 1,
         type: action.payload.type || TOAST_TYPE.NOMAL,
         message: action.payload.message,
-        number: ++state.number,
       };
     case RESET_TOAST:
       return {
