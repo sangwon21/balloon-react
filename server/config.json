@@ -8,5 +8,6 @@
     "port": 27017
   },
   "databaseUsersReset": false,
-  "isDev": true
+  "isDev": true,
+  "secret": "TeStSeCrEtKey"
 }
