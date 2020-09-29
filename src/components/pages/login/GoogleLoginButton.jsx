@@ -38,7 +38,13 @@ const GoogleLoginButton = () => {
 
   return (
     <GoogleLoginButtonWrap>
-      <GoogleLogin clientId={process.env.REACT_APP_OAUTH_CLIENT_ID} buttonText={buttonText} onSuccess={responseGoogle} onFailure={responseGoogle} />
+      <GoogleLogin
+        clientId={process.env.REACT_APP_OAUTH_CLIENT_ID}
+        buttonText={buttonText}
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={"single_host_origin"}
+      />
     </GoogleLoginButtonWrap>
   );
 };
