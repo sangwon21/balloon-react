@@ -7,9 +7,10 @@ import { LANGUAGES } from "@constants/constant";
 import noPicture from "@assets/images/no-picture.png";
 
 const MemberWrap = styled.li`
-  border-radius: 2px;
+  border-radius: 20px;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
+  overflow: hidden;
 `;
 
 const ImgPanel = styled.div`
