@@ -30,6 +30,7 @@ app.listen(port, function () {
 });
 
 // 유저정보 초기화시.
+// const User = require("./models/user");
 // if (config.databaseUsersReset) {
 //   const userList = require("./data/demoData/user-list");
 
@@ -50,6 +51,7 @@ app.listen(port, function () {
 //     newUser.englishName = null;
 //     newUser.googleId = null;
 //     newUser.token = null;
+//     newUser.admin = false;
 
 //     newUser.save(function (err) {
 //       if (err) {

@@ -14,6 +14,7 @@ var userSchema = new mongoose.Schema({
   phone: String,
   tel: String,
   balloonSize: Number,
+  admin: Boolean,
 });
 
 module.exports = mongoose.model("user", userSchema);

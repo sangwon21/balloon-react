@@ -17,7 +17,7 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
   const {
     language: { langData, language },
     receiver,
-    login,
+    login: { userData },
   } = useSelector((index) => index);
 
   const handleChange = ({ target: { value } }) => setMessage(value);
@@ -41,9 +41,9 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       receiverEmail: receiver.email,
       receiverName: receiver.name,
       receiverPicture: receiver.picture,
-      senderEmail: login.email,
-      senderName: login.name,
-      senderPicture: login.picture,
+      senderEmail: userData.email,
+      senderName: userData.name,
+      senderPicture: userData.picture,
     };
 
     const { status } = await sendMessage(messageData);

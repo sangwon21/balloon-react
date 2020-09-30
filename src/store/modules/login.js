@@ -3,6 +3,7 @@ import { getData } from "@utils/request";
 import { STORAGE_KEYS } from "@constants/constant";
 
 const USER_LOGOUT = "login/USER_LOGOUT";
+const INIT_USER_PICTURE = "login/INIT_USER_PICTURE";
 const GET_DATA_SUCCESS = "login/GET_DATA_SUCCESS";
 const GET_DATA_ERROR = "login/GET_DATA_ERROR";
 
@@ -16,6 +17,8 @@ export const getUserData = (profileObj) => async (dispatch) => {
   return data;
 };
 
+export const initUserPicture = (imageUrl) => ({ type: INIT_USER_PICTURE, payload: imageUrl });
+
 const initialState = {
   userData: null,
   error: null,
@@ -26,6 +29,14 @@ const login = (state = initialState, action) => {
     case USER_LOGOUT:
       return {
         ...initialState,
+      };
+    case INIT_USER_PICTURE:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          picture: action.payload,
+        },
       };
     case GET_DATA_SUCCESS:
       return {
