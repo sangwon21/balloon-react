@@ -20,7 +20,7 @@ const GoogleLogoutButton = ({ text }) => {
       render={({ onClick }) => <span onClick={onClick}>{text}</span>}
       clientId={process.env.REACT_APP_OAUTH_CLIENT_ID}
       onLogoutSuccess={logout}
-      onLogoutFailure={logout}
+      // onLogoutFailure={logout}
       cookiePolicy={"single_host_origin"}
     />
   );

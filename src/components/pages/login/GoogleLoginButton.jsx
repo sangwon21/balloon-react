@@ -47,7 +47,7 @@ const GoogleLoginButton = () => {
         clientId={process.env.REACT_APP_OAUTH_CLIENT_ID}
         buttonText={buttonText}
         onSuccess={responseGoogle}
-        onFailure={responseGoogle}
+        // onFailure={responseGoogle}
         cookiePolicy={"single_host_origin"}
       />
     </GoogleLoginButtonWrap>
