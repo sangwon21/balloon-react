@@ -39,9 +39,9 @@ const App = () => {
   return (
     <Router>
       <GlobalStyles />
-      <Session />
       {currentPage !== "/" && (
         <>
+          <Session />
           <Header />
           <Footer />
         </>

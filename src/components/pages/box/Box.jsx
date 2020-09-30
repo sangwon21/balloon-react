@@ -55,7 +55,7 @@ const BalloonListBox = styled.div`
 const Box = () => {
   const dispatch = useDispatch();
   const {
-    login: { name, email, picture },
+    login: { userData },
     language: { langData },
   } = useSelector((index) => index);
 
@@ -64,6 +64,8 @@ const Box = () => {
     dispatch(changeValue());
   }, []);
 
+  if (!userData) return null;
+
   return (
     <ContentWrapper>
       <Helmet>
@@ -71,9 +73,9 @@ const Box = () => {
       </Helmet>
       <BoxWrap>
         <UserInfoBox>
-          <img src={picture} alt="user img" />
-          <p className="name">{name}</p>
-          <p className="email">{email}</p>
+          <img src={userData.picture} alt="user img" />
+          <p className="name">{userData.name}</p>
+          <p className="email">{userData.email}</p>
         </UserInfoBox>
         <BalloonListBox>
           <ReceiveBalloonList />

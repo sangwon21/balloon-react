@@ -1,40 +1,28 @@
 import { API } from "@constants/url";
-import { get, dataPush } from "@utils/request";
+import { getData } from "@utils/request";
+import { STORAGE_KEYS } from "@constants/constant";
 
-const USER_LOGIN = "login/USER_LOGIN";
 const USER_LOGOUT = "login/USER_LOGOUT";
 const GET_DATA_SUCCESS = "login/GET_DATA_SUCCESS";
 const GET_DATA_ERROR = "login/GET_DATA_ERROR";
 
-export const userLogin = ({ profileObj }) => async (dispatch) => {
-  const { token } = await dataPush({ url: API.LOGIN, method: "POST", data: JSON.stringify({ email: profileObj.email }) });
-  profileObj.token = token;
-  dispatch({ type: USER_LOGIN, payload: { profileObj } });
-  return { profileObj };
+export const userLogout = () => (disaptch) => {
+  sessionStorage.removeItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION);
+  disaptch({ type: USER_LOGOUT });
 };
-export const userLogout = () => ({ type: USER_LOGOUT });
 
-export const getUserData = (email) => async (dispatch) => {
-  return await get(API.GET_USER(email), dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
+export const getUserData = (profileObj) => async (dispatch) => {
+  const data = await getData(API.GET_USER(profileObj.email), dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
+  return data;
 };
 
 const initialState = {
-  name: "",
-  email: "",
-  picture: "",
   userData: null,
   error: null,
 };
 
 const login = (state = initialState, action) => {
   switch (action.type) {
-    case USER_LOGIN:
-      return {
-        ...state,
-        name: action.payload.profileObj.name,
-        email: action.payload.profileObj.email,
-        picture: action.payload.profileObj.imageUrl,
-      };
     case USER_LOGOUT:
       return {
         ...initialState,

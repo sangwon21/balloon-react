@@ -36,7 +36,7 @@ const UserImg = styled.img`
 
 const UserInfo = () => {
   const [isOpen, setOpen] = useState(false);
-  const { name, email, picture, userData } = useSelector(({ login }) => login);
+  const { userData } = useSelector(({ login }) => login);
 
   if (!userData) return null;
 
@@ -54,8 +54,8 @@ const UserInfo = () => {
   return (
     <UserInfoWrap>
       <div>{balloons}</div>
-      <UserImg onClick={handleClick} src={picture || noPicture} alt="user img" />
-      {isOpen && <UserInfoSlideMenu {...{ isOpen, setOpen, name, email, picture }} />}
+      <UserImg onClick={handleClick} src={userData.picture || noPicture} alt="user img" />
+      {isOpen && <UserInfoSlideMenu {...{ isOpen, setOpen, userData }} />}
     </UserInfoWrap>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { LANGUAGES } from "@constants/constant";
-import { sendMessage } from "@utils/util";
+import { sendMessage } from "@utils/request";
 import { showToastMessage, updateToastMessage } from "@modules/toast";
 import { TOAST_TYPE } from "@constants/constant";
 
@@ -51,12 +51,12 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       // 메세지 발송 성공 애니메이션, 메세지
       dispatch(updateToastMessage({ message: langData["L0030"] }));
       setShowSendEffect(true);
-      setOpen(false);
     } else {
       // 메세지 발송 실패 메세지
       dispatch(updateToastMessage({ type: TOAST_TYPE.ERROR, message: langData["T0004"] }));
     }
     dispatch(showToastMessage());
+    setOpen(false);
   };
 
   const modalTitleText = langData["L0022"];
