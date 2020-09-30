@@ -38,6 +38,8 @@ const UserInfo = () => {
   const [isOpen, setOpen] = useState(false);
   const { name, email, picture, userData } = useSelector(({ login }) => login);
 
+  if (!userData) return null;
+
   const BALLOON_COUNT = 7;
   const USER_BALLOON_SIZE = userData.balloonSize;
 

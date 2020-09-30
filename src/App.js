@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setLanguage } from "@modules/language";
+import { userLogin, getUserData } from "@modules/login";
 import { STORAGE_KEYS, LANGUAGES } from "@constants/constant";
 
 import koData from "@data/languages/ko.json";
@@ -20,9 +21,11 @@ import Guide from "@components/pages/guide/Guide";
 
 const App = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     page: { currentPage },
     toast: { isShow },
+    login: { userData },
   } = useSelector((index) => index);
 
   const langDatas = {};
@@ -30,8 +33,20 @@ const App = () => {
   langDatas[LANGUAGES.JA] = jaData;
 
   useEffect(() => {
+    // 언어 리소스
     const settingLanguage = localStorage.getItem(STORAGE_KEYS.LANGUAGE);
     if (settingLanguage) dispatch(setLanguage(settingLanguage, langDatas[settingLanguage]));
+
+    // 로그인 세션
+    const prevSessionData = JSON.parse(sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION));
+    if (!prevSessionData) return history.replace("/");
+    if (!userData) dispatch(getUserData(prevSessionData.profileObj.email));
+
+    const sessionUpdate = async () => {
+      const sessionData = await dispatch(userLogin(prevSessionData));
+      sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(sessionData));
+    };
+    sessionUpdate();
   }, []);
 
   return (

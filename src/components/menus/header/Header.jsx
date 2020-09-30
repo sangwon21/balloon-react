@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { LANGUAGES, STORAGE_KEYS } from "@constants/constant";
-import { userLogin, getUserData } from "@modules/login";
+import { LANGUAGES } from "@constants/constant";
 
 import logoSmallKo from "@assets/images/logos/logo-small-ko.png";
 import logoSmallJa from "@assets/images/logos/logo-small-ja.png";
@@ -43,26 +42,10 @@ const Title = styled.div`
 `;
 
 const Header = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
   const {
     language: { langData },
-    login: { userData },
   } = useSelector((index) => index);
-
-  useEffect(() => {
-    const prevSessionData = JSON.parse(sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION));
-    if (!prevSessionData) return history.replace("/");
-    if (!userData) dispatch(getUserData(prevSessionData.profileObj.email));
-
-    const sessionUpdate = async () => {
-      const sessionData = await dispatch(userLogin(prevSessionData));
-      sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(sessionData));
-    };
-    sessionUpdate();
-  }, []);
-
-  if (!userData) return null;
 
   const logos = {};
   logos[LANGUAGES.KO] = logoSmallKo;
