@@ -25,7 +25,9 @@ const Login = () => {
   return (
     <LoginWrap>
       <Helmet>
-        <title>{langData["L0001"]}</title>
+        <title>
+          {langData["L0001"]} - {langData["L0032"]} ^^
+        </title>
       </Helmet>
       <Title />
       <Footer />
