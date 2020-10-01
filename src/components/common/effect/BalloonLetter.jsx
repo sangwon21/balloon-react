@@ -8,31 +8,35 @@ const BalloonLetterWrap = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
+  pointer-events: none;
   animation: balloonTest ${({ animDuration }) => `${animDuration}ms`} ease-in-out;
   animation-fill-mode: both;
   @keyframes balloonTest {
     0% {
       transform: translate(-50%, -65%) rotate(-5deg);
+      opacity: 0;
     }
     25% {
-      transform: translate(-50%, -85%) rotate(18deg);
+      transform: translate(-50%, -85%) rotate(20deg);
+      opacity: 1;
     }
     50% {
-      transform: translate(-50%, -105%) rotate(-16deg);
+      transform: translate(-50%, -105%) rotate(-18deg);
+      opacity: 1;
     }
     75% {
-      transform: translate(-50%, -125%) rotate(15deg);
+      transform: translate(-50%, -125%) rotate(17deg);
       opacity: 1;
     }
     100% {
-      transform: translate(-50%, -145%) rotate(-17deg);
+      transform: translate(-50%, -145%) rotate(-19deg);
       opacity: 0;
     }
   }
 `;
 
 const BalloonLetter = ({ setShowSendEffect }) => {
-  const ANIM_DURATION = 2500;
+  const ANIM_DURATION = 2750;
 
   useSetTimeout(() => {
     setShowSendEffect(false);
