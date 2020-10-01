@@ -33,7 +33,7 @@ exports.picture = (req, res) => {
 
     user.save(function (err) {
       if (err) res.status(500).json({ error: "failed to update" });
-      res.status(200).json({ status: 200 });
+      res.status(200).json({ status: 200, picture: user.picture });
     });
   });
 };

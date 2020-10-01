@@ -2,9 +2,14 @@ import { checkResponseData } from "@utils/util";
 import { API } from "@constants/url";
 import { STORAGE_KEYS } from "@constants/constant";
 
+const getToken = () => {
+  return JSON.parse(sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION)).token;
+};
+
 export const getData = async (url, dispatch, successActionType, errorActionType) => {
+  const token = getToken();
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { headers: { "x-access-token": token } });
     if (!checkResponseData(response)) throw new Error(response.status);
     const data = await response.json();
     dispatch({ type: successActionType, payload: data });
@@ -40,21 +45,22 @@ export const login = async (profileObj) => {
   return profileObj;
 };
 
-export const checkSession = async (token) => {
-  const response = await fetch(API.SESSION_CHECK(token));
+export const checkSession = async () => {
+  const token = getToken();
+  const response = await fetch(API.SESSION_CHECK, { headers: { "x-access-token": token } });
   const json = await response.json();
   return json.success;
 };
 
 export const updateUserPicture = async (email, imageUrl) => {
+  const token = getToken();
   const data = JSON.stringify({ picture: imageUrl });
-  return await pushData({ url: API.UPDATE_USER_PICTURE(email), method: "PUT", data: data });
+  return await pushData({ url: API.UPDATE_USER_PICTURE(email), method: "PUT", data: data, token: token });
 };
 
 export const sendMessage = async (messageData) => {
-  const profileObj = JSON.parse(sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION));
-  if (!profileObj) return false;
-
+  const token = getToken();
+  if (!token) return false;
   const data = JSON.stringify(messageData);
-  return await pushData({ url: API.SEND_MESSAGE, method: "POST", data: data, token: profileObj.token });
+  return await pushData({ url: API.SEND_MESSAGE, method: "POST", data: data, token: token });
 };

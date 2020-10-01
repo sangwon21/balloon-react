@@ -31,8 +31,10 @@ const GoogleLoginButton = () => {
 
     // Set User Picture
     const { message, picture } = await dispatch(getUserData(profileObj));
-    if (!picture) dispatch(initUserPicture(imageUrl));
-    if (imageUrl !== picture) await updateUserPicture(email, imageUrl);
+    if (imageUrl !== picture) {
+      const data = await updateUserPicture(email, imageUrl);
+      dispatch(initUserPicture(data.picture));
+    }
 
     // 조회 된 유저 정보 없음
     if (message !== "404" && message !== "500") return history.push("/users");

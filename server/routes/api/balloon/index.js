@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const controller = require("./balloon.controller");
-const authMiddleware = require("../../../middlewares/auth");
 
 // [GET] 모든 유저 정보 조회
 router.get("/users", controller.users);
@@ -12,7 +11,6 @@ router.get("/user/:email", controller.user);
 router.put("/user/picture/:email", controller.picture);
 
 // [POST] 칭찬 메세지 보내기
-router.use("/message", authMiddleware);
 router.post("/message", controller.message);
 
 module.exports = router;

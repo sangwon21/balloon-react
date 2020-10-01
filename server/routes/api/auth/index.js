@@ -2,7 +2,7 @@ const router = require("express").Router();
 const controller = require("./auth.controller");
 const authMiddleware = require("../../../middlewares/auth");
 
-// [GET] 로그인시 jwt 발행
+// [POST] 로그인시 jwt 발행
 router.post("/login", controller.login);
 
 // [GET] jwt 토큰 검증
