@@ -41,8 +41,8 @@ const App = () => {
 
     // 유효한 로그인 세션인지 체크
     const check = async () => {
-      const isValid = await checkSession();
-      if (isValid) return;
+      const { result } = await checkSession();
+      if (result) return;
 
       // 유효하지 않은 세션 - 로그아웃 처리
       alert(langData["T0005"]);

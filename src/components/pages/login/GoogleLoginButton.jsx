@@ -21,26 +21,22 @@ const GoogleLoginButton = () => {
   const responseGoogle = async ({ profileObj }) => {
     const { email, imageUrl } = profileObj;
 
-    // 유효한 메일 host인지 체크
+    // 메일 유효성 검증
     if (!email.includes(process.env.REACT_APP_VAILD_MAIL_DOMAIN) && !(email === process.env.REACT_APP_TEST_ACCOUNT)) return alert(langData["L0005"]);
 
-    // Set Sesstion Storage
+    // 세션 스토리지 데이터 추가
     const sessionData = await login(profileObj);
     if (!sessionData.token) return alert(langData["T0002"]);
     sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(sessionData));
 
-    // Get User Info & Set User Picture
-    const {
-      result,
-      data: { picture },
-    } = await dispatch(getUserData());
-    if (imageUrl !== picture) {
-      const data = await updateUserPicture(imageUrl);
-      dispatch(initUserPicture(data.picture));
+    // 로그인 유저 정보 요청
+    const { result, data } = await dispatch(getUserData());
+    if (result && imageUrl !== data.picture) {
+      // 사진 변경 시 db 업데이트
+      const { result, picture } = await updateUserPicture(imageUrl);
+      if (result) dispatch(initUserPicture(picture));
     }
     if (result) return history.push("/users");
-
-    // 조회 된 유저 정보 없음
     return alert(langData["T0002"]);
   };
 

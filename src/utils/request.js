@@ -9,12 +9,12 @@ const getToken = () => {
 
 export const getData = async (url, dispatch, successActionType, errorActionType) => {
   const token = getToken();
-  if (!token) return false;
+  if (!token) return { result: false };
 
   try {
     const response = await fetch(url, { headers: { "x-access-token": token } });
-    if (!checkResponseData(response)) throw new Error(response.status);
     const json = await response.json();
+    if (!checkResponseData(response)) throw json;
     dispatch({ type: successActionType, payload: json.data });
     return json;
   } catch (error) {
@@ -25,7 +25,7 @@ export const getData = async (url, dispatch, successActionType, errorActionType)
 
 export const pushData = async ({ url, method, data }) => {
   const token = getToken();
-  if (!token) return false;
+  if (!token) return { result: false };
 
   const fetchOption = {
     method: method,
@@ -37,9 +37,9 @@ export const pushData = async ({ url, method, data }) => {
   };
   try {
     const response = await fetch(url, fetchOption);
-    if (!checkResponseData(response)) throw new Error(response.status);
-    const data = await response.json();
-    return data;
+    const json = await response.json();
+    if (!checkResponseData(response)) throw json;
+    return json;
   } catch (error) {
     return error;
   }
@@ -55,9 +55,9 @@ export const login = async (profileObj) => {
   };
   try {
     const response = await fetch(API.LOGIN, fetchOption);
-    if (!checkResponseData(response)) throw new Error(response.status);
-    const data = await response.json();
-    profileObj.token = data.token;
+    const json = await response.json();
+    if (!checkResponseData(response)) throw json;
+    profileObj.token = json.token;
     return profileObj;
   } catch (error) {
     return error;
@@ -66,11 +66,10 @@ export const login = async (profileObj) => {
 
 export const checkSession = async () => {
   const token = getToken();
-  if (!token) return;
+  if (!token) return { result: false };
 
   const response = await fetch(API.SESSION_CHECK, { headers: { "x-access-token": token } });
-  const { result } = await response.json();
-  return result;
+  return await response.json();
 };
 
 export const updateUserPicture = async (imageUrl) => {
