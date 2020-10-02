@@ -5,6 +5,8 @@ import { changeValue } from "@modules/searchBar";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 
+import noPicture from "@assets/images/no-picture.png";
+
 import ContentWrapper from "@components/common/wrapper/ContentWrap";
 import ReceiveBalloonList from "./ReceiveBalloonList";
 import SentBalloonList from "./SentBalloonList";
@@ -24,6 +26,7 @@ const UserInfoBox = styled.div`
     height: 98px;
     border: 1px solid #e2e2e2;
     border-radius: 50%;
+    background-color: #eee;
   }
   .name {
     font-size: 23px;
@@ -73,7 +76,7 @@ const Box = () => {
       </Helmet>
       <BoxWrap>
         <UserInfoBox>
-          <img src={userData.picture} alt="user img" />
+          <img src={userData.picture || noPicture} alt="user img" />
           <p className="name">{userData.name}</p>
           <p className="email">{userData.email}</p>
         </UserInfoBox>

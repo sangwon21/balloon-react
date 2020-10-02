@@ -54,6 +54,7 @@ const UserInfoInner = styled.div`
     height: 68px;
     border-radius: 50%;
     border: 1px solid #e2e2e2;
+    background-color: #eee;
   }
   .info-text {
     height: 38px;
@@ -112,7 +113,7 @@ const TextMenuInner = styled.div`
   }
 `;
 
-const UserInfoSlideMenu = ({ isOpen, setOpen, userData }) => {
+const UserInfoSlideMenu = ({ isOpen, setOpen, userData, noPicture }) => {
   const history = useHistory();
   const modalRef = useRef();
 
@@ -141,7 +142,7 @@ const UserInfoSlideMenu = ({ isOpen, setOpen, userData }) => {
     <UserInfoModalWrap ref={modalRef}>
       <UserInfoBox>
         <UserInfoInner onClick={handleClick}>
-          <img src={userData.picture} alt="user img" />
+          <img src={userData.picture || noPicture} alt="user img" />
           <div className="info-text">
             <p className="name">{userData.name}</p>
             <p className="email">{userData.email}</p>

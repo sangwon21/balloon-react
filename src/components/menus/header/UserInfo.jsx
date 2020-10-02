@@ -55,7 +55,7 @@ const UserInfo = () => {
     <UserInfoWrap>
       <div>{balloons}</div>
       <UserImg onClick={handleClick} src={userData.picture || noPicture} alt="user img" />
-      {isOpen && <UserInfoSlideMenu {...{ isOpen, setOpen, userData }} />}
+      {isOpen && <UserInfoSlideMenu {...{ isOpen, setOpen, userData, noPicture }} />}
     </UserInfoWrap>
   );
 };

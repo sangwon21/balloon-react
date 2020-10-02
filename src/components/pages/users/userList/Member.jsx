@@ -109,7 +109,7 @@ const Member = ({ member, setOpen }) => {
       ref={memberEl}
     >
       <ImgPanel className={imgPanelClassName} onClick={handleClick}>
-        <img src={member.picture ? member.picture : noPicture} alt="user img" />
+        <img src={member.picture || noPicture} alt="user img" />
         <HoverPanel className={hoverPanelClassName}>
           <span>{langData[hoverPanelText]}</span>
         </HoverPanel>
