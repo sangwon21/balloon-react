@@ -34,6 +34,7 @@ exports.login = (req, res) => {
 
   const respond = (token) => {
     res.json({
+      result: true,
       message: "logged in successfully",
       token,
     });
@@ -41,6 +42,7 @@ exports.login = (req, res) => {
 
   const onError = (error) => {
     res.status(403).json({
+      result: false,
       message: error.message,
     });
   };
@@ -51,7 +53,7 @@ exports.login = (req, res) => {
 // [GET] jwt 토큰 검증
 exports.check = (req, res) => {
   res.json({
-    success: true,
-    info: req.decoded,
+    result: true,
+    data: req.decoded,
   });
 };

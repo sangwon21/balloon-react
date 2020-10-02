@@ -3,24 +3,30 @@ import { API } from "@constants/url";
 import { STORAGE_KEYS } from "@constants/constant";
 
 const getToken = () => {
-  return JSON.parse(sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION)).token;
+  const sessionData = JSON.parse(sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION));
+  return sessionData ? sessionData.token : null;
 };
 
 export const getData = async (url, dispatch, successActionType, errorActionType) => {
   const token = getToken();
+  if (!token) return false;
+
   try {
     const response = await fetch(url, { headers: { "x-access-token": token } });
     if (!checkResponseData(response)) throw new Error(response.status);
-    const data = await response.json();
-    dispatch({ type: successActionType, payload: data });
-    return data;
+    const json = await response.json();
+    dispatch({ type: successActionType, payload: json.data });
+    return json;
   } catch (error) {
     dispatch({ type: errorActionType, payload: error });
     return error;
   }
 };
 
-export const pushData = async ({ url, method, data, token }) => {
+export const pushData = async ({ url, method, data }) => {
+  const token = getToken();
+  if (!token) return false;
+
   const fetchOption = {
     method: method,
     headers: {
@@ -40,27 +46,39 @@ export const pushData = async ({ url, method, data, token }) => {
 };
 
 export const login = async (profileObj) => {
-  const data = await pushData({ url: API.LOGIN, method: "POST", data: JSON.stringify({ email: profileObj.email }) });
-  profileObj.token = data.token;
-  return profileObj;
+  const fetchOption = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email: profileObj.email }),
+  };
+  try {
+    const response = await fetch(API.LOGIN, fetchOption);
+    if (!checkResponseData(response)) throw new Error(response.status);
+    const data = await response.json();
+    profileObj.token = data.token;
+    return profileObj;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const checkSession = async () => {
   const token = getToken();
+  if (!token) return;
+
   const response = await fetch(API.SESSION_CHECK, { headers: { "x-access-token": token } });
-  const json = await response.json();
-  return json.success;
+  const { result } = await response.json();
+  return result;
 };
 
-export const updateUserPicture = async (email, imageUrl) => {
-  const token = getToken();
+export const updateUserPicture = async (imageUrl) => {
   const data = JSON.stringify({ picture: imageUrl });
-  return await pushData({ url: API.UPDATE_USER_PICTURE(email), method: "PUT", data: data, token: token });
+  return await pushData({ url: API.UPDATE_USER_PICTURE, method: "PUT", data: data });
 };
 
 export const sendMessage = async (messageData) => {
-  const token = getToken();
-  if (!token) return false;
   const data = JSON.stringify(messageData);
-  return await pushData({ url: API.SEND_MESSAGE, method: "POST", data: data, token: token });
+  return await pushData({ url: API.SEND_MESSAGE, method: "POST", data: data });
 };

@@ -46,8 +46,8 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       senderPicture: userData.picture,
     };
 
-    const { status } = await sendMessage(messageData);
-    if (status === 200) {
+    const { result } = await sendMessage(messageData);
+    if (result) {
       // 메세지 발송 성공 애니메이션, 메세지
       dispatch(updateToastMessage({ message: langData["L0030"] }));
       setShowSendEffect(true);

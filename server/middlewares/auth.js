@@ -5,7 +5,7 @@ const authMiddleware = (req, res, next) => {
 
   if (!token) {
     return res.status(403).json({
-      success: false,
+      result: false,
       message: "not logged in",
     });
   }
@@ -19,7 +19,7 @@ const authMiddleware = (req, res, next) => {
 
   const onError = (error) => {
     res.status(403).json({
-      success: false,
+      result: false,
       message: error.message,
     });
   };

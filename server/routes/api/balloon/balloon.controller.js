@@ -9,31 +9,31 @@ const UserKeep = require("../../../models/user-keep");
 // [GET] 모든 유저 정보 조회
 exports.users = (req, res) => {
   User.find(function (err, users) {
-    if (err) return res.status(500).send({ error: "database failure" });
-    return res.json(users);
+    if (err) return res.status(500).json({ result: false, message: "database failure" });
+    return res.json({ result: true, data: users });
   });
 };
 
 // [GET] 로그인한 사용자 정보 조회
 exports.user = (req, res) => {
-  User.findOne({ email: req.params.email }, function (err, user) {
-    if (err) return res.status(500).json({ error: "database failure" });
-    if (!user) return res.status(404).json({ error: "user not found" });
-    return res.json(user);
+  User.findById(req.decoded._id, function (err, user) {
+    if (err) return res.status(500).json({ result: false, message: "database failure" });
+    if (!user) return res.status(404).json({ result: false, message: "user not found" });
+    return res.json({ result: true, data: user });
   });
 };
 
 // [PUT] 로그인한 사용자의 사진 URL이 DB와 다르면 업데이트
 exports.picture = (req, res) => {
-  User.findOne({ email: req.params.email }, function (err, user) {
-    if (err) return res.status(500).json({ error: "database failure" });
-    if (!user) return res.status(404).json({ error: "user not found" });
+  User.findById(req.decoded._id, function (err, user) {
+    if (err) return res.status(500).json({ result: false, message: "database failure" });
+    if (!user) return res.status(404).json({ result: false, message: "user not found" });
 
     if (req.body.picture) user.picture = req.body.picture;
 
     user.save(function (err) {
-      if (err) res.status(500).json({ error: "failed to update" });
-      res.status(200).json({ status: 200, picture: user.picture });
+      if (err) res.status(500).json({ result: false, message: "failed to update" });
+      res.status(200).json({ result: true, picture: user.picture });
     });
   });
 };
@@ -53,7 +53,7 @@ exports.message = (req, res) => {
   message.senderPicture = req.body.senderPicture || null;
 
   message.save(function (err) {
-    if (err) res.status(500).json({ error: "failed to send message" });
-    res.status(200).json({ status: 200 });
+    if (err) res.status(500).json({ result: false, message: "failed to send message" });
+    res.status(200).json({ result: true });
   });
 };

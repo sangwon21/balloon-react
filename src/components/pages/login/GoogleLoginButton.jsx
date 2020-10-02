@@ -29,15 +29,18 @@ const GoogleLoginButton = () => {
     if (!sessionData.token) return alert(langData["T0002"]);
     sessionStorage.setItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION, JSON.stringify(sessionData));
 
-    // Set User Picture
-    const { message, picture } = await dispatch(getUserData(profileObj));
+    // Get User Info & Set User Picture
+    const {
+      result,
+      data: { picture },
+    } = await dispatch(getUserData());
     if (imageUrl !== picture) {
-      const data = await updateUserPicture(email, imageUrl);
+      const data = await updateUserPicture(imageUrl);
       dispatch(initUserPicture(data.picture));
     }
+    if (result) return history.push("/users");
 
     // 조회 된 유저 정보 없음
-    if (message !== "404" && message !== "500") return history.push("/users");
     return alert(langData["T0002"]);
   };
 

@@ -11,7 +11,7 @@ const SET_FILTER_PARTS_DATA = "users/SET_FILTER_PARTS_DATA";
 export const changeSelectedTab = (tabIndex = 0) => ({ type: CHANGE_SELECTED_TAB, payload: tabIndex });
 
 export const getUsersData = () => async (dispatch) => {
-  const data = await getData(API.GET_USERS, dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
+  const { data } = await getData(API.GET_USERS, dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
   const partsMap = makePartsMap(data);
 
   dispatch({ type: SET_PARTS_DATA, payload: Array.from(partsMap) });

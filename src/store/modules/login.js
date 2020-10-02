@@ -12,9 +12,8 @@ export const userLogout = () => (disaptch) => {
   disaptch({ type: USER_LOGOUT });
 };
 
-export const getUserData = (profileObj) => async (dispatch) => {
-  const data = await getData(API.GET_USER(profileObj.email), dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
-  return data;
+export const getUserData = () => async (dispatch) => {
+  return await getData(API.GET_USER, dispatch, GET_DATA_SUCCESS, GET_DATA_ERROR);
 };
 
 export const initUserPicture = (imageUrl) => ({ type: INIT_USER_PICTURE, payload: imageUrl });

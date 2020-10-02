@@ -1,17 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { GoogleLogout } from "react-google-login";
 import { userLogout } from "@modules/login";
 
 const GoogleLogoutButton = ({ text }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const logout = () => {
     dispatch(userLogout());
-    history.push("/");
-    window.location.reload();
+    window.location.href = "/";
   };
 
   return (
