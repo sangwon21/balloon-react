@@ -33,18 +33,11 @@ exports.login = (req, res) => {
   };
 
   const respond = (token) => {
-    res.json({
-      result: true,
-      message: "logged in successfully",
-      token,
-    });
+    res.status(200).json({ result: true, message: "logged in successfully", token });
   };
 
   const onError = (error) => {
-    res.status(403).json({
-      result: false,
-      message: error.message,
-    });
+    res.status(403).json({ result: false, message: error.message });
   };
 
   User.findOne({ email: email }).then(check).then(respond).catch(onError);
@@ -52,8 +45,5 @@ exports.login = (req, res) => {
 
 // [GET] jwt 토큰 검증
 exports.check = (req, res) => {
-  res.json({
-    result: true,
-    data: req.decoded,
-  });
+  res.status(200).json({ result: true, data: req.decoded });
 };

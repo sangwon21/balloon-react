@@ -4,10 +4,7 @@ const authMiddleware = (req, res, next) => {
   const token = req.headers["x-access-token"] || req.query.token;
 
   if (!token) {
-    return res.status(403).json({
-      result: false,
-      message: "not logged in",
-    });
+    return res.status(403).json({ result: false, message: "not logged in" });
   }
 
   const p = new Promise((resolve, reject) => {
@@ -18,10 +15,7 @@ const authMiddleware = (req, res, next) => {
   });
 
   const onError = (error) => {
-    res.status(403).json({
-      result: false,
-      message: error.message,
-    });
+    res.status(403).json({ result: false, message: error.message });
   };
 
   p.then((decoded) => {

@@ -29,7 +29,7 @@ app.listen(port, function () {
   console.log("Express server has started on port " + port);
 });
 
-// 유저정보 초기화시.
+// 유저정보 초기화시 (로컬 테스트용)
 // const User = require("./models/user");
 // if (config.databaseUsersReset) {
 //   const userList = require("./data/demoData/user-list");
