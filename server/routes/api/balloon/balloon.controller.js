@@ -10,7 +10,7 @@ const UserKeep = require("../../../models/user-keep");
 exports.users = (req, res) => {
   User.find(function (err, users) {
     if (err) return res.status(500).json({ result: false, message: "database failure" });
-    return res.json({ result: true, data: users });
+    res.json({ result: true, data: users });
   });
 };
 
@@ -19,7 +19,7 @@ exports.user = (req, res) => {
   User.findById(req.decoded._id, function (err, user) {
     if (err) return res.status(500).json({ result: false, message: "database failure" });
     if (!user) return res.status(404).json({ result: false, message: "user not found" });
-    return res.json({ result: true, data: user });
+    res.json({ result: true, data: user });
   });
 };
 
@@ -28,11 +28,10 @@ exports.picture = (req, res) => {
   User.findById(req.decoded._id, function (err, user) {
     if (err) return res.status(500).json({ result: false, message: "database failure" });
     if (!user) return res.status(404).json({ result: false, message: "user not found" });
-
     if (req.body.picture) user.picture = req.body.picture;
 
     user.save(function (err) {
-      if (err) res.status(500).json({ result: false, message: "failed to update" });
+      if (err) return res.status(500).json({ result: false, message: "failed to update" });
       res.status(200).json({ result: true, picture: user.picture });
     });
   });
@@ -53,7 +52,7 @@ exports.message = (req, res) => {
   message.senderPicture = req.body.senderPicture || null;
 
   message.save(function (err) {
-    if (err) res.status(500).json({ result: false, message: "failed to send message" });
+    if (err) return res.status(500).json({ result: false, message: "failed to send message" });
     res.status(200).json({ result: true });
   });
 };
