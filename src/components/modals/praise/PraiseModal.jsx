@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LANGUAGES } from "@constants/constant";
 import { sendMessage } from "@utils/request";
 import { showToastMessage, updateToastMessage } from "@modules/toast";
+import { updateBalloonSize } from "@modules/login";
 import { TOAST_TYPE } from "@constants/constant";
 
 import ModalContainer from "@components/modals/ModalContainer";
@@ -46,9 +47,10 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       senderPicture: userData.picture,
     };
 
-    const { result } = await sendMessage(messageData);
+    const { result, balloonSize } = await sendMessage(messageData);
     if (result) {
       // 메세지 발송 성공 애니메이션, 메세지
+      dispatch(updateBalloonSize(balloonSize));
       dispatch(updateToastMessage({ message: langData["L0030"] }));
       setShowSendEffect(true);
     } else {

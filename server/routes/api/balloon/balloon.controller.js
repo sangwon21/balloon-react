@@ -36,20 +36,31 @@ exports.picture = (req, res) => {
 
 // [POST] 칭찬 메세지 보내기
 exports.message = (req, res) => {
-  var message = new Message();
+  User.findById(req.decoded._id, function (err, user) {
+    if (err) return res.status(500).json({ result: false, message: "database failure" });
+    if (!user) return res.status(404).json({ result: false, message: "user not found" });
+    if (!user.balloonSize) return res.status(404).json({ result: false, message: "not enough balloons", balloonSize: user.balloonSize });
 
-  message.date = moment().tz("Asia/Seoul").toDate().toISOString();
-  message.isSecret = req.body.isSecret;
-  message.message = req.body.message;
-  message.receiverEmail = req.body.receiverEmail;
-  message.receiverName = req.body.receiverName;
-  message.receiverPicture = req.body.receiverPicture || null;
-  message.senderEmail = req.body.senderEmail;
-  message.senderName = req.body.senderName;
-  message.senderPicture = req.body.senderPicture || null;
+    const message = makeMessage(new Message(), req);
+    user.balloonSize--;
 
-  message.save(function (err) {
-    if (err) return res.status(500).json({ result: false, message: "failed to send message" });
-    res.status(200).json({ result: true });
+    message.save(function (err) {
+      if (err) return res.status(500).json({ result: false, message: "failed to send message" });
+      user.save();
+      res.status(200).json({ result: true, balloonSize: user.balloonSize });
+    });
   });
+};
+
+const makeMessage = (obj, req) => {
+  obj.date = moment().tz("Asia/Seoul").toDate().toISOString();
+  obj.isSecret = req.body.isSecret;
+  obj.message = req.body.message;
+  obj.receiverEmail = req.body.receiverEmail;
+  obj.receiverName = req.body.receiverName;
+  obj.receiverPicture = req.body.receiverPicture || null;
+  obj.senderEmail = req.body.senderEmail;
+  obj.senderName = req.body.senderName;
+  obj.senderPicture = req.body.senderPicture || null;
+  return obj;
 };
