@@ -1,10 +1,7 @@
 const moment = require("moment-timezone");
 
-const Feedback = require("../../../models/Feedback");
-const Message = require("../../../models/message");
-const OpenComment = require("../../../models/open-comment");
 const User = require("../../../models/user");
-const UserKeep = require("../../../models/user-keep");
+const Message = require("../../../models/message");
 
 // [GET] 모든 유저 정보 조회
 exports.users = (req, res) => {

@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var openCommentSchema = new mongoose.Schema({
+const openCommentSchema = new mongoose.Schema({
   parentId: String,
   email: String,
   name: String,

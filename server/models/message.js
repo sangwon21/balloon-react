@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var msgSchema = new mongoose.Schema({
+const msgSchema = new mongoose.Schema({
   senderEmail: String,
   senderName: String,
   senderPicture: String,
