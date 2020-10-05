@@ -16,7 +16,27 @@ exports.user = (req, res) => {
   User.findById(req.decoded._id, function (err, user) {
     if (err) return res.status(500).json({ result: false, message: "database failure" });
     if (!user) return res.status(404).json({ result: false, message: "user not found" });
-    res.json({ result: true, data: user });
+
+    // 이번 달 칭찬한 사람 데이터 조회
+    const startOfDate = moment().startOf("month").format("YYYY-MM-DD");
+    const endOfDate = moment().endOf("month").format("YYYY-MM-DD");
+
+    Message.find(
+      {
+        $and: [
+          {
+            date: {
+              $gte: new Date(startOfDate),
+              $lt: new Date(endOfDate),
+            },
+          },
+          { senderEmail: user.email },
+        ],
+      },
+      function (err, message) {
+        res.json({ result: true, data: user, message: message });
+      },
+    );
   });
 };
 
@@ -42,10 +62,10 @@ exports.message = (req, res) => {
     if (!user.balloonSize) return res.status(404).json({ result: false, message: "not enough balloons", balloonSize: user.balloonSize });
 
     const message = makeMessage(new Message(), req);
-    user.balloonSize--;
 
     message.save(function (err) {
       if (err) return res.status(500).json({ result: false, message: "failed to send message" });
+      user.balloonSize--;
       user.save();
       res.status(200).json({ result: true, balloonSize: user.balloonSize });
     });
