@@ -15,7 +15,7 @@ export const getData = async (url, dispatch, successActionType, errorActionType)
     const response = await fetch(url, { headers: { "x-access-token": token } });
     const json = await response.json();
     if (!checkResponseData(response)) throw json;
-    dispatch({ type: successActionType, payload: json.data });
+    dispatch({ type: successActionType, payload: json });
     return json;
   } catch (error) {
     dispatch({ type: errorActionType, payload: error });

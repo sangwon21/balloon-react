@@ -33,8 +33,8 @@ exports.user = (req, res) => {
           { senderEmail: user.email },
         ],
       },
-      function (err, message) {
-        res.json({ result: true, data: user, message: message });
+      function (err, messages) {
+        res.json({ result: true, data: user, messagesData: messages });
       },
     );
   });

@@ -44,7 +44,7 @@ const users = (state = initialState, action) => {
     case GET_DATA_SUCCESS:
       return {
         ...state,
-        usersData: action.payload,
+        usersData: action.payload.data,
         error: null,
       };
     case GET_DATA_ERROR:

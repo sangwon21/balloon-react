@@ -23,6 +23,7 @@ export const updateBalloonSize = (balloonSize) => ({ type: UPDATE_BALLOON_SZIE, 
 
 const initialState = {
   userData: null,
+  messagesData: null,
   error: null,
 };
 
@@ -35,7 +36,8 @@ const login = (state = initialState, action) => {
     case GET_DATA_SUCCESS:
       return {
         ...state,
-        userData: action.payload,
+        userData: action.payload.data,
+        messagesData: action.payload.messagesData,
         error: null,
       };
     case GET_DATA_ERROR:
