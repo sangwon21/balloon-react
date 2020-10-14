@@ -1,8 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { LANGUAGES } from "@constants/constant";
+import { changeSelectedTab } from "@modules/users";
 
 import logoSmallKo from "@assets/images/logos/logo-small-ko.png";
 import logoSmallJa from "@assets/images/logos/logo-small-ja.png";
@@ -42,9 +43,11 @@ const Title = styled.div`
 `;
 
 const Header = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const {
     language: { langData },
+    page: { currentPage },
   } = useSelector((index) => index);
 
   const logos = {};
@@ -53,7 +56,10 @@ const Header = () => {
 
   const mainTitle = logos[langData["L0000"]];
 
-  const handleClick = () => history.push("/users");
+  const handleClick = () => {
+    dispatch(changeSelectedTab());
+    history.push("/users");
+  };
 
   return (
     <>
