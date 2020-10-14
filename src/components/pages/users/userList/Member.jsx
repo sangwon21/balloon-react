@@ -4,9 +4,14 @@ import styled from "styled-components";
 import { setReceiverData } from "@modules/receiver";
 import { LANGUAGES } from "@constants/constant";
 
+import balloonRed from "@assets/images/balloon-red.png";
 import noPicture from "@assets/images/no-picture.png";
 
-const MemberWrap = styled.li`
+const Test = styled.li`
+  position: relative;
+`;
+
+const MemberWrap = styled.div`
   border-radius: 20px;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
@@ -34,6 +39,16 @@ const ImgPanel = styled.div`
     border-radius: 50%;
     box-sizing: border-box;
   }
+`;
+
+const Balloon = styled.img`
+  position: absolute;
+  width: 80px;
+  height: 92px;
+  top: -30px;
+  left: -30px;
+  z-index: 1;
+  pointer-events: none;
 `;
 
 const NamePanel = styled.div`
@@ -78,7 +93,7 @@ const Member = ({ member, setOpen }) => {
   const [isHover, setHover] = useState(false);
   const {
     language: { language, langData },
-    login: { userData },
+    login: { userData, messagesData },
   } = useSelector((index) => index);
 
   const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
@@ -98,26 +113,31 @@ const Member = ({ member, setOpen }) => {
   const hoverPanelText = "L0020";
   const imgPanelClassName = userData.email === member.email ? "myImg" : "";
 
+  const isDupllicate = messagesData.some((data) => data.receiverEmail === member.email);
+
   return (
-    <MemberWrap
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
-      data-email={member.email}
-      data-name={member.name}
-      data-english-name={member.englishName}
-      data-picture={member.picture}
-      ref={memberEl}
-    >
-      <ImgPanel className={imgPanelClassName} onClick={handleClick}>
-        <img src={member.picture || noPicture} alt="user img" />
-        <HoverPanel className={hoverPanelClassName}>
-          <span>{langData[hoverPanelText]}</span>
-        </HoverPanel>
-      </ImgPanel>
-      <NamePanel>
-        <span>{name}</span>
-      </NamePanel>
-    </MemberWrap>
+    <Test>
+      <MemberWrap
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+        data-email={member.email}
+        data-name={member.name}
+        data-english-name={member.englishName}
+        data-picture={member.picture}
+        ref={memberEl}
+      >
+        {isDupllicate && <Balloon src={balloonRed} alt="balloon img" />}
+        <ImgPanel className={imgPanelClassName} onClick={handleClick}>
+          <img src={member.picture || noPicture} alt="user img" />
+          <HoverPanel className={hoverPanelClassName}>
+            <span>{langData[hoverPanelText]}</span>
+          </HoverPanel>
+        </ImgPanel>
+        <NamePanel>
+          <span>{name}</span>
+        </NamePanel>
+      </MemberWrap>
+    </Test>
   );
 };
 
