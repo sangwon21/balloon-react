@@ -43,8 +43,8 @@ const ImgPanel = styled.div`
 
 const Balloon = styled.img`
   position: absolute;
-  width: 80px;
-  height: 92px;
+  width: 70px;
+  height: 81px;
   top: -15px;
   left: -30px;
   z-index: 1;
@@ -73,14 +73,18 @@ const HoverPanel = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 166, 222, 0.3);
+  background-color: ${(props) =>
+    props.balloonSize ? (props.isDupllicate ? "rgba(231, 76, 60, 0.3)" : "rgba(0, 166, 222, 0.3)") : "rgba(231, 76, 60, 0.3)"};
   color: #333;
   opacity: 0;
   transition: opacity 0.3s;
-  span {
+  cursor: ${(props) => (props.balloonSize ? (props.isDupllicate ? "default" : "pointer") : "default")};
+  p {
     text-shadow: 0 0 2px rgba(255, 255, 255, 1);
     font-size: 1.2em;
     font-weight: bold;
+    text-align: center;
+    line-height: 25px;
   }
   &.active {
     opacity: 1;
@@ -98,6 +102,15 @@ const Member = ({ member, setOpen }) => {
 
   const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
 
+  const balloonSize = userData.balloonSize;
+  const isDupllicate = messagesData.some((data) => data.receiverEmail === member.email);
+
+  const hoverPanelClassName = isHover ? "active" : "";
+  const hoverPanelText = () => {
+    return { __html: balloonSize ? (isDupllicate ? langData["L0021"] : langData["L0020"]) : langData["L0019"] };
+  };
+  const imgPanelClassName = userData.email === member.email ? "myImg" : "";
+
   const handleMouseOver = () => {
     if (userData.email === member.email) return;
     setHover(true);
@@ -105,15 +118,11 @@ const Member = ({ member, setOpen }) => {
   const handleMouseOut = () => setHover(false);
   const handleClick = () => {
     if (userData.email === member.email) return;
+    if (!balloonSize) return;
+    if (isDupllicate) return;
     dispatch(setReceiverData(memberEl.current.dataset));
     setOpen(true);
   };
-
-  const hoverPanelClassName = isHover ? "active" : "";
-  const hoverPanelText = "L0020";
-  const imgPanelClassName = userData.email === member.email ? "myImg" : "";
-
-  const isDupllicate = messagesData.some((data) => data.receiverEmail === member.email);
 
   return (
     <MemberWrap>
@@ -129,8 +138,8 @@ const Member = ({ member, setOpen }) => {
         {isDupllicate && <Balloon src={balloonRed} alt="balloon img" />}
         <ImgPanel className={imgPanelClassName} onClick={handleClick}>
           <img src={member.picture || noPicture} alt="user img" />
-          <HoverPanel className={hoverPanelClassName}>
-            <span>{langData[hoverPanelText]}</span>
+          <HoverPanel className={hoverPanelClassName} isDupllicate={isDupllicate} balloonSize={balloonSize}>
+            <p dangerouslySetInnerHTML={hoverPanelText()} />
           </HoverPanel>
         </ImgPanel>
         <NamePanel>
