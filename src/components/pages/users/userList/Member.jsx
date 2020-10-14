@@ -7,11 +7,11 @@ import { LANGUAGES } from "@constants/constant";
 import balloonRed from "@assets/images/balloon-red.png";
 import noPicture from "@assets/images/no-picture.png";
 
-const Test = styled.li`
+const MemberWrap = styled.li`
   position: relative;
 `;
 
-const MemberWrap = styled.div`
+const MemberInner = styled.div`
   border-radius: 20px;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
@@ -45,7 +45,7 @@ const Balloon = styled.img`
   position: absolute;
   width: 80px;
   height: 92px;
-  top: -30px;
+  top: -15px;
   left: -30px;
   z-index: 1;
   pointer-events: none;
@@ -116,8 +116,8 @@ const Member = ({ member, setOpen }) => {
   const isDupllicate = messagesData.some((data) => data.receiverEmail === member.email);
 
   return (
-    <Test>
-      <MemberWrap
+    <MemberWrap>
+      <MemberInner
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
         data-email={member.email}
@@ -136,8 +136,8 @@ const Member = ({ member, setOpen }) => {
         <NamePanel>
           <span>{name}</span>
         </NamePanel>
-      </MemberWrap>
-    </Test>
+      </MemberInner>
+    </MemberWrap>
   );
 };
 
