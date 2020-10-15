@@ -1,9 +1,12 @@
-const SET_RECEIVER_DATA = "message/SET_RECEIVER_DATA";
+let SET_DUPLICATE_FUNC;
 
-export const setReceiverData = ({ name, englishName, email, picture }) => ({
-  type: SET_RECEIVER_DATA,
-  payload: { name, englishName, email, picture },
-});
+const SET_RECEIVER_DATA = "receiver/SET_RECEIVER_DATA";
+
+export const changeDuplicateValue = () => () => SET_DUPLICATE_FUNC(true);
+export const setReceiverData = ({ name, englishName, email, picture, setDuplicate }) => (disaptch) => {
+  SET_DUPLICATE_FUNC = setDuplicate;
+  disaptch({ type: SET_RECEIVER_DATA, payload: { name, englishName, email, picture } });
+};
 
 const initialState = {
   name: "",

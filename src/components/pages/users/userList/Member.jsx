@@ -27,10 +27,6 @@ const ImgPanel = styled.div`
   background-color: #fff;
   padding: 20px;
   box-sizing: border-box;
-  cursor: pointer;
-  &.myImg {
-    cursor: default;
-  }
   img {
     width: 100px;
     height: 100px;
@@ -45,10 +41,22 @@ const Balloon = styled.img`
   position: absolute;
   width: 70px;
   height: 81px;
-  top: -15px;
-  left: -25px;
+  top: -12.5px;
+  left: -22.5px;
   z-index: 1;
   pointer-events: none;
+  animation-name: duplicateBalloonAnim;
+  animation-duration: 400ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  @keyframes duplicateBalloonAnim {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const NamePanel = styled.div`
@@ -79,6 +87,9 @@ const HoverPanel = styled.div`
   opacity: 0;
   transition: opacity 0.3s;
   cursor: ${(props) => (props.balloonSize ? (props.isDuplicate ? "default" : "pointer") : "default")};
+  &.myImg {
+    cursor: default;
+  }
   p {
     text-shadow: 0 0 2px rgba(255, 255, 255, 1);
     font-size: 1.2em;
@@ -105,11 +116,11 @@ const Member = ({ member, setOpen }) => {
   const balloonSize = userData.balloonSize;
   const [isDuplicate, setDuplicate] = useState(messagesData.some((data) => data.receiverEmail === member.email));
 
-  const hoverPanelClassName = isHover ? "active" : "";
+  const imgPanelClassName = userData.email === member.email ? "myImg" : "";
+  const hoverPanelClassName = `${isHover ? "active" : ""} ${imgPanelClassName}`;
   const hoverPanelText = () => {
     return { __html: balloonSize ? (isDuplicate ? langData["L0021"] : langData["L0020"]) : langData["L0019"] };
   };
-  const imgPanelClassName = userData.email === member.email ? "myImg" : "";
 
   const handleMouseOver = () => {
     if (userData.email === member.email) return;
@@ -120,7 +131,7 @@ const Member = ({ member, setOpen }) => {
     if (userData.email === member.email) return;
     if (!balloonSize) return;
     if (isDuplicate) return;
-    dispatch(setReceiverData(memberEl.current.dataset));
+    dispatch(setReceiverData({ ...memberEl.current.dataset, setDuplicate }));
     setOpen(true);
   };
 

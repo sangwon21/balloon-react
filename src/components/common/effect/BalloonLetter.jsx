@@ -8,10 +8,11 @@ const BalloonLetterWrap = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
+  z-index: 3;
   pointer-events: none;
-  animation: balloonTest ${({ animDuration }) => `${animDuration}ms`} ease-in-out;
+  animation: balloonEffectAnim ${({ animDuration }) => `${animDuration}ms`} ease-in-out;
   animation-fill-mode: both;
-  @keyframes balloonTest {
+  @keyframes balloonEffectAnim {
     0% {
       transform: translate(-50%, -65%) rotate(-5deg);
       opacity: 0;

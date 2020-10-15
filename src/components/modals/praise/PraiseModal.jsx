@@ -5,6 +5,7 @@ import { LANGUAGES } from "@constants/constant";
 import { sendMessage } from "@utils/request";
 import { showToastMessage, updateToastMessage } from "@modules/toast";
 import { updateBalloonSize } from "@modules/login";
+import { changeDuplicateValue } from "@modules/receiver";
 import { TOAST_TYPE } from "@constants/constant";
 
 import ModalContainer from "@components/modals/ModalContainer";
@@ -52,6 +53,7 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       // 메세지 발송 성공 애니메이션, 메세지
       dispatch(updateBalloonSize(balloonSize));
       dispatch(updateToastMessage({ message: langData["L0030"] }));
+      dispatch(changeDuplicateValue());
       setShowSendEffect(true);
     } else {
       // 메세지 발송 실패 메세지
