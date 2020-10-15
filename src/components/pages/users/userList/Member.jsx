@@ -46,7 +46,7 @@ const Balloon = styled.img`
   width: 70px;
   height: 81px;
   top: -15px;
-  left: -30px;
+  left: -25px;
   z-index: 1;
   pointer-events: none;
 `;
@@ -74,11 +74,11 @@ const HoverPanel = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
-    props.balloonSize ? (props.isDupllicate ? "rgba(231, 76, 60, 0.3)" : "rgba(0, 166, 222, 0.3)") : "rgba(231, 76, 60, 0.3)"};
+    props.balloonSize ? (props.isDuplicate ? "rgba(231, 76, 60, 0.3)" : "rgba(0, 166, 222, 0.3)") : "rgba(231, 76, 60, 0.3)"};
   color: #333;
   opacity: 0;
   transition: opacity 0.3s;
-  cursor: ${(props) => (props.balloonSize ? (props.isDupllicate ? "default" : "pointer") : "default")};
+  cursor: ${(props) => (props.balloonSize ? (props.isDuplicate ? "default" : "pointer") : "default")};
   p {
     text-shadow: 0 0 2px rgba(255, 255, 255, 1);
     font-size: 1.2em;
@@ -103,11 +103,11 @@ const Member = ({ member, setOpen }) => {
   const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
 
   const balloonSize = userData.balloonSize;
-  const isDupllicate = messagesData.some((data) => data.receiverEmail === member.email);
+  const [isDuplicate, setDuplicate] = useState(messagesData.some((data) => data.receiverEmail === member.email));
 
   const hoverPanelClassName = isHover ? "active" : "";
   const hoverPanelText = () => {
-    return { __html: balloonSize ? (isDupllicate ? langData["L0021"] : langData["L0020"]) : langData["L0019"] };
+    return { __html: balloonSize ? (isDuplicate ? langData["L0021"] : langData["L0020"]) : langData["L0019"] };
   };
   const imgPanelClassName = userData.email === member.email ? "myImg" : "";
 
@@ -119,7 +119,7 @@ const Member = ({ member, setOpen }) => {
   const handleClick = () => {
     if (userData.email === member.email) return;
     if (!balloonSize) return;
-    if (isDupllicate) return;
+    if (isDuplicate) return;
     dispatch(setReceiverData(memberEl.current.dataset));
     setOpen(true);
   };
@@ -135,10 +135,10 @@ const Member = ({ member, setOpen }) => {
         data-picture={member.picture}
         ref={memberEl}
       >
-        {isDupllicate && <Balloon src={balloonRed} alt="balloon img" />}
+        {isDuplicate && <Balloon src={balloonRed} alt="balloon img" />}
         <ImgPanel className={imgPanelClassName} onClick={handleClick}>
           <img src={member.picture || noPicture} alt="user img" />
-          <HoverPanel className={hoverPanelClassName} isDupllicate={isDupllicate} balloonSize={balloonSize}>
+          <HoverPanel className={hoverPanelClassName} isDuplicate={isDuplicate} balloonSize={balloonSize}>
             <p dangerouslySetInnerHTML={hoverPanelText()} />
           </HoverPanel>
         </ImgPanel>
