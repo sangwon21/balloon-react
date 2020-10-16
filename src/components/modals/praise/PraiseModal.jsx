@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { LANGUAGES } from "@constants/constant";
 import { sendMessage } from "@utils/request";
 import { showToastMessage, updateToastMessage } from "@modules/toast";
-import { updateBalloonSize } from "@modules/login";
-import { changeDuplicateValue } from "@modules/receiver";
+import { updateBalloonSize, updateMessagesData } from "@modules/login";
 import { TOAST_TYPE } from "@constants/constant";
+import moment from "moment-timezone";
 
 import ModalContainer from "@components/modals/ModalContainer";
 import PraiseModalBody from "./PraiseModalBody";
@@ -38,6 +38,7 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
     if (!window.confirm(langData["T0003"].replace("{{name}}", receiver.name))) return;
 
     const messageData = {
+      date: moment().tz("Asia/Seoul").toDate().toISOString(),
       isSecret: isSecret,
       message: message,
       receiverEmail: receiver.email,
@@ -53,7 +54,7 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       // 메세지 발송 성공 애니메이션, 메세지
       dispatch(updateBalloonSize(balloonSize));
       dispatch(updateToastMessage({ message: langData["L0030"] }));
-      dispatch(changeDuplicateValue());
+      dispatch(updateMessagesData(messageData));
       setShowSendEffect(true);
     } else {
       // 메세지 발송 실패 메세지

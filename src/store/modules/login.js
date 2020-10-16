@@ -7,6 +7,7 @@ const GET_DATA_SUCCESS = "login/GET_DATA_SUCCESS";
 const GET_DATA_ERROR = "login/GET_DATA_ERROR";
 const INIT_USER_PICTURE = "login/INIT_USER_PICTURE";
 const UPDATE_BALLOON_SZIE = "login/UPDATE_BALLOON_SZIE";
+const UPDATE_MASSAGES_DATA = "login/UPDATE_MASSAGES_DATA";
 
 export const userLogout = () => (disaptch) => {
   sessionStorage.removeItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION);
@@ -20,6 +21,8 @@ export const getUserData = () => async (dispatch) => {
 export const initUserPicture = (imageUrl) => ({ type: INIT_USER_PICTURE, payload: imageUrl });
 
 export const updateBalloonSize = (balloonSize) => ({ type: UPDATE_BALLOON_SZIE, payload: balloonSize });
+
+export const updateMessagesData = (messageData) => ({ type: UPDATE_MASSAGES_DATA, payload: messageData });
 
 const initialState = {
   userData: null,
@@ -60,6 +63,11 @@ const login = (state = initialState, action) => {
           ...state.userData,
           balloonSize: action.payload,
         },
+      };
+    case UPDATE_MASSAGES_DATA:
+      return {
+        ...state,
+        messagesData: [...state.messagesData, action.payload],
       };
     default:
       return state;

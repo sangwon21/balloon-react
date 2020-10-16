@@ -114,7 +114,7 @@ const Member = ({ member, setOpen }) => {
   const name = language === LANGUAGES.KO ? member.name : member.englishName ? member.englishName : member.name;
 
   const balloonSize = userData.balloonSize;
-  const [isDuplicate, setDuplicate] = useState(messagesData.some((data) => data.receiverEmail === member.email));
+  const isDuplicate = messagesData.some((data) => data.receiverEmail === member.email);
 
   const imgPanelClassName = userData.email === member.email ? "myImg" : "";
   const hoverPanelClassName = `${isHover ? "active" : ""} ${imgPanelClassName}`;
@@ -131,7 +131,7 @@ const Member = ({ member, setOpen }) => {
     if (userData.email === member.email) return;
     if (!balloonSize) return;
     if (isDuplicate) return;
-    dispatch(setReceiverData({ ...memberEl.current.dataset, setDuplicate }));
+    dispatch(setReceiverData(memberEl.current.dataset));
     setOpen(true);
   };
 
