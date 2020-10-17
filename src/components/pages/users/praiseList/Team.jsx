@@ -20,23 +20,22 @@ const TeamWrap = styled.div`
 `;
 
 const Team = ({ language, langData, teamName, members }) => {
-  let isExist;
   const { messagesData } = useSelector(({ login }) => login);
   const receivers = messagesData.map((data) => data.receiverEmail);
 
   const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
 
-  const filterList = members.map((member) => {
-    isExist = members.some((member) => receivers.includes(member.email));
+  const _filterList = members.filter((member) => receivers.includes(member.email));
+  const filterList = _filterList.map((member) => {
     return <Member key={member._id} {...{ member }} />;
   });
 
-  if (!isExist) return null;
+  if (!_filterList.length) return null;
 
   return (
     <TeamWrap>
       <h4 id={team}>
-        {team} <span>({langData["L0016"].replace("%s", filterList.length)})</span>
+        {team} <span>({langData["L0016"].replace("%s", _filterList.length)})</span>
       </h4>
       <ul>{filterList}</ul>
     </TeamWrap>
