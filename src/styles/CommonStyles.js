@@ -12,7 +12,7 @@ export const BalloonListWrap = styled.div`
     width: 638px;
     height: 860px;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-    border-radius: 2px;
+    border-radius: 10px;
     box-sizing: border-box;
   }
   margin-bottom: 60px;

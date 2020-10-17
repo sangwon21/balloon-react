@@ -20,7 +20,8 @@ const ContentWrapInner = styled.div`
     margin-top: 40px;
     border: 1px solid #e6e6e6;
     background-color: #f9f9f9;
-    border-radius: 2px;
+    border-radius: 15px;
+    overflow: hidden;
   }
 `;
 
