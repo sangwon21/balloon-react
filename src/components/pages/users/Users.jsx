@@ -77,7 +77,7 @@ const Users = () => {
         <TabsMenuWrap>
           <Tabs {...{ TabButtonWrap, TabButton, selectedTab, setSelectedTab }}>
             <UserList title={langData["L0017"]} {...{ partsData, filterPartsData }} />
-            <PraiseList title={langData["L0018"]} />
+            <PraiseList title={langData["L0018"]} {...{ partsData }} />
           </Tabs>
         </TabsMenuWrap>
       </UsersWrap>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import kakaoHappy from "@assets/images/kakao-happy.png";
 
-import Member from "./Member";
+import Part from "./Part";
 
 const NothingMessagesWrap = styled.div`
   padding: 40px;
@@ -27,15 +27,15 @@ const NothingMessagesWrap = styled.div`
   }
 `;
 
-const PraiseListWrap = styled.div`
-  padding: 20px;
+const PraiseListWrap = styled.ul`
+  padding: 0 20px;
   min-height: 100vh;
 `;
 
-const PraiseList = () => {
+const PraiseList = ({ partsData }) => {
   const {
     login: { userData, messagesData },
-    language: { langData },
+    language: { language, langData },
   } = useSelector((index) => index);
 
   if (!messagesData.length) {
@@ -51,7 +51,12 @@ const PraiseList = () => {
     );
   }
 
-  return <PraiseListWrap>이번 달 칭찬한 사람</PraiseListWrap>;
+  const userList = partsData.map((partData) => {
+    const [partName, teamsData] = partData;
+    return <Part key={partName} {...{ language, langData, partName, teamsData }} />;
+  });
+
+  return <PraiseListWrap>{userList}</PraiseListWrap>;
 };
 
 export default PraiseList;
