@@ -57,18 +57,41 @@ exports.picture = (req, res) => {
 // [POST] 칭찬 메세지 보내기
 exports.message = (req, res) => {
   User.findById(req.decoded._id, function (err, user) {
-    if (err) return res.status(500).json({ result: false, message: "database failure" });
-    if (!user) return res.status(404).json({ result: false, message: "user not found" });
-    if (!user.balloonSize) return res.status(404).json({ result: false, message: "not enough balloons", balloonSize: user.balloonSize });
+    const startOfDate = moment().startOf("month").format("YYYY-MM-DD");
+    const endOfDate = moment().endOf("month").format("YYYY-MM-DD");
 
-    const message = makeMessage(new Message(), req);
+    Message.find(
+      {
+        $and: [
+          {
+            date: {
+              $gte: new Date(startOfDate),
+              $lt: new Date(endOfDate),
+            },
+          },
+          { senderEmail: user.email },
+        ],
+      },
+      function (err, messages) {
+        const receivers = messages.map((message) => message.receiverEmail);
+        const isExist = receivers.includes(req.body.receiverEmail);
 
-    message.save(function (err) {
-      if (err) return res.status(500).json({ result: false, message: "failed to send message" });
-      user.balloonSize--;
-      user.save();
-      res.status(200).json({ result: true, balloonSize: user.balloonSize });
-    });
+        if (err) return res.status(500).json({ result: false, message: "database failure" });
+        if (!user) return res.status(404).json({ result: false, message: "user not found" });
+        if (!user.balloonSize) return res.status(404).json({ result: false, message: "not enough balloons", balloonSize: user.balloonSize });
+        if (user.email === req.body.receiverEmail) return res.status(404).json({ result: false, message: "자신에게 보낼 수 없어요." });
+        if (isExist) return res.status(404).json({ result: false, message: "이미 이번 달 메시지를 보낸 대상입니다." });
+
+        const message = makeMessage(new Message(), req);
+
+        message.save(function (err) {
+          if (err) return res.status(500).json({ result: false, message: "failed to send message" });
+          user.balloonSize--;
+          user.save();
+          res.status(200).json({ result: true, balloonSize: user.balloonSize });
+        });
+      },
+    );
   });
 };
 

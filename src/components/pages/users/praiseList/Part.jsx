@@ -18,7 +18,7 @@ const PartWrap = styled.li`
 `;
 
 const Part = ({ language, langData, partName, teamsData }) => {
-  let isExist;
+  let isExist = false;
   const { messagesData } = useSelector(({ login }) => login);
   const receivers = messagesData.map((data) => data.receiverEmail);
 
