@@ -9,7 +9,7 @@ exports.login = (req, res) => {
 
   const check = (user) => {
     if (!user) {
-      throw new Error("login failed");
+      throw new Error("로그인 실패");
     } else {
       const p = new Promise((resolve, reject) => {
         jwt.sign(
@@ -33,7 +33,7 @@ exports.login = (req, res) => {
   };
 
   const respond = (token) => {
-    res.status(200).json({ result: true, message: "logged in successfully", token });
+    res.status(200).json({ result: true, message: "로그인 성공", token });
   };
 
   const onError = (error) => {
