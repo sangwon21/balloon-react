@@ -156,6 +156,7 @@ const Member = ({ member, setOpen, setUserInfoOpen, inView }) => {
         data-phone={member.phone}
         data-tel={member.tel}
         data-team={member.team}
+        data-leader-part={member.leaderPart}
         ref={memberEl}
       >
         {isDuplicate && <Balloon src={balloonRed} alt="balloon img" />}

@@ -37,7 +37,7 @@ const GuideWrap = styled.div`
   }
 `;
 
-const Devider = styled.div`
+const Divider = styled.div`
   width: 40px;
   margin: 30px 0;
   border-top: 2px solid ${({ theme }) => theme.backgroundColor.sub};
@@ -74,13 +74,13 @@ const Guide = () => {
       <GuideWrap>
         <VideoSection>
           <h3>{langData["L0065"]}</h3>
-          <Devider />
+          <Divider />
           <iframe src="https://www.youtube.com/embed/TTSbmLuTU98" frameBorder="0" allowFullScreen title="introduce video" />
           <p>{langData["L0066"]}</p>
         </VideoSection>
         <Section>
           <h3>{langData["L0067"]}</h3>
-          <Devider />
+          <Divider />
           <ol>
             <li>{langData["L0068"]}</li>
             <li>{langData["L0069"]}</li>
@@ -94,7 +94,7 @@ const Guide = () => {
         {language === LANGUAGES.KO && (
           <Section>
             <h3>칭찬왕 휴가 결재 방법</h3>
-            <Devider />
+            <Divider />
             <img src={contSpecialHoliday} alt="cont special holyday img" />
             <ul className="m-t-20">
               <li>
@@ -114,7 +114,7 @@ const Guide = () => {
         )}
         <Section>
           <h3>{langData["L0075"]}</h3>
-          <Devider />
+          <Divider />
           <ol>
             <li>{langData["L0076"]}</li>
             <li>{langData["L0077"]}</li>
@@ -122,7 +122,7 @@ const Guide = () => {
         </Section>
         <Section>
           <h3>{langData["L0078"]}</h3>
-          <Devider />
+          <Divider />
           <ol>
             <li>{langData["L0079"]}</li>
             <li>{langData["L0080"]}</li>
@@ -130,14 +130,14 @@ const Guide = () => {
         </Section>
         <Section>
           <h3>{langData["L0081"]}</h3>
-          <Devider />
+          <Divider />
           <ol>
             <li>{langData["L0082"]}</li>
           </ol>
         </Section>
         <Section>
           <h3>{langData["L0084"]}</h3>
-          <Devider />
+          <Divider />
           <p className="m-b-20">{langData["L0085"]}</p>
           <ol>
             <li>

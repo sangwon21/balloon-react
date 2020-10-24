@@ -1,8 +1,8 @@
 const SET_RECEIVER_DATA = "receiver/SET_RECEIVER_DATA";
 
-export const setReceiverData = ({ name, englishName, email, picture, phone, tel, team }) => ({
+export const setReceiverData = ({ name, englishName, email, picture, phone, tel, team, leaderPart }) => ({
   type: SET_RECEIVER_DATA,
-  payload: { name, englishName, email, picture, phone, tel, team },
+  payload: { name, englishName, email, picture, phone, tel, team, leaderPart },
 });
 
 const initialState = {
@@ -13,6 +13,7 @@ const initialState = {
   phone: "",
   tel: "",
   team: "",
+  leaderPart: "",
 };
 
 const receiver = (state = initialState, action) => {
@@ -27,6 +28,7 @@ const receiver = (state = initialState, action) => {
         phone: action.payload.phone,
         tel: action.payload.tel,
         team: action.payload.team,
+        leaderPart: action.payload.leaderPart,
       };
     default:
       return state;

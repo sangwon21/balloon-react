@@ -107,6 +107,7 @@ const Member = ({ member, setUserInfoOpen, inView }) => {
         data-phone={member.phone}
         data-tel={member.tel}
         data-team={member.team}
+        data-leader-part={member.leaderPart}
         ref={memberEl}
       >
         <Balloon src={balloonRed} alt="balloon img" />
