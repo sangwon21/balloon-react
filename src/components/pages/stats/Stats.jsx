@@ -79,17 +79,17 @@ const DescriptionBox = styled.div`
     padding: 16px 38px;
     font-size: 20px;
     color: #fff;
-    background-color: #00a6de;
+    background-color: #f1a9a0;
     border: none;
     outline: none;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-    border-radius: 3px;
+    border-radius: 8px;
     cursor: pointer;
     .icon {
       margin-right: 14px;
     }
     :hover {
-      background-color: #0090c0;
+      background-color: #e08283;
     }
   }
 `;

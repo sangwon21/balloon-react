@@ -36,8 +36,9 @@ const ModalContainerForm = styled.form`
   background-color: #fff;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.33);
   font-size: 18px;
-  border: 3px solid #999;
-  border-radius: 6px;
+  border: 2px solid #999;
+  border-radius: 10px;
+  overflow: hidden;
   color: #474747;
   z-index: 25;
   &.show {
@@ -94,14 +95,14 @@ const Footer = styled.div`
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
     border: none;
     outline: none;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
   }
   .send-btn {
-    background-color: #00a6de;
+    background-color: #f1a9a0;
     margin-right: 10px;
     :hover {
-      background-color: #0090c0;
+      background-color: #e08283;
     }
   }
   .close-btn {

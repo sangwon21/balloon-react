@@ -11,7 +11,7 @@ const LoginWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #70bbd9;
+  background-color: #f1a9a0;
 `;
 
 const Login = () => {

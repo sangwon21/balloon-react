@@ -82,7 +82,7 @@ const HoverPanel = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
-    props.balloonSize ? (props.isDuplicate ? "rgba(231, 76, 60, 0.3)" : "rgba(0, 166, 222, 0.3)") : "rgba(231, 76, 60, 0.3)"};
+    props.balloonSize ? (props.isDuplicate ? "rgba(0, 0, 0, 0.2)" : "rgba(241, 169, 160, 0.3)") : "rgba(0, 0, 0, 0.2)"};
   color: #333;
   opacity: 0;
   transition: opacity 0.3s;

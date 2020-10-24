@@ -18,7 +18,7 @@ const HeaderWrap = styled.div`
   top: 0;
   width: 100%;
   height: 60px;
-  background-color: #00a6de;
+  background-color: #f1a9a0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
   box-sizing: border-box;
 `;

@@ -79,7 +79,7 @@ const UserInfoInner = styled.div`
   }
   :hover {
     .name {
-      color: #00a6de;
+      color: #e08283;
     }
   }
 `;
@@ -108,7 +108,7 @@ const TextMenuInner = styled.div`
       margin-right: 10px;
     }
     :hover {
-      color: #00a6de;
+      color: #e08283;
     }
   }
 `;

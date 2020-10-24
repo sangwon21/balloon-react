@@ -40,7 +40,7 @@ const GuideWrap = styled.div`
 const Devider = styled.div`
   width: 40px;
   margin: 30px 0;
-  border-top: 2px solid #00a6de;
+  border-top: 2px solid #f1a9a0;
 `;
 
 const VideoSection = styled.section`
