@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { partNameLangData, teamNameLangData } from "@data/languages/part-team-name";
+import { IoMdArrowDropright } from "react-icons/io";
 
-const PartBoxWrap = styled.div`
+const PartBoxWrap = styled.li`
   padding-top: 20px;
   color: #333;
   h3 {
@@ -11,7 +12,7 @@ const PartBoxWrap = styled.div`
     font-size: 16px;
   }
   ul {
-    margin-left: 15px;
+    margin-left: 30px;
   }
   li {
     font-size: 14px;
@@ -25,6 +26,9 @@ const PartBoxWrap = styled.div`
     :hover {
       text-decoration: underline;
     }
+  }
+  :first-child {
+    padding-top: 5px;
   }
   :last-child {
     padding-bottom: 20px;
@@ -47,7 +51,7 @@ const PartBox = ({ language, partName, teamsData }) => {
   return (
     <PartBoxWrap>
       <h3>
-        <a href={`#${part}`}>{part}</a>
+        <IoMdArrowDropright /> <a href={`#${part}`}>{part}</a>
       </h3>
       <ul>{teamsList}</ul>
     </PartBoxWrap>
