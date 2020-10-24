@@ -38,6 +38,8 @@ const PraiseList = ({ partsData }) => {
     language: { language, langData },
   } = useSelector((index) => index);
 
+  if (!userData) return null;
+
   if (!messagesData.length) {
     const text = () => {
       return { __html: langData["L0055"].replace("{{name}}", userData.name) };
