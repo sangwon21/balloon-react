@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeValue } from "@modules/searchBar";
 import { changeSelectedTab, filterUsersData } from "@modules/users";
@@ -37,12 +37,18 @@ const SearchInput = styled.input`
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+  const timeId = useRef();
   const {
     language: { langData },
     page: { currentPage },
     searchBar: { value },
     users: { usersData },
   } = useSelector((index) => index);
+  const [text, setText] = useState(value);
+
+  useEffect(() => {
+    setText(value);
+  }, [value]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,10 +56,15 @@ const SearchBar = () => {
   };
 
   const handleChange = ({ target: { value } }) => {
-    if (currentPage === "/users") {
+    setText(value);
+    if (timeId.current) clearTimeout(timeId.current);
+
+    timeId.current = setTimeout(() => {
       dispatch(changeValue(value));
-      return dispatch(filterUsersData(usersData, value));
-    }
+      if (currentPage === "/users") {
+        return dispatch(filterUsersData(usersData, value));
+      }
+    }, 300);
   };
 
   const handleFocus = () => {
@@ -66,7 +77,7 @@ const SearchBar = () => {
 
   return (
     <SearchBarForm onSubmit={handleSubmit}>
-      <SearchInput type="text" value={value} onFocus={handleFocus} onChange={handleChange} placeholder={langData[searchMenu.placeholder]} />
+      <SearchInput type="text" value={text} onFocus={handleFocus} onChange={handleChange} placeholder={langData[searchMenu.placeholder]} />
       <BiSearch className="search-icon" />
     </SearchBarForm>
   );
