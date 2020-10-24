@@ -39,10 +39,10 @@ const ImgPanel = styled.div`
 
 const Balloon = styled.img`
   position: absolute;
-  width: 56px;
-  height: 66px;
+  width: 50px;
+  height: 58px;
   top: -10px;
-  left: -20px;
+  left: -12px;
   z-index: 1;
   pointer-events: none;
   animation-name: duplicateBalloonAnim;
@@ -82,7 +82,7 @@ const HoverPanel = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) =>
-    props.balloonSize ? (props.isDuplicate ? "rgba(0, 0, 0, 0.2)" : "rgba(241, 169, 160, 0.3)") : "rgba(0, 0, 0, 0.2)"};
+    props.balloonSize ? (props.isDuplicate ? "rgba(0, 0, 0, 0.2)" : `rgba(${props.theme.backgroundColor.mainRGB}, 0.3)`) : "rgba(0, 0, 0, 0.2)"};
   color: #333;
   opacity: 0;
   transition: opacity 0.3s;

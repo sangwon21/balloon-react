@@ -38,10 +38,10 @@ const ImgPanel = styled.div`
 
 const Balloon = styled.img`
   position: absolute;
-  width: 56px;
-  height: 66px;
+  width: 50px;
+  height: 58px;
   top: -10px;
-  left: -20px;
+  left: -12px;
   z-index: 1;
   pointer-events: none;
   animation-name: duplicateBalloonAnim;

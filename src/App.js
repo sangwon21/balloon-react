@@ -5,6 +5,8 @@ import { setLanguage } from "@modules/language";
 import { getUserData, userLogout } from "@modules/login";
 import { checkSession } from "@utils/request";
 import { STORAGE_KEYS, LANGUAGES } from "@constants/constant";
+import { ThemeProvider } from "styled-components";
+import theme from "@styles/theme";
 
 import koData from "@data/languages/ko.json";
 import jaData from "@data/languages/ja.json";
@@ -60,23 +62,25 @@ const App = () => {
 
   return (
     <Router>
-      <GlobalStyles />
-      {currentPage !== "/" && (
-        <>
-          <Header />
-          <Footer />
-        </>
-      )}
-      {isShow && <Toast />}
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/users" component={Users} />
-        <Route path="/congrats" component={Congrats} />
-        <Route path="/box" component={Box} />
-        <Route path="/stats" component={Stats} />
-        <Route path="/guide" component={Guide} />
-        <Redirect to="/" />
-      </Switch>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        {currentPage !== "/" && (
+          <>
+            <Header />
+            <Footer />
+          </>
+        )}
+        {isShow && <Toast />}
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/users" component={Users} />
+          <Route path="/congrats" component={Congrats} />
+          <Route path="/box" component={Box} />
+          <Route path="/stats" component={Stats} />
+          <Route path="/guide" component={Guide} />
+          <Redirect to="/" />
+        </Switch>
+      </ThemeProvider>
     </Router>
   );
 };

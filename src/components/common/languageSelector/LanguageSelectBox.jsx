@@ -29,7 +29,7 @@ const CurrentLanguage = styled.div`
 const SelectButton = styled.button`
   width: 20px;
   height: 100%;
-  background-color: #e08283;
+  background-color: ${({ theme }) => theme.backgroundColor.sub};
   border: none;
   outline: none;
   font-size: 20px;

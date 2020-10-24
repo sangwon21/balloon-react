@@ -11,7 +11,7 @@ const LoginWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #f1a9a0;
+  background-color: ${({ theme }) => theme.backgroundColor.main};
 `;
 
 const Login = () => {

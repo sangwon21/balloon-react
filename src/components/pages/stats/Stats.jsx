@@ -79,7 +79,7 @@ const DescriptionBox = styled.div`
     padding: 16px 38px;
     font-size: 20px;
     color: #fff;
-    background-color: #f1a9a0;
+    background-color: ${({ theme }) => theme.backgroundColor.main};
     border: none;
     outline: none;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
@@ -89,7 +89,7 @@ const DescriptionBox = styled.div`
       margin-right: 14px;
     }
     :hover {
-      background-color: #e08283;
+      background-color: ${({ theme }) => theme.backgroundColor.hover};
     }
   }
 `;

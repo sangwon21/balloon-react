@@ -79,7 +79,7 @@ const UserInfoInner = styled.div`
   }
   :hover {
     .name {
-      color: #e08283;
+      color: ${({ theme }) => theme.backgroundColor.sub};
     }
   }
 `;
@@ -108,7 +108,7 @@ const TextMenuInner = styled.div`
       margin-right: 10px;
     }
     :hover {
-      color: #e08283;
+      color: ${({ theme }) => theme.backgroundColor.sub};
     }
   }
 `;

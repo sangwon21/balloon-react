@@ -39,8 +39,8 @@ const TabButton = styled.li`
   justify-content: center;
   cursor: pointer;
   box-sizing: border-box;
-  border-bottom: 2px solid ${({ selected }) => (selected ? "#ff9478" : "transparent")};
-  color: ${({ selected }) => (selected ? "#ff9478" : "#555")};
+  border-bottom: 2px solid ${({ selected, theme }) => (selected ? theme.backgroundColor.sub : "transparent")};
+  color: ${({ selected, theme }) => (selected ? theme.backgroundColor.sub : "#555")};
   transition: color 0.3s;
   span {
     line-height: 94px;
@@ -48,7 +48,7 @@ const TabButton = styled.li`
     font-weight: ${({ selected }) => (selected ? "600" : "500")};
   }
   :hover {
-    color: #ff9478;
+    color: ${({ theme }) => theme.backgroundColor.sub};
   }
 `;
 

@@ -29,7 +29,7 @@ const LanguageBox = styled.li`
     font-weight: 600;
   }
   :hover {
-    background-color: rgba(241, 169, 160, 0.3);
+    background-color: ${({ theme }) => `rgba(${theme.backgroundColor.mainRGB}, 0.3)`};
   }
   :last-child {
     border-bottom: none;

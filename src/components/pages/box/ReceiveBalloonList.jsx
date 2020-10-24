@@ -7,9 +7,10 @@ import styled from "styled-components";
 const Panel = styled.div`
   width: 100%;
   height: 120px;
-  border: 4px dashed rgba(241, 169, 160, 0.4);
+  border: 4px dashed;
+  border-color: ${({ theme }) => `rgba(${theme.backgroundColor.mainRGB}, 0.4)`};
   background: #f5f5f5;
-  color: rgba(241, 169, 160, 0.8);
+  color: ${({ theme }) => `rgba(${theme.backgroundColor.mainRGB}, 0.8)`};
   font-size: 20px;
   border-radius: 10px;
   box-sizing: border-box;

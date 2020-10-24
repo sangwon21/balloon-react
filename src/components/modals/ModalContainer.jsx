@@ -99,10 +99,10 @@ const Footer = styled.div`
     cursor: pointer;
   }
   .send-btn {
-    background-color: #f1a9a0;
+    background-color: ${({ theme }) => theme.backgroundColor.main};
     margin-right: 10px;
     :hover {
-      background-color: #e08283;
+      background-color: ${({ theme }) => theme.backgroundColor.hover};
     }
   }
   .close-btn {
