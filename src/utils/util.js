@@ -3,6 +3,8 @@ export const checkResponseData = (response) => response.ok && response.status >=
 export const checkFilterCondition = (userData, value) => {
   if (userData.name.toLowerCase().includes(value.toLowerCase())) return true;
   if (userData.englishName && userData.englishName.toLowerCase().includes(value.toLowerCase())) return true;
+  if (userData.phone && userData.phone.includes(value)) return true;
+  if (userData.tel && userData.tel.includes(value)) return true;
   return false;
 };
 
