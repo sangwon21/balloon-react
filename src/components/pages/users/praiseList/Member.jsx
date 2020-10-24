@@ -1,5 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setReceiverData } from "@modules/receiver";
 import styled from "styled-components";
 import { LANGUAGES } from "@constants/constant";
 
@@ -68,9 +69,14 @@ const NamePanel = styled.div`
   color: #252525;
   font-size: 14px;
   box-sizing: border-box;
+  span {
+    cursor: pointer;
+  }
 `;
 
-const Member = ({ member }) => {
+const Member = ({ member, setUserInfoOpen }) => {
+  const dispatch = useDispatch();
+  const memberEl = useRef();
   const {
     language: { language },
     login: { messagesData },
@@ -82,15 +88,26 @@ const Member = ({ member }) => {
 
   if (!isDuplicate) return null;
 
+  const handleNameClick = () => {
+    dispatch(setReceiverData(memberEl.current.dataset));
+    setUserInfoOpen(true);
+  };
+
   return (
     <MemberWrap>
-      <MemberInner>
+      <MemberInner
+        data-email={member.email}
+        data-name={member.name}
+        data-english-name={member.englishName}
+        data-picture={member.picture}
+        ref={memberEl}
+      >
         <Balloon src={balloonRed} alt="balloon img" />
         <ImgPanel>
           <img src={member.picture || noPicture} alt="user img" />
         </ImgPanel>
         <NamePanel>
-          <span>{name}</span>
+          <span onClick={handleNameClick}>{name}</span>
         </NamePanel>
       </MemberInner>
     </MemberWrap>

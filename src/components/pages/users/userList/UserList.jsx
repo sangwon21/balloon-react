@@ -11,7 +11,7 @@ const UserListWrap = styled.ul`
   min-height: 100vh;
 `;
 
-const UserList = ({ partsData, filterPartsData }) => {
+const UserList = ({ partsData, filterPartsData, setUserInfoOpen }) => {
   const [isOpen, setOpen] = useState(false);
   const [showSendEffect, setShowSendEffect] = useState(false);
   const {
@@ -26,7 +26,7 @@ const UserList = ({ partsData, filterPartsData }) => {
 
   const userList = data.map((partData) => {
     const [partName, teamsData] = partData;
-    return <Part key={partName} {...{ language, langData, partName, teamsData, setOpen }} />;
+    return <Part key={partName} {...{ language, langData, partName, teamsData, setOpen, setUserInfoOpen }} />;
   });
 
   return (

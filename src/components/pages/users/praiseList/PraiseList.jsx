@@ -32,7 +32,7 @@ const PraiseListWrap = styled.ul`
   min-height: 100vh;
 `;
 
-const PraiseList = ({ partsData }) => {
+const PraiseList = ({ partsData, setUserInfoOpen }) => {
   const {
     login: { userData, messagesData },
     language: { language, langData },
@@ -55,7 +55,7 @@ const PraiseList = ({ partsData }) => {
 
   const userList = partsData.map((partData) => {
     const [partName, teamsData] = partData;
-    return <Part key={partName} {...{ language, langData, partName, teamsData }} />;
+    return <Part key={partName} {...{ language, langData, partName, teamsData, setUserInfoOpen }} />;
   });
 
   return <PraiseListWrap>{userList}</PraiseListWrap>;

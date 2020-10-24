@@ -17,7 +17,7 @@ const PartWrap = styled.li`
   }
 `;
 
-const Part = ({ language, langData, partName, teamsData }) => {
+const Part = ({ language, langData, partName, teamsData, setUserInfoOpen }) => {
   let isExist = false;
   const { messagesData } = useSelector(({ login }) => login);
   const receivers = messagesData.map((data) => data.receiverEmail);
@@ -26,7 +26,7 @@ const Part = ({ language, langData, partName, teamsData }) => {
   const part = partNameLangData[partName] ? partNameLangData[partName][language] : partName;
 
   for (let [teamName, members] of Object.entries(teamsData)) {
-    teamList.push(<Team key={teamName} {...{ language, langData, teamName, members }} />);
+    teamList.push(<Team key={teamName} {...{ language, langData, teamName, members, setUserInfoOpen }} />);
     if (isExist) continue;
     isExist = members.some((member) => receivers.includes(member.email));
   }

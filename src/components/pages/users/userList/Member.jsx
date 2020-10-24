@@ -69,6 +69,9 @@ const NamePanel = styled.div`
   color: #252525;
   font-size: 14px;
   box-sizing: border-box;
+  span {
+    cursor: pointer;
+  }
 `;
 
 const HoverPanel = styled.div`
@@ -102,7 +105,7 @@ const HoverPanel = styled.div`
   }
 `;
 
-const Member = ({ member, setOpen }) => {
+const Member = ({ member, setOpen, setUserInfoOpen }) => {
   const dispatch = useDispatch();
   const memberEl = useRef();
   const [isHover, setHover] = useState(false);
@@ -134,12 +137,14 @@ const Member = ({ member, setOpen }) => {
     dispatch(setReceiverData(memberEl.current.dataset));
     setOpen(true);
   };
+  const handleNameClick = () => {
+    dispatch(setReceiverData(memberEl.current.dataset));
+    setUserInfoOpen(true);
+  };
 
   return (
     <MemberWrap>
       <MemberInner
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
         data-email={member.email}
         data-name={member.name}
         data-english-name={member.englishName}
@@ -147,14 +152,14 @@ const Member = ({ member, setOpen }) => {
         ref={memberEl}
       >
         {isDuplicate && <Balloon src={balloonRed} alt="balloon img" />}
-        <ImgPanel className={imgPanelClassName} onClick={handleClick}>
+        <ImgPanel className={imgPanelClassName} onClick={handleClick} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
           <img src={member.picture || noPicture} alt="user img" />
           <HoverPanel className={hoverPanelClassName} isDuplicate={isDuplicate} balloonSize={balloonSize}>
             <p dangerouslySetInnerHTML={hoverPanelText()} />
           </HoverPanel>
         </ImgPanel>
         <NamePanel>
-          <span>{name}</span>
+          <span onClick={handleNameClick}>{name}</span>
         </NamePanel>
       </MemberInner>
     </MemberWrap>

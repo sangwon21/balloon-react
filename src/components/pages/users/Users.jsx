@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "@modules/page";
 import { changeSelectedTab, getUsersData } from "@modules/users";
@@ -11,6 +11,7 @@ import Tabs from "@components/common/wrapper/Tabs";
 import PartList from "./partList/PartList";
 import UserList from "./userList/UserList";
 import PraiseList from "./praiseList/PraiseList";
+import UserInfoModal from "@components/modals/userInfo/UserInfoModal";
 
 const UsersWrap = styled.div`
   position: relative;
@@ -53,6 +54,7 @@ const TabButton = styled.li`
 `;
 
 const Users = () => {
+  const [userInfoOpen, setUserInfoOpen] = useState(false);
   const dispatch = useDispatch();
   const {
     language: { langData },
@@ -76,10 +78,11 @@ const Users = () => {
         <PartList {...{ partsData }} />
         <TabsMenuWrap>
           <Tabs {...{ TabButtonWrap, TabButton, selectedTab, setSelectedTab }}>
-            <UserList title={langData["L0017"]} {...{ partsData, filterPartsData }} />
-            <PraiseList title={langData["L0018"]} {...{ partsData }} />
+            <UserList title={langData["L0017"]} {...{ partsData, filterPartsData, setUserInfoOpen }} />
+            <PraiseList title={langData["L0018"]} {...{ partsData, setUserInfoOpen }} />
           </Tabs>
         </TabsMenuWrap>
+        {userInfoOpen && <UserInfoModal {...{ isOpen: userInfoOpen, setOpen: setUserInfoOpen }} />}
       </UsersWrap>
     </ContentWrapper>
   );

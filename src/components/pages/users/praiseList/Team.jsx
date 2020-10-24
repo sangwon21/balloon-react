@@ -19,7 +19,7 @@ const TeamWrap = styled.div`
   }
 `;
 
-const Team = ({ language, langData, teamName, members }) => {
+const Team = ({ language, langData, teamName, members, setUserInfoOpen }) => {
   const { messagesData } = useSelector(({ login }) => login);
   const receivers = messagesData.map((data) => data.receiverEmail);
 
@@ -27,7 +27,7 @@ const Team = ({ language, langData, teamName, members }) => {
 
   const _filterList = members.filter((member) => receivers.includes(member.email));
   const filterList = _filterList.map((member) => {
-    return <Member key={member._id} {...{ member }} />;
+    return <Member key={member._id} {...{ member, setUserInfoOpen }} />;
   });
 
   if (!_filterList.length) return null;

@@ -126,9 +126,11 @@ const ModalContainer = ({ isOpen, body, handleSubmit, handleModalClose, onSubmit
           <button type="submit" className="send-btn">
             {submitBtnText}
           </button>
-          <button type="button" className="close-btn" onClick={handleModalClose}>
-            {closeBtnText}
-          </button>
+          {closeBtnText && (
+            <button type="button" className="close-btn" onClick={handleModalClose}>
+              {closeBtnText}
+            </button>
+          )}
         </Footer>
       </ModalContainerForm>
     </>
