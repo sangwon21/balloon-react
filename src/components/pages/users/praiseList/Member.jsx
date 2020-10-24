@@ -100,6 +100,9 @@ const Member = ({ member, setUserInfoOpen }) => {
         data-name={member.name}
         data-english-name={member.englishName}
         data-picture={member.picture}
+        data-phone={member.phone}
+        data-tel={member.tel}
+        data-team={member.team}
         ref={memberEl}
       >
         <Balloon src={balloonRed} alt="balloon img" />

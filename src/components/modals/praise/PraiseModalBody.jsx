@@ -40,7 +40,7 @@ const PraiseModalBodyWrap = styled.div`
   }
 `;
 
-const PraiseModalBody = ({ receiverName, register, langData, handleChange }) => {
+const PraiseModalBody = ({ register, langData, receiverName, handleChange }) => {
   return (
     <PraiseModalBodyWrap>
       <span className="receiver-name">To. {receiverName}</span>

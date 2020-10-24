@@ -149,6 +149,9 @@ const Member = ({ member, setOpen, setUserInfoOpen }) => {
         data-name={member.name}
         data-english-name={member.englishName}
         data-picture={member.picture}
+        data-phone={member.phone}
+        data-tel={member.tel}
+        data-team={member.team}
         ref={memberEl}
       >
         {isDuplicate && <Balloon src={balloonRed} alt="balloon img" />}

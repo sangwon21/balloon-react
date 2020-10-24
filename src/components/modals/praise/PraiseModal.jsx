@@ -69,7 +69,7 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
   const closeBtnText = langData["L0028"];
 
   // Modal Body
-  const body = <PraiseModalBody {...{ receiverName, register, langData, handleChange }} />;
+  const body = <PraiseModalBody {...{ register, langData, receiverName, handleChange }} />;
 
   return <ModalContainer {...{ isOpen, body, handleSubmit, handleModalClose, onSubmit, modalTitleText, submitBtnText, closeBtnText }} />;
 };
