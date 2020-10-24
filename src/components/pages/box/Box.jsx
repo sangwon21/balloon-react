@@ -69,6 +69,11 @@ const Box = () => {
 
   if (!userData) return null;
 
+  const handleImgError = ({ target }) => {
+    target.onerror = null;
+    target.src = noPicture;
+  };
+
   return (
     <ContentWrapper>
       <Helmet>
@@ -76,7 +81,7 @@ const Box = () => {
       </Helmet>
       <BoxWrap>
         <UserInfoBox>
-          <img src={userData.picture || noPicture} alt="user img" />
+          <img src={userData.picture || noPicture} alt="user img" referrerPolicy="no-referrer" onError={handleImgError} />
           <p className="name">{userData.name}</p>
           <p className="email">{userData.email}</p>
         </UserInfoBox>

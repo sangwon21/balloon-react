@@ -105,7 +105,7 @@ const HoverPanel = styled.div`
   }
 `;
 
-const Member = ({ member, setOpen, setUserInfoOpen }) => {
+const Member = ({ member, setOpen, setUserInfoOpen, inView }) => {
   const dispatch = useDispatch();
   const memberEl = useRef();
   const [isHover, setHover] = useState(false);
@@ -141,6 +141,10 @@ const Member = ({ member, setOpen, setUserInfoOpen }) => {
     dispatch(setReceiverData(memberEl.current.dataset));
     setUserInfoOpen(true);
   };
+  const handleImgError = ({ target }) => {
+    target.onerror = null;
+    target.src = noPicture;
+  };
 
   return (
     <MemberWrap>
@@ -156,7 +160,7 @@ const Member = ({ member, setOpen, setUserInfoOpen }) => {
       >
         {isDuplicate && <Balloon src={balloonRed} alt="balloon img" />}
         <ImgPanel className={imgPanelClassName} onClick={handleClick} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-          <img src={member.picture || noPicture} alt="user img" />
+          <img src={inView ? member.picture || noPicture : noPicture} alt="user img" referrerPolicy="no-referrer" onError={handleImgError} />
           <HoverPanel className={hoverPanelClassName} isDuplicate={isDuplicate} balloonSize={balloonSize}>
             <p dangerouslySetInnerHTML={hoverPanelText()} />
           </HoverPanel>

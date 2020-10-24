@@ -74,7 +74,7 @@ const NamePanel = styled.div`
   }
 `;
 
-const Member = ({ member, setUserInfoOpen }) => {
+const Member = ({ member, setUserInfoOpen, inView }) => {
   const dispatch = useDispatch();
   const memberEl = useRef();
   const {
@@ -92,6 +92,10 @@ const Member = ({ member, setUserInfoOpen }) => {
     dispatch(setReceiverData(memberEl.current.dataset));
     setUserInfoOpen(true);
   };
+  const handleImgError = ({ target }) => {
+    target.onerror = null;
+    target.src = noPicture;
+  };
 
   return (
     <MemberWrap>
@@ -107,7 +111,7 @@ const Member = ({ member, setUserInfoOpen }) => {
       >
         <Balloon src={balloonRed} alt="balloon img" />
         <ImgPanel>
-          <img src={member.picture || noPicture} alt="user img" />
+          <img src={inView ? member.picture || noPicture : noPicture} alt="user img" referrerPolicy="no-referrer" onError={handleImgError} />
         </ImgPanel>
         <NamePanel>
           <span onClick={handleNameClick}>{name}</span>

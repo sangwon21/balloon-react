@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { teamNameLangData } from "@data/languages/part-team-name";
+import { useInView } from "react-intersection-observer";
 
 import Member from "./Member";
 
@@ -20,6 +21,10 @@ const TeamWrap = styled.div`
 `;
 
 const Team = ({ language, langData, teamName, members, setUserInfoOpen }) => {
+  const [ref, inView] = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
   const { messagesData } = useSelector(({ login }) => login);
   const receivers = messagesData.map((data) => data.receiverEmail);
 
@@ -27,13 +32,13 @@ const Team = ({ language, langData, teamName, members, setUserInfoOpen }) => {
 
   const _filterList = members.filter((member) => receivers.includes(member.email));
   const filterList = _filterList.map((member) => {
-    return <Member key={member._id} {...{ member, setUserInfoOpen }} />;
+    return <Member key={member._id} {...{ member, setUserInfoOpen, inView }} />;
   });
 
   if (!_filterList.length) return null;
 
   return (
-    <TeamWrap>
+    <TeamWrap ref={ref}>
       <h4 id={team}>
         {team} <span>({langData["L0016"].replace("%s", _filterList.length)})</span>
       </h4>

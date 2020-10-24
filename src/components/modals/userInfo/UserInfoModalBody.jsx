@@ -21,9 +21,14 @@ const UserInfoModalBodyWrap = styled.div`
 
 const UserInfoModalBody = ({ language, receiver }) => {
   const name = language === LANGUAGES.KO ? receiver.name : receiver.englishName ? receiver.englishName : receiver.name;
+  const handleImgError = ({ target }) => {
+    target.onerror = null;
+    target.src = noPicture;
+  };
+
   return (
     <UserInfoModalBodyWrap>
-      <img src={receiver.picture || noPicture} alt="user img" />
+      <img src={receiver.picture || noPicture} alt="user img" referrerPolicy="no-referrer" onError={handleImgError} />
       <div>
         <p>{name}</p>
         <p>{receiver.team}</p>

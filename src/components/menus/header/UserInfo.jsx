@@ -50,11 +50,15 @@ const UserInfo = () => {
   }
 
   const handleClick = () => setOpen(!isOpen);
+  const handleImgError = ({ target }) => {
+    target.onerror = null;
+    target.src = noPicture;
+  };
 
   return (
     <UserInfoWrap>
       <div>{balloons}</div>
-      <UserImg onClick={handleClick} src={userData.picture || noPicture} alt="user img" />
+      <UserImg onClick={handleClick} src={userData.picture || noPicture} alt="user img" referrerPolicy="no-referrer" onError={handleImgError} />
       {isOpen && <UserInfoSlideMenu {...{ isOpen, setOpen, userData, noPicture }} />}
     </UserInfoWrap>
   );

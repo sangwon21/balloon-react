@@ -130,6 +130,10 @@ const UserInfoSlideMenu = ({ isOpen, setOpen, userData, noPicture }) => {
     setOpen(false);
     history.push("/box");
   };
+  const handleImgError = ({ target }) => {
+    target.onerror = null;
+    target.src = noPicture;
+  };
 
   useEffect(() => {
     window.addEventListener("click", handleClickOutside);
@@ -142,7 +146,7 @@ const UserInfoSlideMenu = ({ isOpen, setOpen, userData, noPicture }) => {
     <UserInfoModalWrap ref={modalRef}>
       <UserInfoBox>
         <UserInfoInner onClick={handleClick}>
-          <img src={userData.picture || noPicture} alt="user img" />
+          <img src={userData.picture || noPicture} alt="user img" referrerPolicy="no-referrer" onError={handleImgError} />
           <div className="info-text">
             <p className="name">{userData.name}</p>
             <p className="email">{userData.email}</p>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { teamNameLangData } from "@data/languages/part-team-name";
+import { useInView } from "react-intersection-observer";
 
 import Member from "./Member";
 
@@ -19,12 +20,16 @@ const TeamWrap = styled.div`
 `;
 
 const Team = ({ language, langData, teamName, members, setOpen, setUserInfoOpen }) => {
-  const filterList = members.map((member) => <Member key={member._id} {...{ member, setOpen, setUserInfoOpen }} />);
+  const [ref, inView] = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+  const filterList = members.map((member) => <Member key={member._id} {...{ member, setOpen, setUserInfoOpen, inView }} />);
 
   const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
 
   return (
-    <TeamWrap>
+    <TeamWrap ref={ref}>
       <h4 id={team}>
         {team} <span>({langData["L0016"].replace("%s", filterList.length)})</span>
       </h4>
