@@ -32,13 +32,14 @@ app.listen(port, function () {
 // 유저정보 초기화시 (로컬 테스트용)
 // const User = require("./models/user");
 // if (config.databaseUsersReset) {
-//   const userList = require("./data/demoData/user-list");
+//   const userList = require("./data/demoData/user-list-2020");
 
 //   for (let i = 0; i < userList.length; i++) {
 //     const newUser = new User();
 //     const thisUser = userList[i];
 
 //     newUser.name = thisUser.name;
+//     newUser.englishName = thisUser.englishName;
 //     newUser.email = thisUser.email;
 //     newUser.branch = thisUser.branch;
 //     newUser.part = thisUser.part;
@@ -48,7 +49,6 @@ app.listen(port, function () {
 //     newUser.tel = thisUser.tel;
 //     newUser.picture = thisUser.picture;
 //     newUser.balloonSize = 7;
-//     newUser.englishName = null;
 //     newUser.googleId = null;
 //     newUser.token = null;
 //     newUser.admin = false;
