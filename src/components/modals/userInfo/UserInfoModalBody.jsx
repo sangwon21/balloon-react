@@ -13,6 +13,8 @@ const UserInfoModalBodyWrap = styled.div`
   align-items: center;
   font-size: 14px;
   a {
+    display: inline-block;
+    height: 20px;
     text-decoration: none;
     color: #474747;
     :hover {
