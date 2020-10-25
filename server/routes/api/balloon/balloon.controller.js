@@ -1,4 +1,6 @@
 const moment = require("moment-timezone");
+const config = require("../../../config.json");
+const mailer = require("../../../mail/mail-sender");
 
 const User = require("../../../models/user");
 const Message = require("../../../models/message");
@@ -93,6 +95,8 @@ exports.message = (req, res) => {
           user.balloonSize--;
           user.save();
           res.status(200).json({ result: true, balloonSize: user.balloonSize });
+
+          if (config.isMailSend) mailer.sendEmail(req.body.receiverEmail, req.body.receiverBranch);
         });
       },
     );

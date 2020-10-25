@@ -44,6 +44,7 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       receiverEmail: receiver.email,
       receiverName: receiver.name,
       receiverPicture: receiver.picture,
+      receiverBranch: receiver.branch,
       senderEmail: userData.email,
       senderName: userData.name,
       senderPicture: userData.picture,

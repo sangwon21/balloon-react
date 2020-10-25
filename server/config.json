@@ -9,5 +9,6 @@
   },
   "databaseUsersReset": false,
   "isDev": true,
+  "isMailSend": false,
   "secret": "TeStSeCrEtKey"
 }
