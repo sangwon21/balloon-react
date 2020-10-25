@@ -12,6 +12,10 @@ const UserInfoModalBodyWrap = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
+  a {
+    text-decoration: none;
+    color: #474747;
+  }
   img {
     width: 140px;
     height: 140px;
@@ -45,10 +49,6 @@ const ContactNumber = styled.div`
 const Email = styled.div`
   display: flex;
   align-items: center;
-  a {
-    text-decoration: none;
-    color: #474747;
-  }
   .icon {
     font-size: 22px;
     margin-right: 11px;
@@ -79,8 +79,12 @@ const UserInfoModalBody = ({ language, receiver }) => {
         <ContactNumber>
           <FaPhoneAlt className="icon" />
           <div>
-            <p className="tel">{receiver.tel}</p>
-            <p className="phone">{receiver.phone}</p>
+            <p className="tel">
+              <a href={`tel:${receiver.tel}`}>{receiver.tel}</a>
+            </p>
+            <p className="phone">
+              <a href={`tel:${receiver.phone}`}>{receiver.phone}</a>
+            </p>
           </div>
         </ContactNumber>
         <Divider />
