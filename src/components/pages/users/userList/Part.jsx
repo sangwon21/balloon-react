@@ -30,7 +30,7 @@ const Part = ({ language, langData, partName, teamsData, setOpen, setUserInfoOpe
 
   return (
     <PartWrap>
-      <h3 id={part}>{part}</h3>
+      <h3 id={part.trim()}>{part}</h3>
       {teamList}
     </PartWrap>
   );

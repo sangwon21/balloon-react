@@ -55,7 +55,7 @@ const PartBox = ({ language, partName, teamsData }) => {
   return (
     <PartBoxWrap>
       <h3>
-        <IoMdArrowDropright /> <a href={`#${part}`}>{part}</a>
+        <IoMdArrowDropright /> <a href={`#${part.trim()}`}>{part}</a>
       </h3>
       <ul>{teamList}</ul>
     </PartBoxWrap>

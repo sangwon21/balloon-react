@@ -33,7 +33,7 @@ const Team = ({ language, langData, teamName, members, setOpen, setUserInfoOpen 
 
   return (
     <TeamWrap ref={ref}>
-      <h4 id={team}>
+      <h4 id={team.trim()}>
         {team} <span>({langData["L0016"].replace("%s", filterList.length)})</span>
       </h4>
       <ul>{filterList}</ul>
