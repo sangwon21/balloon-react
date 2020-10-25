@@ -15,6 +15,9 @@ const UserInfoModalBodyWrap = styled.div`
   a {
     text-decoration: none;
     color: #474747;
+    :hover {
+      text-decoration: underline;
+    }
   }
   img {
     width: 140px;
