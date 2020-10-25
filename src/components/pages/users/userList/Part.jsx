@@ -23,6 +23,10 @@ const Part = ({ language, langData, partName, teamsData, setOpen, setUserInfoOpe
   for (let [teamName, members] of Object.entries(teamsData)) {
     teamList.push(<Team key={teamName} {...{ language, langData, teamName, members, setOpen, setUserInfoOpen }} />);
   }
+  teamList.sort((a, b) => {
+    if (partName === "해외법인") return -1;
+    return a.key < b.key ? -1 : a.key > b.key ? 1 : 0;
+  });
 
   return (
     <PartWrap>

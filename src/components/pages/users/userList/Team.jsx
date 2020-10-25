@@ -25,6 +25,9 @@ const Team = ({ language, langData, teamName, members, setOpen, setUserInfoOpen 
     triggerOnce: true,
   });
   const filterList = members.map((member) => <Member key={member._id} {...{ member, setOpen, setUserInfoOpen, inView }} />);
+  filterList.sort((a, b) => {
+    return a.props.member.name < b.props.member.name ? -1 : a.props.member.name > b.props.member.name ? 1 : 0;
+  });
 
   const team = teamNameLangData[teamName] ? teamNameLangData[teamName][language] : teamName;
 

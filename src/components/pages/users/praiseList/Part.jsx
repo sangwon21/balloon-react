@@ -22,14 +22,18 @@ const Part = ({ language, langData, partName, teamsData, setUserInfoOpen }) => {
   const { messagesData } = useSelector(({ login }) => login);
   const receivers = messagesData.map((data) => data.receiverEmail);
 
-  const teamList = [];
   const part = partNameLangData[partName] ? partNameLangData[partName][language] : partName;
 
+  const teamList = [];
   for (let [teamName, members] of Object.entries(teamsData)) {
     teamList.push(<Team key={teamName} {...{ language, langData, teamName, members, setUserInfoOpen }} />);
     if (isExist) continue;
     isExist = members.some((member) => receivers.includes(member.email));
   }
+  teamList.sort((a, b) => {
+    if (partName === "해외법인") return -1;
+    return a.key < b.key ? -1 : a.key > b.key ? 1 : 0;
+  });
 
   if (!isExist) return null;
 

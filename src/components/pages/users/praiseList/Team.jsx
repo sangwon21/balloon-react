@@ -34,6 +34,9 @@ const Team = ({ language, langData, teamName, members, setUserInfoOpen }) => {
   const filterList = _filterList.map((member) => {
     return <Member key={member._id} {...{ member, setUserInfoOpen, inView }} />;
   });
+  filterList.sort((a, b) => {
+    return a.props.member.name < b.props.member.name ? -1 : a.props.member.name > b.props.member.name ? 1 : 0;
+  });
 
   if (!_filterList.length) return null;
 

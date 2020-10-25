@@ -15,15 +15,14 @@ export const getUsersData = () => async (dispatch) => {
   if (!result) return;
 
   const partsMap = makePartsMap(data);
-
-  dispatch({ type: SET_PARTS_DATA, payload: Array.from(partsMap) });
+  dispatch({ type: SET_PARTS_DATA, payload: partsMap });
 };
 
 export const filterUsersData = (usersData, value) => (dispatch) => {
   const data = usersData.filter((userData) => checkFilterCondition(userData, value));
-  const partsMap = makePartsMap(data);
 
-  dispatch({ type: SET_FILTER_PARTS_DATA, payload: Array.from(partsMap) });
+  const partsMap = makePartsMap(data);
+  dispatch({ type: SET_FILTER_PARTS_DATA, payload: partsMap });
 };
 
 const initialState = {

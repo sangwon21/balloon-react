@@ -20,5 +20,8 @@ export const makePartsMap = (data) => {
       partsMap.get(user.part)[user.team].push(user);
     }
   });
-  return partsMap;
+
+  return Array.from(partsMap).sort((a, b) => {
+    return a[0] > b[0] ? -1 : a[0] < b[0] ? 1 : 0;
+  });
 };

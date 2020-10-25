@@ -36,15 +36,19 @@ const PartBoxWrap = styled.li`
 `;
 
 const PartBox = ({ language, partName, teamsData }) => {
-  const teamsList = [];
+  const teamList = [];
   for (let name in teamsData) {
     const team = teamNameLangData[name] ? teamNameLangData[name][language] : name;
-    teamsList.push(
+    teamList.push(
       <li key={name}>
         <a href={`#${team}`}>{team}</a>
       </li>,
     );
   }
+  teamList.sort((a, b) => {
+    if (partName === "해외법인") return -1;
+    return a.key < b.key ? -1 : a.key > b.key ? 1 : 0;
+  });
 
   const part = partNameLangData[partName] ? partNameLangData[partName][language] : partName;
 
@@ -53,7 +57,7 @@ const PartBox = ({ language, partName, teamsData }) => {
       <h3>
         <IoMdArrowDropright /> <a href={`#${part}`}>{part}</a>
       </h3>
-      <ul>{teamsList}</ul>
+      <ul>{teamList}</ul>
     </PartBoxWrap>
   );
 };
