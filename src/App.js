@@ -12,6 +12,7 @@ import koData from "@data/languages/ko.json";
 import jaData from "@data/languages/ja.json";
 
 import GlobalStyles from "@styles/GlobalStyles";
+import Loading from "@components/common/effect/Loading";
 import Header from "@components/menus/header/Header";
 import Footer from "@components/menus/footer/Footer";
 import Toast from "@components/common/toast/Toast";
@@ -29,6 +30,7 @@ const App = () => {
     toast: { isShow },
     language: { langData },
     login: { userData },
+    loading: { isLoading },
   } = useSelector((index) => index);
 
   const langDatas = {};
@@ -71,6 +73,7 @@ const App = () => {
           </>
         )}
         {isShow && <Toast />}
+        {isLoading && <Loading />}
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/users" component={Users} />
