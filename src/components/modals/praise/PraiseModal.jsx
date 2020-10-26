@@ -5,6 +5,7 @@ import { LANGUAGES } from "@constants/constant";
 import { sendMessage } from "@utils/request";
 import { showToastMessage, updateToastMessage } from "@modules/toast";
 import { updateBalloonSize, updateMessagesData } from "@modules/login";
+import { setLoadingState } from "@modules/loading";
 import { TOAST_TYPE } from "@constants/constant";
 import moment from "moment-timezone";
 
@@ -50,6 +51,7 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       senderPicture: userData.picture,
     };
 
+    dispatch(setLoadingState(true));
     const { result, balloonSize } = await sendMessage(messageData);
     if (result) {
       // 메세지 발송 성공 애니메이션, 메세지
@@ -61,6 +63,7 @@ const PraiseModal = ({ isOpen, setOpen, setShowSendEffect }) => {
       // 메세지 발송 실패 메세지
       dispatch(updateToastMessage({ type: TOAST_TYPE.ERROR, message: langData["T0004"] }));
     }
+    dispatch(setLoadingState(false));
     dispatch(showToastMessage());
     setOpen(false);
   };
