@@ -15,6 +15,7 @@ const UserInfoModalBodyWrap = styled.div`
   a {
     display: inline-block;
     height: 20px;
+    line-height: 20px;
     text-decoration: none;
     color: #474747;
     :hover {
@@ -34,6 +35,9 @@ const UserInfoModalBodyWrap = styled.div`
     color: ${({ theme }) => theme.backgroundColor.point};
     font-size: 18px;
     margin-right: 15px;
+    &.contact {
+      height: 22px;
+    }
   }
 `;
 
@@ -82,7 +86,7 @@ const UserInfoModalBody = ({ language, receiver }) => {
         {receiver.leaderPart ? <p>{receiver.leaderPart}</p> : <p>{team}</p>}
         <Divider />
         <ContactNumber>
-          <FaPhoneAlt className="icon" />
+          <FaPhoneAlt className="icon contact" />
           <div>
             <p className="tel">
               <a href={`tel:${receiver.tel}`}>{receiver.tel}</a>
