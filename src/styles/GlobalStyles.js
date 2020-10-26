@@ -5,7 +5,7 @@ const GlobalStyles = createGlobalStyle`
   ${reset}
 
   html {
-      /* scroll-behavior: smooth; */
+      scroll-behavior: smooth;
   }
 
   body {
