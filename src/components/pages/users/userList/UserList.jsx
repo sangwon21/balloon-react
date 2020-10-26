@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
+import UserListSkeleton from "./UserListSkeleton";
 import Part from "./Part";
 import PraiseModal from "@components/modals/praise/PraiseModal";
 import BalloonLetter from "@components/common/effect/BalloonLetter";
@@ -20,7 +21,7 @@ const UserList = ({ partsData, filterPartsData, setUserInfoOpen }) => {
     login: { userData },
   } = useSelector((index) => index);
 
-  if (!userData) return null;
+  if (!userData) return <UserListSkeleton />;
 
   const data = value ? filterPartsData : partsData;
 
