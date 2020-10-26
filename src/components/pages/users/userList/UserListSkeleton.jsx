@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const UserListSkeletonWrap = styled.div`
-  width: 1400px;
+  width: 100%;
   height: 100vh;
   margin: 20px;
   background-image: linear-gradient(100deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.5) 100%),
