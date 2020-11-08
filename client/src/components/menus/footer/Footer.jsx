@@ -42,7 +42,7 @@ const LanguageSelectBoxWrap = styled.div`
 
 const Footer = () => {
   return (
-    <FooterWrap>
+    <FooterWrap data-test="footer">
       <FooterInner>
         <Text>
           © Created by <a href="mailto:stlee@rsupport.com">Lee Seung Taek</a>
