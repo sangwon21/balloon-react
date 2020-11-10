@@ -62,18 +62,16 @@ const Header = () => {
   };
 
   return (
-    <>
-      <HeaderWrap>
-        <HeaderInner>
-          <Title onClick={handleClick}>
-            <img src={mainTitle} alt="title img" />
-          </Title>
-          <Nav />
-          <SearchBar />
-          <UserInfo />
-        </HeaderInner>
-      </HeaderWrap>
-    </>
+    <HeaderWrap data-test="header">
+      <HeaderInner>
+        <Title data-test="title" onClick={handleClick}>
+          <img src={mainTitle} alt="title img" />
+        </Title>
+        <Nav />
+        <SearchBar />
+        <UserInfo />
+      </HeaderInner>
+    </HeaderWrap>
   );
 };
 
