@@ -19,8 +19,8 @@ jest.mock("react-router-dom", () => ({
   }),
 }));
 
+const store = makeTestStore();
 const setUp = (initialState = {}) => {
-  const store = makeTestStore();
   const wrapper = shallow(<Header store={store} />);
 
   return wrapper;
