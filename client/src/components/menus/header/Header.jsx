@@ -45,10 +45,7 @@ const Title = styled.div`
 const Header = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const {
-    language: { langData },
-    page: { currentPage },
-  } = useSelector((index) => index);
+  const { langData } = useSelector(({ language }) => language);
 
   const logos = {};
   logos[LANGUAGES.KO] = logoSmallKo;
