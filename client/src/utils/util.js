@@ -1,3 +1,6 @@
+import theme from "@styles/theme";
+import { BACKGROUND_COLORS } from "@constants/constant";
+
 export const checkResponseData = (response) => response.ok && response.status >= 200 && response.status <= 207;
 
 export const checkFilterCondition = (userData, value) => {
@@ -25,3 +28,5 @@ export const makePartsMap = (data) => {
     return a[0] > b[0] ? -1 : a[0] < b[0] ? 1 : 0;
   });
 };
+
+export const changeBackgroundColor = (colorKey) => (theme.backgroundColor = BACKGROUND_COLORS[colorKey]);
