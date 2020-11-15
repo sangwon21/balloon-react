@@ -23,7 +23,7 @@ db.once("open", function () {
   console.log("Connected to mongod server");
 });
 
-mongoose.connect("mongodb://localhost/balloon-react-local");
+mongoose.connect("mongodb://mongo:27017/balloon-react-local");
 
 app.listen(port, function () {
   console.log("Express server has started on port " + port);

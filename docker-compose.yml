@@ -1,0 +1,44 @@
+version: "3"
+services:
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    stdin_open: true
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3000:80"
+
+  server:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    container_name: ballon_server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - "5000:8080"
+
+  mongo:
+    build:
+      dockerfile: Dockerfile
+      context: ./db
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+
+  seed:
+    build:
+      dockerfile: Dockerfile
+      context: ./db/seed
+    links:
+      - mongo
