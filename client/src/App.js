@@ -43,6 +43,7 @@ const App = () => {
     if (currentPage !== "/" && !sessionData) return (window.location.href = "/");
     if (!userData) dispatch(getUserData());
     console.log("hello");
+    console.log("what")
     // 유효한 로그인 세션인지 체크
     const check = async () => {
       const { result } = await checkSession();
