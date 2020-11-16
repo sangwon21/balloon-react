@@ -8,7 +8,9 @@ import { changeSelectedTab } from "@modules/users";
 
 const mockDispatchFn = jest.fn();
 jest.mock("react-redux", () => ({
-  useSelector: jest.fn().mockReturnValue({ language: { langData: "data" }, page: { currentPage: 1 } }),
+  useSelector: jest.fn().mockReturnValue({ langData: {
+    "L0000": "KO"
+  }, page: { currentPage: 1 } }),
   useDispatch: () => mockDispatchFn,
 }));
 
