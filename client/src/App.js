@@ -42,7 +42,7 @@ const App = () => {
     const sessionData = JSON.parse(sessionStorage.getItem(STORAGE_KEYS.GOOGLE_LOGIN_SESSION));
     if (currentPage !== "/" && !sessionData) return (window.location.href = "/");
     if (!userData) dispatch(getUserData());
-
+    console.log("hello");
     // 유효한 로그인 세션인지 체크
     const check = async () => {
       const { result } = await checkSession();
