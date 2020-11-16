@@ -6,18 +6,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t junothyme/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+  - docker build -t junothyme/react-test-app -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true junothyme/react-test-app npm test
 
 after_success:
-  - docker build -t junothyme/docker-frontend ./frontend
-  - docker build -t junothyme/docker-backend ./backend
+  - docker build -t junothyme/docker-client ./client
+  - docker build -t junothyme/docker-server ./server
   - docker build -t junothyme/docker-nginx ./nginx
 
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-  - docker push junothyme/docker-frontend
-  - docker push junothyme/docker-backend
+  - docker push junothyme/docker-client
+  - docker push junothyme/docker-server
   - docker push junothyme/docker-nginx
